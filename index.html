@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OBAYEDZONE — Computer & CCTV Technician</title>
+<title>OBAYEDZONE — Computer, Security & POS Solutions</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -277,7 +277,7 @@
   .skill-card li::before{ content: ""; width:6px; height:6px; border-radius:50%; background: var(--accent); flex-shrink:0; }
 
   /* SERVICES */
-  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .service-card-new {
     background: var(--bg-panel);
     border: 1px solid var(--line);
@@ -295,7 +295,7 @@
     border-color: var(--accent-neon);
     box-shadow: 0 12px 30px rgba(16, 185, 129, 0.1);
   }
-  .service-img-box { width: 100%; height: 180px; overflow: hidden; position: relative; border-bottom: 1px solid var(--line); }
+  .service-img-box { width: 100%; height: 200px; overflow: hidden; position: relative; border-bottom: 1px solid var(--line); }
   .service-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
   .service-card-new:hover .service-img-box img { transform: scale(1.08); }
   .service-info { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
@@ -351,7 +351,6 @@
 
 <!-- সম্পূর্ণ স্টিকি হেডার এরিয়া -->
 <div class="main-header">
-  <!-- লোগো, স্লোগান এবং ল্যাঙ্গুয়েজ বাটন এরিয়া -->
   <div class="nav-top-row">
     <div class="wrap">
       <div onclick="navigateTo('home')" class="brand-box">
@@ -376,7 +375,7 @@
   </div>
 </div>
 
-<!-- HERO SECTION / VIEW -->
+<!-- HERO SECTION -->
 <div id="page-home" class="page-view">
   <header class="hero">
     <div class="wrap">
@@ -391,7 +390,7 @@
   </header>
 </div>
 
-<!-- ABOUT SECTION / VIEW -->
+<!-- ABOUT SECTION -->
 <div id="page-about" class="page-view">
   <section>
     <div class="wrap">
@@ -414,7 +413,7 @@
   </section>
 </div>
 
-<!-- SKILLS SECTION / VIEW -->
+<!-- SKILLS SECTION -->
 <div id="page-skills" class="page-view">
   <section>
     <div class="wrap">
@@ -422,27 +421,30 @@
       <h2 class="sec-title" data-i18n="skills-title">Skills</h2>
       <div class="skill-groups">
         <div class="skill-card">
-          <h3 data-i18n="skill-group-1">Hardware</h3>
+          <h3 data-i18n="skill-group-1">Hardware & OS</h3>
           <ul>
             <li data-i18n="skill-h1">PC &amp; Laptop Repair</li>
             <li data-i18n="skill-h2">Component Diagnosis</li>
-            <li data-i18n="skill-h3">Assembly &amp; Upgrade</li>
+            <li data-i18n="skill-h3">Windows / Linux Install</li>
+            <li data-i18n="skill-h4">Virus &amp; Malware Removal</li>
           </ul>
         </div>
         <div class="skill-card">
-          <h3 data-i18n="skill-group-2">Software</h3>
+          <h3 data-i18n="skill-group-2">Smart Security</h3>
           <ul>
-            <li data-i18n="skill-s1">Windows / Linux Install</li>
-            <li data-i18n="skill-s2">Driver &amp; Software Setup</li>
-            <li data-i18n="skill-s3">Virus &amp; Malware Removal</li>
+            <li data-i18n="skill-s1">CCTV Camera Setup</li>
+            <li data-i18n="skill-s2">Intercom Installation</li>
+            <li data-i18n="skill-s3">IP Door Lock Config</li>
+            <li data-i18n="skill-s4">Alarm Systems Setup</li>
           </ul>
         </div>
         <div class="skill-card">
-          <h3 data-i18n="skill-group-3">Networking & CCTV</h3>
+          <h3 data-i18n="skill-group-3">Business Solutions</h3>
           <ul>
-            <li data-i18n="skill-n1">Router / Wi-Fi Setup</li>
-            <li data-i18n="skill-n2">CCTV Camera Installation</li>
-            <li data-i18n="skill-n3">Network Troubleshooting</li>
+            <li data-i18n="skill-n1">Inventory POS Sales</li>
+            <li data-i18n="skill-n2">POS Software Setup</li>
+            <li data-i18n="skill-n3">Router / Wi-Fi Setup</li>
+            <li data-i18n="skill-n4">Network Troubleshooting</li>
           </ul>
         </div>
       </div>
@@ -450,37 +452,50 @@
   </section>
 </div>
 
-<!-- SERVICES SECTION / VIEW -->
+<!-- SERVICES SECTION -->
 <div id="page-services" class="page-view">
   <section>
     <div class="wrap">
       <div class="sec-label" data-i18n="label-services">services</div>
       <h2 class="sec-title" data-i18n="services-title">Services</h2>
       <div class="services-grid">
+        <!-- Service 1 -->
         <div onclick="scrollToSection('page-contact')" class="service-card-new">
           <div class="service-img-box"><img src="https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=500&q=80" alt="Hardware Repair"></div>
           <div class="service-info">
-            <div class="service-tags"><span class="tag">PC</span><span class="tag">Laptop</span></div>
-            <h3 data-i18n="service-1-title">Hardware Repair</h3>
-            <p data-i18n="service-1-desc">Diagnosing and fixing PC and laptop hardware issues including Motherboards, RAM, Power Supplies, replacements and repairs.</p>
+            <div class="service-tags"><span class="tag">PC</span><span class="tag">Laptop</span><span class="tag">OS</span></div>
+            <h3 data-i18n="service-1-title">Hardware & Software Fix</h3>
+            <p data-i18n="service-1-desc">Diagnosing and fixing PC/laptop hardware issues (Motherboards, RAM, Power Supplies) along with fresh Windows/Linux installations and virus removal.</p>
             <div class="service-link-btn"><span data-i18n="service-btn-txt">Get Service</span> →</div>
           </div>
         </div>
+        <!-- Service 2 -->
         <div onclick="scrollToSection('page-contact')" class="service-card-new">
-          <div class="service-img-box"><img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=500&q=80" alt="Software Setup"></div>
+          <div class="service-img-box"><img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=500&q=80" alt="CCTV & Advanced Security"></div>
           <div class="service-info">
-            <div class="service-tags"><span class="tag">Windows</span><span class="tag">Linux</span></div>
-            <h3 data-i18n="service-2-title">Software & OS Setup</h3>
-            <p data-i18n="service-2-desc">Fresh Windows/Linux installations, essential software configurations, PC speed optimization, and virus removal services.</p>
+            <div class="service-tags"><span class="tag">CCTV</span><span class="tag">Intercom</span><span class="tag">IP Lock</span></div>
+            <h3 data-i18n="service-2-title">Advanced Security Systems</h3>
+            <p data-i18n="service-2-desc">Complete home and shop security solutions including CCTV installation, Intercom systems, IP smart door locks, and advanced security alarm systems setup.</p>
             <div class="service-link-btn"><span data-i18n="service-btn-txt">Get Service</span> →</div>
           </div>
         </div>
+        <!-- Service 3 -->
         <div onclick="scrollToSection('page-contact')" class="service-card-new">
-          <div class="service-img-box"><img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=500&q=80" alt="CCTV & Networking"></div>
+          <div class="service-img-box"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=500&q=80" alt="Inventory POS Systems"></div>
           <div class="service-info">
-            <div class="service-tags"><span class="tag">CCTV</span><span class="tag">Network</span></div>
-            <h3 data-i18n="service-3-title">Network & CCTV</h3>
-            <p data-i18n="service-3-desc">Complete CCTV security camera installation for homes or shops, advanced router & Wi-Fi setup, and local network (LAN) troubleshooting.</p>
+            <div class="service-tags"><span class="tag">POS</span><span class="tag">Retail</span><span class="tag">Inventory</span></div>
+            <h3 data-i18n="service-3-title">Inventory & POS Systems</h3>
+            <p data-i18n="service-3-desc">Sales and complete configurations of professional Inventory POS systems for retail shops and businesses. Track sales and stocks seamlessly.</p>
+            <div class="service-link-btn"><span data-i18n="service-btn-txt">Get Service</span> →</div>
+          </div>
+        </div>
+        <!-- Service 4 -->
+        <div onclick="scrollToSection('page-contact')" class="service-card-new">
+          <div class="service-img-box"><img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=500&q=80" alt="Network Infrastructure"></div>
+          <div class="service-info">
+            <div class="service-tags"><span class="tag">Network</span><span class="tag">Wi-Fi</span><span class="tag">Router</span></div>
+            <h3 data-i18n="service-4-title">Network & Wi-Fi Setup</h3>
+            <p data-i18n="service-4-desc">Advanced router, access point and Wi-Fi configurations, local area network (LAN) cabling, and expert network troubleshooting for flawless connectivity.</p>
             <div class="service-link-btn"><span data-i18n="service-btn-txt">Get Service</span> →</div>
           </div>
         </div>
@@ -489,7 +504,7 @@
   </section>
 </div>
 
-<!-- CONTACT SECTION / VIEW -->
+<!-- CONTACT SECTION -->
 <div id="page-contact" class="page-view">
   <section>
     <div class="wrap">
@@ -564,7 +579,7 @@ window.addEventListener('scroll', () => {
 // Translation Database
 const langData = {
   bn: {
-    "slogan-txt": "| টেক ও সিকিউরিটি",
+    "slogan-txt": "| টেক, সিকিউরিটি ও পস সলিউশন",
     "sub-home": "হোম",
     "sub-about": "সম্পর্কে",
     "sub-skills": "দক্ষতা",
@@ -577,43 +592,48 @@ const langData = {
     "hero-btn-ghost": "যোগাযোগ করুন",
     "label-about": "সম্পর্কে",
     "about-title": "আমার সম্পর্কে",
-    "about-text": `<p>আমি <strong>ওবায়েদ</strong>, একজন পেশাদার <strong>কম্পিউটার ও সিকিউরিটি টেকনিশিয়ান</strong>। কম্পিউটার এবং ল্যাপটপ হার্ডওয়্যার সমস্যা নির্ণয় ও মেরামত, অপারেটিং সিস্টেম ইনস্টলেশন, প্রয়োজনীয় সফটওয়্যার সেটআপ, নেটওয়ার্ক কনফিগারেশন এবং প্রফেশনাল <strong>সিসিটিভি (CCTV) সিকিউরিটি ক্যামেরা সেটআপ ও ট্রাবলশুটিংয়ের</strong> কাজে আমার দীর্ঘ ও বাস্তব অভিজ্ঞতা রয়েছে।</p>
-        <p>আপনার ডিভাইস স্লো হয়ে যাওয়া, ভাইরাসের আক্রমণ, হার্ডওয়্যার নষ্ট হওয়া, সিসিটিভি ক্যামেরা রেকর্ডিং বা কাভারেজ সমস্যা কিংবা যেকোনো নতুন সেটআপ — নিখুঁত সমাধান দেওয়াই আমার প্রধান লক্ষ্য।</p>
-        <p>গ্রাহকের সমস্যা আন্তরিকভাবে বুঝতে, সততা বজায় রাখতে এবং সাশ্রয়ী মূল্যে সঠিক সেবা দিতে আমি প্রতিশ্রুতিবদ্ধ।</p>`,
+    "about-text": `<p>আমি <strong>ওবায়েদ</strong>, একজন পেশাদার <strong>কম্পিউটার, স্মার্ট সিকিউরিটি এবং পস (POS) সলিউশন টেকনিশিয়ান</strong>। কম্পিউটার এবং ল্যাপটপ হার্ডওয়্যার মেরামত, অপারেটিং সিস্টেম ও প্রয়োজনীয় সফটওয়্যার সেটআপের পাশাপাশি আধুনিক সিকিউরিটি সিস্টেম যেমন— <strong>সিসিটিভি ক্যামেরা, ইন্টারকম (Intercom), আইপি ডোর লক (IP Door Lock) এবং সিকিউরিটি অ্যালার্ম সিস্টেম</strong> নিখুঁতভাবে ইনস্টলেশন ও ট্রাবলশুটিংয়ের কাজে আমার দীর্ঘ অভিজ্ঞতা রয়েছে।</p>
+        <p>এছাড়াও ব্যবসা প্রতিষ্ঠান ও রিটেল শপের হিসাব-নিকাশ ও স্টক ম্যানেজমেন্ট সহজ করতে আমি প্রফেশনাল <strong>ইনভেন্টরি পস (Inventory POS) সিস্টেম বিক্রি এবং সম্পূর্ণ সেটআপ</strong> সেবা প্রদান করি।</p>
+        <p>গ্রাহকের প্রয়োজন আন্তরিকভাবে বুঝে সততা ও সাশ্রয়ী মূল্যে সঠিক সময়ে উন্নত মানের সেবা নিশ্চিত করাই আমার মূল লক্ষ্য।</p>`,
     "stat-1-title": "পিসি",
     "stat-1-desc": "হার্ডওয়্যার রিপেয়ার",
-    "stat-2-title": "CCTV",
-    "stat-2-desc": "সিকিউরিটি ক্যামেরা",
-    "stat-3-title": "OS",
-    "stat-3-desc": "ইন্সটলেশন ও সেটআপ",
+    "stat-2-title": "সিকিউরিটি",
+    "stat-2-desc": "CCTV, লক ও অ্যালার্ম",
+    "stat-3-title": "POS",
+    "stat-3-desc": "ইনভেন্টরি সিস্টেম সেলস",
     "stat-4-title": "২০১৩",
     "stat-4-desc": "সার্ভিস চালু",
     "label-skills": "দক্ষতা",
     "skills-title": "আমার কারিগরি দক্ষতা",
-    "skill-group-1": "হার্ডওয়্যার",
-    "skill-group-2": "সফটওয়্যার",
-    "skill-group-3": "নেটওয়ার্কিং ও সিসিটিভি",
+    "skill-group-1": "হার্ডওয়্যার ও ওএস",
+    "skill-group-2": "স্মার্ট সিকিউরিটি",
+    "skill-group-3": "বিজনেস সলিউশন",
     "skill-h1": "পিসি ও ল্যাপটপ মেরামত",
     "skill-h2": "কম্পোনেন্ট ডায়াগনসিস",
-    "skill-h3": "অ্যাসেম্বলি ও আপগ্রেড",
-    "skill-s1": "উইন্ডোজ / লিনাক্স ইনস্টল",
-    "skill-s2": "ড্রাইভার ও সফটওয়্যার সেটআপ",
-    "skill-s3": "ভাইরাস ও ম্যালওয়্যার রিমুভাল",
-    "skill-n1": "রাউটার / ওয়াই-ফাই সেটআপ",
-    "skill-n2": "CCTV ক্যামেরা ইনস্টলেশন",
-    "skill-n3": "নেটওয়ার্ক ট্রাবলশুটিং",
+    "skill-h3": "উইন্ডোজ / লিনাক্স ইনস্টল",
+    "skill-h4": "ভাইরাস ও ম্যালওয়্যার রিমুভাল",
+    "skill-s1": "CCTV ক্যামেরা সেটআপ",
+    "skill-s2": "ইন্টারকম (Intercom) ইনস্টলেশন",
+    "skill-s3": "IP ডোর লক কনফিগারেশন",
+    "skill-s4": "অ্যালার্ম সিস্টেম সেটআপ",
+    "skill-n1": "ইনভেন্টরি POS সিস্টেম বিক্রি",
+    "skill-n2": "POS সফটওয়্যার কনফিগারেশন",
+    "skill-n3": "রাউটার / ওয়াই-ফাই সেটআপ",
+    "skill-n4": "নেটওয়ার্ক ট্রাবলশুটিং",
     "label-services": "সার্ভিসসমূহ",
     "services-title": "আমার সেবাসমূহ",
-    "service-1-title": "হার্ডওয়্যার রিপেয়ার",
-    "service-1-desc": "পিসি ও ল্যাপটপের সব ধরনের হার্ডওয়্যার সমস্যা সমাধান — যেমন মাদারবোর্ড, র‍্যাম, পাওয়ার সাপ্লাই পরীক্ষা, মেরামত ও নতুন পার্টস প্রতিস্থাপন।",
-    "service-2-title": "সফটওয়্যার ও OS সেটআপ",
-    "service-2-desc": "নতুন Windows/Linux অপারেটিং সিস্টেম দেওয়া, দরকারি সফটওয়্যার সেটআপ করা, স্লো পিসি ফিক্স করা এবং সম্পূর্ণ ভাইরাস পরিষ্কার করা।",
-    "service-3-title": "নেটওয়ার্ক ও সিসিটিভি",
-    "service-3-desc": "বাসাবাড়ি বা ব্যবসার জন্য সিসিটিভি (CCTV) ক্যামেরা নিখুঁতভাবে ইনস্টলেশন, রাউটার ও ওয়াই-ফাই কনফিগারেশন এবং ল্যান নেটওয়ার্কিং ঠিক করা।",
+    "service-1-title": "হার্ডওয়্যার ও সফটওয়্যার ফিক্স",
+    "service-1-desc": "পিসি ও ল্যাপটপের সব ধরনের হার্ডওয়্যার সমস্যা সমাধান (মাদারবোর্ড, র‍্যাম, পাওয়ার সাপ্লাই) এবং নতুন Windows/Linux ও ভাইরাস পরিষ্কার করার সেবা।",
+    "service-2-title": "অ্যাডভান্সড সিকিউরিটি সিস্টেম",
+    "service-2-desc": "বাসাবাড়ি বা দোকানের সম্পূর্ণ নিরাপত্তা নিশ্চিত করতে সিসিটিভি ক্যামেরা, ইন্টারকম সিস্টেম, আইপি স্মার্ট ডোর লক এবং অটোমেটেড অ্যালার্ম সিস্টেম ইনস্টলেশন।",
+    "service-3-title": "ইনভেন্টরি ও POS সিস্টেমস",
+    "service-3-desc": "দোকান ও ব্যবসা প্রতিষ্ঠানের জন্য উন্নত মানের ইনভেন্টরি POS (Point of Sale) হার্ডওয়্যার ও সফটওয়্যার বিক্রয়, ইন্সটলেশন এবং সম্পূর্ণ লাইভ কনফিগারেশন সেবা।",
+    "service-4-title": "নেটওয়ার্ক ও ওয়াই-ফাই সেটআপ",
+    "service-4-desc": "অ্যাডভান্সড রাউটার ও ওয়াই-ফাই কাভারেজ কনফিগারেশন, লোকাল ল্যান (LAN) ক্যাবলিং এবং নিরবচ্ছিন্ন ইন্টারনেটের জন্য নেটওয়ার্ক সমস্যার স্থায়ী সমাধান।",
     "service-btn-txt": "সার্ভিস নিন",
     "label-contact": "যোগাযোগ",
     "contact-title": "সেবা প্রয়োজন?",
-    "contact-desc": "কম্পিউটার/ল্যাপটপ বা সিসিটিভি ক্যামেরা সংক্রান্ত যেকোনো সমস্যা বা জিজ্ঞাসায় সরাসরি নিচের ইমেইল অথবা হোয়াটসঅ্যাপ নম্বরে যোগাযোগ করুন।",
+    "contact-desc": "যেকোনো কম্পিউটার, সিকিউরিটি লক, সিসিটিভি ক্যামেরা বা পস (POS) সিস্টেম সংক্রান্ত সেবার জন্য নিচের ইমেইল অথবা হোয়াটসঅ্যাপ নম্বরে সরাসরি যোগাযোগ করুন।",
     "footer-text": "© ২০২৬ OBAYEDZONE — এইচটিএমএল ও সিএসএস দিয়ে তৈরি"
   },
   en: {
@@ -630,39 +650,44 @@ const langData = {
     "hero-btn-ghost": "Contact Me",
     "label-about": "about",
     "about-title": "About Me",
-    "about-text": `<p>I am <strong>OBAYED</strong>, a professional <strong>Computer & Security Technician</strong>. I have long-term, hands-on experience in diagnosing and repairing computer & laptop hardware issues, operating system installations, software setup, network configurations, and professional **CCTV security camera setup & troubleshooting**.</p>
-        <p>Whether it's a slow device, virus issues, hardware malfunctions, CCTV coverage/recording issues, or a fresh setup — my goal is to provide fast and dependable solutions.</p>
-        <p>I believe in understanding the customer's issue thoroughly, delivering services with honesty and at reasonable pricing.</p>`,
-    "stat-1-title": "PC",
-    "stat-1-desc": "Hardware Repair",
-    "stat-2-title": "CCTV",
-    "stat-2-desc": "Security Camera",
-    "stat-3-title": "OS",
-    "stat-3-desc": "Install & Setup",
+    "about-text": `<p>I am <strong>OBAYED</strong>, a professional <strong>Computer, Smart Security & POS Solutions Technician</strong>. Along with diagnosis and repair of PC/laptop hardware and software, I have extensive experience in advanced home security solutions like <strong>CCTV cameras, Intercom systems, IP Door Locks, and Security Alarm systems</strong>.</p>
+        <p>Additionally, I sell and fully configure <strong>Inventory POS (Point of Sale) systems</strong> for retail shops and businesses to manage their daily sales and stocks efficiently.</p>
+        <p>My goal is to understand the customer's exact needs and deliver high-quality services with maximum honesty, speed, and affordable pricing.</p>`,
+    "stat-1-title": "PC Fix",
+    "stat-1-desc": "Hardware & OS",
+    "stat-2-title": "Security",
+    "stat-2-desc": "CCTV, Locks & Alarms",
+    "stat-3-title": "POS",
+    "stat-3-desc": "Inventory Systems Sale",
     "stat-4-title": "2013",
     "stat-4-desc": "Service Active",
     "label-skills": "skills",
     "skills-title": "Skills",
-    "skill-group-1": "Hardware",
-    "skill-group-2": "Software",
-    "skill-group-3": "Networking & CCTV",
+    "skill-group-1": "Hardware & OS",
+    "skill-group-2": "Smart Security",
+    "skill-group-3": "Business Solutions",
     "skill-h1": "PC & Laptop Repair",
     "skill-h2": "Component Diagnosis",
-    "skill-h3": "Assembly & Upgrade",
-    "skill-s1": "Windows / Linux Install",
-    "skill-s2": "Driver & Software Setup",
-    "skill-s3": "Virus & Malware Removal",
-    "skill-n1": "Router / Wi-Fi Setup",
-    "skill-n2": "CCTV Camera Installation",
-    "skill-n3": "Network Troubleshooting",
+    "skill-h3": "Windows / Linux Install",
+    "skill-h4": "Virus & Malware Removal",
+    "skill-s1": "CCTV Camera Setup",
+    "skill-s2": "Intercom Installation",
+    "skill-s3": "IP Door Lock Config",
+    "skill-s4": "Alarm Systems Setup",
+    "skill-n1": "Inventory POS Sales",
+    "skill-n2": "POS Software Setup",
+    "skill-n3": "Router / Wi-Fi Setup",
+    "skill-n4": "Network Troubleshooting",
     "label-services": "services",
     "services-title": "Services",
-    "service-1-title": "Hardware Repair",
-    "service-1-desc": "Diagnosing and fixing PC and laptop hardware issues including Motherboards, RAM, Power Supplies, replacements and repairs.",
-    "service-2-title": "Software & OS Setup",
-    "service-2-desc": "Fresh Windows/Linux installations, essential software configurations, PC speed optimization, and virus removal services.",
-    "service-3-title": "Network & CCTV",
-    "service-3-desc": "Complete CCTV security camera installation for homes or shops, advanced router & Wi-Fi setup, and local network (LAN) troubleshooting.",
+    "service-1-title": "Hardware & Software Fix",
+    "service-1-desc": "Diagnosing and fixing PC/laptop hardware issues (Motherboards, RAM, Power Supplies) along with fresh Windows/Linux installations and virus removal.",
+    "service-2-title": "Advanced Security Systems",
+    "service-2-desc": "Complete home and shop security solutions including CCTV installation, Intercom systems, IP smart door locks, and advanced security alarm systems setup.",
+    "service-3-title": "Inventory & POS Systems",
+    "service-3-desc": "Sales and complete configurations of professional Inventory POS systems for retail shops and businesses. Track sales and stocks seamlessly.",
+    "service-4-title": "Network & Wi-Fi Setup",
+    "service-4-desc": "Advanced router, access point and Wi-Fi configurations, local area network (LAN) cabling, and expert network troubleshooting for flawless connectivity.",
     "service-btn-txt": "Get Service",
     "label-contact": "contact",
     "contact-title": "Need Service?",
