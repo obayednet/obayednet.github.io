@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OBAYED — Computer Technician</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FAFAF7;
+    --bg-panel: #FFFFFF;
+    --ink: #16172B;
+    --ink-soft: #565875;
+    --accent: #4C5FD5;
+    --accent-soft: #EDEFFC;
+    --teal: #12897A;
+    --line: #E4E3DC;
+    --mono: 'JetBrains Mono', monospace;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    line-height: 1.6;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+    html{ scroll-behavior: auto; }
+  }
+
+  a{ color: inherit; }
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* NAV */
+  nav{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(250,250,247,0.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content: space-between;
+    height: 64px;
+  }
+  .brand{
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration:none;
+    color: var(--ink);
+  }
+  .brand span{ color: var(--accent); }
+  .navlinks{
+    display:flex; gap: 28px; list-style:none; margin:0; padding:0;
+    font-family: var(--mono); font-size: 13px;
+  }
+  .navlinks a{ text-decoration:none; color: var(--ink-soft); transition: color .15s; }
+  .navlinks a:hover{ color: var(--accent); }
+  .navlinks .num{ color: var(--accent); margin-right: 4px; }
+
+  /* HERO */
+  header.hero{
+    padding: 96px 0 72px;
+  }
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--teal);
+    display:flex; align-items:center; gap: 8px;
+    margin-bottom: 20px;
+  }
+  .dot{
+    width:8px; height:8px; border-radius:50%;
+    background: var(--teal);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity: 1; }
+    50%{ opacity: .35; }
+  }
+  h1.title{
+    font-family: var(--display);
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: 1.05;
+    margin: 0 0 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  h1.title .hl{ color: var(--accent); }
+  .lede{
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 540px;
+    margin: 0 0 36px;
+  }
+  .cta-row{ display:flex; gap:14px; flex-wrap: wrap; }
+  .btn{
+    font-family: var(--mono);
+    font-size: 14px;
+    padding: 12px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    display:inline-flex; align-items:center; gap:8px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn-primary{
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px rgba(22,23,43,0.18); }
+  .btn-ghost{
+    border: 1px solid var(--line);
+    color: var(--ink);
+    background: transparent;
+  }
+  .btn-ghost:hover{ border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  /* CODE PANEL (signature element) */
+  .code-panel{
+    margin-top: 56px;
+    background: var(--ink);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 24px 48px -20px rgba(22,23,43,0.35);
+  }
+  .code-topbar{
+    display:flex; align-items:center; gap:8px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .code-topbar .tab{
+    width:10px; height:10px; border-radius:50%;
+    background: rgba(255,255,255,0.15);
+  }
+  .code-topbar .tab.r{ background:#e2665d; }
+  .code-topbar .tab.y{ background:#e5c07b; }
+  .code-topbar .tab.g{ background:#57ab5a; }
+  .code-topbar .filename{
+    margin-left: 10px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+  }
+  .code-body{
+    padding: 24px 22px 28px;
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.9;
+    color: #cfd3f2;
+    overflow-x: auto;
+  }
+  .code-body .k{ color: #f0a8a0; }
+  .code-body .s{ color: #a8e0c8; }
+  .code-body .c{ color: #7a7ea8; }
+  .code-body .p{ color: #cfd3f2; }
+  .caret{
+    display:inline-block; width:8px; height:16px;
+    background: var(--accent);
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  /* SECTION SHARED */
+  section{ padding: 88px 0; border-top: 1px solid var(--line); }
+  .sec-label{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .sec-label::before{ content: "// "; color: var(--ink-soft); }
+  h2.sec-title{
+    font-family: var(--display);
+    font-size: clamp(28px, 4vw, 38px);
+    margin: 0 0 32px;
+    font-weight: 600;
+  }
+
+  /* ABOUT */
+  .about-grid{
+    display:grid; grid-template-columns: 1.3fr 1fr; gap: 48px;
+  }
+  .about-text p{ color: var(--ink-soft); margin: 0 0 16px; font-size: 16px; }
+  .about-text strong{ color: var(--ink); font-weight: 600; }
+  .stat-list{ display:flex; flex-direction: column; gap: 22px; }
+  .stat{
+    border-left: 2px solid var(--line);
+    padding-left: 16px;
+  }
+  .stat b{
+    display:block; font-family: var(--display); font-size: 28px; color: var(--ink);
+  }
+  .stat span{ font-size: 13px; color: var(--ink-soft); font-family: var(--mono); }
+
+  /* SKILLS */
+  .skill-groups{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  .skill-card{
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px;
+  }
+  .skill-card h3{
+    font-family: var(--mono); font-size: 13px; color: var(--teal);
+    margin: 0 0 14px; text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .skill-card ul{ list-style: none; margin:0; padding:0; }
+  .skill-card li{
+    font-size: 15px; padding: 6px 0;
+    display:flex; align-items:center; gap: 10px;
+  }
+  .skill-card li::before{
+    content: ""; width:6px; height:6px; border-radius:50%;
+    background: var(--accent); flex-shrink:0;
+  }
+
+  /* PROJECTS */
+  .project{
+    display:grid; grid-template-columns: 80px 1fr auto;
+    gap: 20px; align-items: start;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration:none;
+    color: inherit;
+    transition: background .15s;
+  }
+  .project:last-child{ border-bottom:none; }
+  .project:hover{ background: var(--accent-soft); margin: 0 -20px; padding: 26px 20px; border-radius: 10px; }
+  .project-index{
+    font-family: var(--mono); color: var(--ink-soft); font-size: 14px; padding-top: 4px;
+  }
+  .project h3{
+    font-family: var(--display); font-size: 20px; margin: 0 0 8px; font-weight: 600;
+  }
+  .project p{ margin:0; color: var(--ink-soft); font-size: 14.5px; max-width: 480px; }
+  .project-tags{
+    display:flex; gap:8px; margin-top: 10px; flex-wrap: wrap;
+  }
+  .tag{
+    font-family: var(--mono); font-size: 11px;
+    padding: 3px 9px; border-radius: 100px;
+    background: var(--accent-soft); color: var(--accent);
+  }
+  .project-arrow{
+    font-family: var(--mono); font-size: 20px; color: var(--ink-soft);
+    align-self: center; transition: transform .15s, color .15s;
+  }
+  .project:hover .project-arrow{ transform: translateX(4px); color: var(--accent); }
+
+  /* CONTACT */
+  .contact-panel{
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 16px;
+    padding: 56px 48px;
+    text-align: center;
+  }
+  .contact-panel .sec-label{ color: #9aa3f5; justify-content:center; }
+  .contact-panel .sec-label::before{ color: rgba(255,255,255,0.4); }
+  .contact-panel h2{
+    font-family: var(--display); font-size: clamp(28px,4vw,40px);
+    margin: 0 0 18px;
+  }
+  .contact-panel p{ color: rgba(255,255,255,0.65); max-width: 420px; margin: 0 auto 32px; }
+  .contact-email{
+    font-family: var(--mono); font-size: 20px;
+    color: #fff; text-decoration:none;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 4px;
+  }
+  .contact-email:hover{ border-color: var(--accent); color: var(--accent); }
+  .contact-socials{
+    display:flex; gap: 22px; justify-content:center; margin-top: 30px;
+    font-family: var(--mono); font-size: 13px;
+  }
+  .contact-socials a{ text-decoration:none; color: rgba(255,255,255,0.6); }
+  .contact-socials a:hover{ color: #fff; }
+
+  footer{
+    padding: 32px 0 48px;
+    text-align:center;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 760px){
+    .about-grid{ grid-template-columns: 1fr; }
+    .skill-groups{ grid-template-columns: 1fr; }
+    .navlinks{ display:none; }
+    .project{ grid-template-columns: 40px 1fr; }
+    .project-arrow{ display:none; }
+    .contact-panel{ padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="brand">OBAYED<span>/</span>tech</a>
+    <ul class="navlinks">
+      <li><a href="#about"><span class="num">01</span>About</a></li>
+      <li><a href="#skills"><span class="num">02</span>Skills</a></li>
+      <li><a href="#work"><span class="num">03</span>Work</a></li>
+      <li><a href="#contact"><span class="num">04</span>Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span> AVAILABLE FOR SERVICE</div>
+    <h1 class="title">OBAYED<br>keeps your <span class="hl">computers running.</span></h1>
+    <p class="lede">কম্পিউটার টেকনিশিয়ান। হার্ডওয়্যার সমস্যা, সফটওয়্যার ইন্সটলেশন, নেটওয়ার্কিং এবং যেকোনো কম্পিউটার সমস্যার সমাধান — নির্ভরযোগ্য ও দ্রুত সার্ভিস।</p>
+    <div class="cta-row">
+      <a href="#work" class="btn btn-primary">সার্ভিসসমূহ দেখুন →</a>
+      <a href="#contact" class="btn btn-ghost">যোগাযোগ করুন</a>
+    </div>
+
+    <div class="code-panel">
+      <div class="code-topbar">
+        <span class="tab r"></span><span class="tab y"></span><span class="tab g"></span>
+        <span class="filename">about-me.js</span>
+      </div>
+      <div class="code-body"><span class="c">// একটু আমার সম্পর্কে</span>
+<span class="k">const</span> <span class="p">technician</span> = {
+  <span class="p">name:</span> <span class="s">"OBAYED"</span>,
+  <span class="p">role:</span> <span class="s">"Computer Technician"</span>,
+  <span class="p">based_in:</span> <span class="s">"Bangladesh"</span>,
+  <span class="p">expertise:</span> [<span class="s">"Hardware Repair"</span>, <span class="s">"OS Install"</span>, <span class="s">"Networking"</span>],
+  <span class="p">contact:</span> <span class="s">"obayedzone@gmail.com"</span>
+};<span class="caret"></span></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-label">01 / about</div>
+    <h2 class="sec-title">পরিচিতি</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>আমি <strong>OBAYED</strong>, একজন <strong>কম্পিউটার টেকনিশিয়ান</strong>। কম্পিউটার ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় ও সমাধান, অপারেটিং সিস্টেম ইন্সটলেশন, সফটওয়্যার সেটআপ এবং নেটওয়ার্ক কনফিগারেশনের কাজে আমার হাতে-কলমে অভিজ্ঞতা আছে।</p>
+        <p>কোনো ডিভাইস স্লো হয়ে যাওয়া, ভাইরাস সমস্যা, হার্ডওয়্যার ত্রুটি বা নতুন সেটআপ — যেকোনো সমস্যায় দ্রুত ও নির্ভরযোগ্য সমাধান দেওয়াই আমার লক্ষ্য।</p>
+        <p>গ্রাহকের সমস্যা মনোযোগ দিয়ে বুঝে, সততার সাথে এবং যুক্তিসঙ্গত খরচে সার্ভিস দেওয়াতেই বিশ্বাস করি।</p>
+      </div>
+      <div class="stat-list">
+        <div class="stat"><b>PC</b><span>হার্ডওয়্যার রিপেয়ার</span></div>
+        <div class="stat"><b>OS</b><span>ইন্সটলেশন ও সেটআপ</span></div>
+        <div class="stat"><b>2026</b><span>সার্ভিস চালু</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-label">02 / skills</div>
+    <h2 class="sec-title">দক্ষতা</h2>
+    <div class="skill-groups">
+      <div class="skill-card">
+        <h3>Hardware</h3>
+        <ul>
+          <li>PC &amp; Laptop Repair</li>
+          <li>Component Diagnosis</li>
+          <li>Assembly &amp; Upgrade</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Software</h3>
+        <ul>
+          <li>Windows / Linux Install</li>
+          <li>Driver &amp; Software Setup</li>
+          <li>Virus &amp; Malware Removal</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Networking</h3>
+        <ul>
+          <li>Router / Wi-Fi Setup</li>
+          <li>LAN Configuration</li>
+          <li>Network Troubleshooting</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-label">03 / services</div>
+    <h2 class="sec-title">সার্ভিসসমূহ</h2>
+
+    <a href="#" class="project">
+      <span class="project-index">01</span>
+      <div>
+        <h3>হার্ডওয়্যার রিপেয়ার</h3>
+        <p>পিসি ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় করে সমাধান — যেমন মাদারবোর্ড, RAM, পাওয়ার সাপ্লাই ইত্যাদি।</p>
+        <div class="project-tags"><span class="tag">PC</span><span class="tag">Laptop</span></div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a href="#" class="project">
+      <span class="project-index">02</span>
+      <div>
+        <h3>সফটওয়্যার ও OS সেটআপ</h3>
+        <p>Windows/Linux ইন্সটলেশন, প্রয়োজনীয় সফটওয়্যার সেটআপ, এবং ভাইরাস/ম্যালওয়্যার রিমুভাল সার্ভিস।</p>
+        <div class="project-tags"><span class="tag">Windows</span><span class="tag">Linux</span></div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a href="#" class="project">
+      <span class="project-index">03</span>
+      <div>
+        <h3>নেটওয়ার্ক সেটআপ</h3>
+        <p>রাউটার ও Wi-Fi কনফিগারেশন, LAN সেটআপ এবং যেকোনো নেটওয়ার্ক সমস্যার সমাধান।</p>
+        <div class="project-tags"><span class="tag">Networking</span></div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-panel">
+      <div class="sec-label">04 / contact</div>
+      <h2>সার্ভিস দরকার?</h2>
+      <p>কম্পিউটার/ল্যাপটপ সংক্রান্ত যেকোনো সমস্যায় বা সার্ভিসের জন্য নিচের ইমেইলে যোগাযোগ করুন।</p>
+      <a href="mailto:obayedzone@gmail.com" class="contact-email">obayedzone@gmail.com</a>
+      <div class="contact-socials">
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Facebook</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 OBAYED — Built with HTML &amp; CSS
+</footer>
+
+</body>
+</html>
