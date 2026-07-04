@@ -46,7 +46,7 @@
     width: 100%;
   }
 
-  /* NAV & LOGO SIZE INCREASE */
+  /* NAV & LOGO */
   nav{
     position: sticky; top:0; z-index: 50;
     background: rgba(11, 15, 25, 0.95);
@@ -60,7 +60,7 @@
   .brand{
     font-family: var(--display);
     font-weight: 700;
-    font-size: 32px; /* লোগোর সাইজ বড় করা হয়েছে */
+    font-size: 32px;
     text-decoration:none;
     color: #FFF;
     letter-spacing: -0.02em;
@@ -102,14 +102,20 @@
     color: #fff;
   }
 
-  /* DYNAMIC PAGES SETUP */
-  .page-content {
-    display: none; /* ডিফল্টভাবে সব পেজ হাইড থাকবে */
-    flex-grow: 1;
+  /* DYNAMIC PAGES / VIEW MODES SETUP */
+  .page-view {
+    display: none;
     animation: fadeIn 0.4s ease-in-out forwards;
   }
-  .page-content.active-page {
-    display: block; /* শুধুমাত্র অ্যাক্টিভ পেজটি দেখাবে */
+  
+  /* যখন হোম মোডে থাকবে, সব পেজ ভিউগুলো ব্লক হিসেবে দেখাবে */
+  body.mode-home .page-view {
+    display: block !important;
+  }
+  
+  /* যখন স্পেসিফিক পেজ মোডে থাকবে, শুধু একটি সেকশন দেখাবে */
+  body.mode-single .page-view.active-page {
+    display: block !important;
   }
 
   @keyframes fadeIn {
@@ -180,7 +186,9 @@
   .btn-ghost:hover{ border-color: var(--accent-neon); color: var(--accent-neon); transform: translateY(-2px); }
 
   /* SECTION SHARED */
-  section { padding: 80px 0; }
+  section { padding: 96px 0; border-bottom: 1px solid var(--line); }
+  body.mode-single section { border-bottom: none; } /* সিঙ্গেল পেজ মোডে নিচের বর্ডার লাগবে না */
+  
   .sec-label{
     font-family: var(--mono);
     font-size: 13px;
@@ -306,13 +314,14 @@
   }
 </style>
 </head>
-<body>
+<body class="mode-home"> <!-- ডিফল্ট মোড হোম (সব একসাথে) -->
 
 <nav>
   <div class="wrap">
     <a onclick="navigateTo('home')" class="brand" style="cursor:pointer;">OBAYEDZONE<span>.</span></a>
     <div class="nav-right">
       <ul class="navlinks">
+        <li><a onclick="navigateTo('home')" id="link-home" data-i18n="nav-home" class="active">হোম</a></li>
         <li><a onclick="navigateTo('about')" id="link-about" data-i18n="nav-about">পরিচিতি</a></li>
         <li><a onclick="navigateTo('skills')" id="link-skills" data-i18n="nav-skills">দক্ষতা</a></li>
         <li><a onclick="navigateTo('services')" id="link-services" data-i18n="nav-services">সার্ভিস</a></li>
@@ -323,8 +332,8 @@
   </div>
 </nav>
 
-<!-- HOME PAGE -->
-<div id="page-home" class="page-content active-page">
+<!-- HERO SECTION / VIEW -->
+<div id="page-home" class="page-view active-page">
   <header class="hero">
     <div class="wrap">
       <div class="eyebrow"><span class="dot"></span> <span data-i18n="hero-eyebrow">AVAILABLE FOR SERVICE</span></div>
@@ -338,8 +347,8 @@
   </header>
 </div>
 
-<!-- ABOUT PAGE -->
-<div id="page-about" class="page-content">
+<!-- ABOUT SECTION / VIEW -->
+<div id="page-about" class="page-view">
   <section>
     <div class="wrap">
       <div class="sec-label">about</div>
@@ -348,7 +357,7 @@
         <div class="about-text" data-i18n="about-text">
           <p>আমি <strong>OBAYED</strong>, একজন <strong>কম্পিউটার ও সিকিউরিটি টেকনিশিয়ান</strong>। কম্পিউটার ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় ও সমাধান, অপারেটিং সিস্টেম ইন্সটলেশন, সফটওয়্যার সেটআপ, নেটওয়ার্ক কনফিগারেশন এবং প্রফেশনাল **সিসিটিভি (CCTV) সিকিউরিটি ক্যামেরা সেটআপ ও ট্রাবলশুটিংয়ের** কাজে আমার দীর্ঘ ও হাতে-কলমে অভিজ্ঞতা আছে।</p>
           <p>কোনো ডিভাইস স্লো হয়ে যাওয়া, ভাইরাস সমস্যা, হার্ডওয়্যার ত্রুটি, সিসিটিভি ক্যামেরার কাভারেজ বা রেকর্ডিং ইস্যু কিংবা যেকোনো নতুন সেটআপ — নিখুঁত ও নির্ভরযোগ্য সমাধান দেওয়াই আমার লক্ষ্য।</p>
-          <p>গ্রหาร সমস্যা মনোযোগ দিয়ে বুঝে, সততার সাথে এবং যুক্তিসঙ্গত খরচে সার্ভিস দেওয়াতেই বিশ্বাস করি।</p>
+          <p>গ্রাহকের সমস্যা মনোযোগ দিয়ে বুঝে, সততার সাথে এবং যুক্তিসঙ্গত খরচে সার্ভিস দেওয়াতেই বিশ্বাস করি।</p>
         </div>
         <div class="stat-list">
           <div class="stat"><b data-i18n="stat-1-title">PC</b><span data-i18n="stat-1-desc">হার্ডওয়্যার রিপেয়ার</span></div>
@@ -361,8 +370,8 @@
   </section>
 </div>
 
-<!-- SKILLS PAGE -->
-<div id="page-skills" class="page-content">
+<!-- SKILLS SECTION / VIEW -->
+<div id="page-skills" class="page-view">
   <section>
     <div class="wrap">
       <div class="sec-label">skills</div>
@@ -397,8 +406,8 @@
   </section>
 </div>
 
-<!-- SERVICES PAGE -->
-<div id="page-services" class="page-content">
+<!-- SERVICES SECTION / VIEW -->
+<div id="page-services" class="page-view">
   <section>
     <div class="wrap">
       <div class="sec-label">services</div>
@@ -436,8 +445,8 @@
   </section>
 </div>
 
-<!-- CONTACT PAGE -->
-<div id="page-contact" class="page-content">
+<!-- CONTACT SECTION / VIEW -->
+<div id="page-contact" class="page-view">
   <section>
     <div class="wrap">
       <div class="contact-panel">
@@ -463,48 +472,61 @@
 </footer>
 
 <script>
-// SPA Routing Function
+// SPA Routing & Mode Control
 function navigateTo(pageId) {
-  // সব পেজ কনটেন্ট হাইড করা
-  document.querySelectorAll('.page-content').forEach(page => {
-    page.classList.remove('active-page');
-  });
+  const body = document.body;
   
-  // সব মেনু লিংকের অ্যাক্টিভ ক্লাস রিমুভ করা
+  // সব লিংকের অ্যাক্টিভ ক্লাস রিমুভ করা
   document.querySelectorAll('.navlinks a').forEach(link => {
     link.classList.remove('active');
   });
 
-  // নির্দিষ্ট পেজ দেখানো
-  const targetPage = document.getElementById('page-' + pageId);
-  if (targetPage) {
-    targetPage.classList.add('active-page');
+  if (pageId === 'home') {
+    // হোম মোড: সব সেকশন একসাথে রেন্ডার হবে
+    body.className = "mode-home";
+    
+    // হোম লিংক অ্যাক্টিভ করা
+    const homeLink = document.getElementById('link-home');
+    if (homeLink) homeLink.classList.add('active');
+    
+  } else {
+    // সিঙ্গেল মোড: শুধুমাত্র নির্দিষ্ট পেজ দেখাবে
+    body.className = "mode-single";
+    
+    // সব ভিউ থেকে অ্যাক্টিভ ক্লাস রিমুভ
+    document.querySelectorAll('.page-view').forEach(view => {
+      view.classList.remove('active-page');
+    });
+    
+    // নির্দিষ্ট সেকশনটি অন করা
+    const targetPage = document.getElementById('page-' + pageId);
+    if (targetPage) {
+      targetPage.classList.add('active-page');
+    }
+    
+    // বর্তমান লিংক অ্যাক্টিভ করা
+    const activeLink = document.getElementById('link-' + pageId);
+    if (activeLink) activeLink.classList.add('active');
   }
 
-  // মেনু হাইলাইট করা
-  const activeLink = document.getElementById('link-' + pageId);
-  if (activeLink) {
-    activeLink.classList.add('active');
-  }
-
-  // পেজের একদম উপরে স্ক্রোল করা
+  // স্ক্রিন টপ পজিশনে নিয়ে যাওয়া
   window.scrollTo(0, 0);
   
-  // ব্রাউজার হিস্টোরি স্টেট চেঞ্জ (সব পেজ আলাদা দেখানোর ফিলিং)
+  // ব্রাউজার হিস্টোরি চেঞ্জ
   window.history.pushState({}, '', pageId === 'home' ? '/' : '#' + pageId);
 }
 
-// ব্রাউজারের ব্যাক/ফরওয়ার্ড বাটন হ্যান্ডেল করা
+// ব্রাউজার ব্যাক/ফরওয়ার্ড বাটন লজিক
 window.addEventListener('popstate', () => {
   const hash = window.location.hash.replace('#', '');
-  if (hash) {
+  if (hash && ['about', 'skills', 'services', 'contact'].includes(hash)) {
     navigateTo(hash);
   } else {
     navigateTo('home');
   }
 });
 
-// শুরুর সময় পেজ ডিটেক্ট করা
+// শুরুর সময় ইউআরএল চেক করা
 document.addEventListener("DOMContentLoaded", () => {
   const hash = window.location.hash.replace('#', '');
   if (hash && ['about', 'skills', 'services', 'contact'].includes(hash)) {
@@ -517,6 +539,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // বহুভাষিক ডেটাবেস
 const langData = {
   bn: {
+    "nav-home": "হোম",
     "nav-about": "পরিচিতি",
     "nav-skills": "দক্ষতা",
     "nav-services": "সার্ভিস",
@@ -528,7 +551,7 @@ const langData = {
     "hero-btn-ghost": "যোগাযোগ করুন",
     "about-title": "পরিচিতি",
     "about-text": `<p>আমি <strong>OBAYED</strong>, একজন <strong>কম্পিউটার ও সিকিউরিটি টেকনিশিয়ান</strong>। কম্পিউটার ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় ও সমাধান, অপারেটিং সিস্টেম ইন্সটলেশন, সফটওয়্যার সেটআপ, নেটওয়ার্ক কনফিগারেশন এবং প্রফেশনাল **সিসিটিভি (CCTV) সিকিউরিটি ক্যামেরা সেটআপ ও ট্রাবলশুটিংয়ের** কাজে আমার দীর্ঘ ও হাতে-কলমে অভিজ্ঞতা আছে।</p>
-        <p>কোনো ডিভাইস স্লো হয়ে যাওয়া, ভাইরাস সমস্যা, হার্ডওয়্যার ত্রুটি, সিসিটিভি ক্যামেরার কাভারেজ বা রেকর্ডিং ইস্যু কিংবা যেকোনো নতুন সেটআপ — নিখুঁত ও নির্ভরযোগ্য সমাধান দেওয়াই আমার লক্ষ্য।</p>
+        <p>কোনো ডিভাইস স্লো হয়ে যাওয়া, virus সমস্যা, হার্ডওয়্যার ত্রুটি, সিসিটিভি ক্যামেরার কাভারেজ বা রেকর্ডিং ইস্যু কিংবা যেকোনো নতুন সেটআপ — নিখুঁত ও নির্ভরযোগ্য সমাধান দেওয়াই আমার লক্ষ্য।</p>
         <p>গ্রাহকের সমস্যা মনোযোগ দিয়ে বুঝে, সততার সাথে এবং যুক্তিসঙ্গত খরচে সার্ভিস দেওয়াতেই বিশ্বাস করি।</p>`,
     "stat-1-title": "PC",
     "stat-1-desc": "হার্ডওয়্যার রিপেয়ার",
@@ -560,6 +583,7 @@ const langData = {
     "footer-text": "© 2026 OBAYEDZONE — এইচটিএমএল ও সিএসএস দিয়ে তৈরি"
   },
   en: {
+    "nav-home": "Home",
     "nav-about": "About",
     "nav-skills": "Skills",
     "nav-services": "Services",
