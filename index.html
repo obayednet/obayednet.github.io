@@ -23,7 +23,7 @@
 
   *{ box-sizing: border-box; }
   html {
-    scroll-behavior: smooth; /* স্মুথ স্ক্রলিংয়ের জন্য */
+    scroll-behavior: smooth;
   }
   body{
     margin:0;
@@ -105,27 +105,26 @@
     color: #fff;
   }
 
-  /* NEW: SUB-NAVIGATION BAR (আপনার লাল দাগ দেওয়া অংশের জন্য) */
+  /* SUB-NAVIGATION BAR (লাল দাগ দেওয়া জায়গা) */
   .sub-nav {
-    background: rgba(22, 29, 48, 0.4);
+    background: rgba(22, 29, 48, 0.3);
     border-bottom: 1px solid var(--line);
-    padding: 12px 0;
-    display: none; /* ডিফল্টভাবে এটি বন্ধ থাকবে */
+    padding: 14px 0;
+    display: none;
   }
-  /* শুধুমাত্র হোম মোড একটিভ থাকলে এই নিচের বারটি দেখাবে */
   body.mode-home .sub-nav {
     display: block;
   }
   .sub-nav-links {
     display: flex;
-    gap: 20px;
+    gap: 28px;
     list-style: none;
     margin: 0;
     padding: 0;
   }
   .sub-nav-links a {
-    font-size: 13px;
-    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 500;
     color: var(--ink-soft);
     text-decoration: none;
     cursor: pointer;
@@ -154,7 +153,7 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* HERO WITH COMPUTER BACKGROUND IMAGE */
+  /* HERO */
   header.hero{
     position: relative;
     padding: 140px 0;
@@ -364,15 +363,15 @@
   </div>
 </nav>
 
-<!-- NEW: SUB-NAVIGATION BAR (আপনার লাল দাগ দেওয়া জায়গার জন্য) -->
+<!-- SUB-NAVIGATION BAR (আপডেট করা মেনু নামসমূহ) -->
 <div class="sub-nav">
   <div class="wrap">
     <ul class="sub-nav-links">
-      <li><a onclick="scrollToSection('page-home')">// Intro</a></li>
-      <li><a onclick="scrollToSection('page-about')">// About Sec</a></li>
-      <li><a onclick="scrollToSection('page-skills')">// Skills Sec</a></li>
-      <li><a onclick="scrollToSection('page-services')">// Services Sec</a></li>
-      <li><a onclick="scrollToSection('page-contact')">// Contact Sec</a></li>
+      <li><a onclick="scrollToSection('page-home')" data-i18n="sub-home">Home</a></li>
+      <li><a onclick="scrollToSection('page-about')" data-i18n="sub-about">About</a></li>
+      <li><a onclick="scrollToSection('page-skills')" data-i18n="sub-skills">Skills</a></li>
+      <li><a onclick="scrollToSection('page-services')" data-i18n="sub-services">Services</a></li>
+      <li><a onclick="scrollToSection('page-contact')" data-i18n="sub-contact">Contact</a></li>
     </ul>
   </div>
 </div>
@@ -517,7 +516,7 @@
 </footer>
 
 <script>
-// SPA Routing & Mode Control
+// SPA Routing
 function navigateTo(pageId) {
   const body = document.body;
   
@@ -550,7 +549,7 @@ function navigateTo(pageId) {
   window.history.pushState({}, '', pageId === 'home' ? '/' : '#' + pageId);
 }
 
-// নতুন ফাংশন: হোম মোডে থাকা অবস্থায় নির্দিষ্ট সেকশনে স্মুথ স্ক্রল করার জন্য
+// Smooth scrolling for sub-nav elements
 function scrollToSection(id) {
   const element = document.getElementById(id);
   if (element) {
@@ -584,7 +583,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// বহুভাষিক ডেটাবেস
+// Translation Database
 const langData = {
   bn: {
     "nav-home": "হোম",
@@ -592,6 +591,11 @@ const langData = {
     "nav-skills": "দক্ষতা",
     "nav-services": "সার্ভিস",
     "nav-contact": "যোগাযোগ",
+    "sub-home": "হোম",
+    "sub-about": "পরিচিতি",
+    "sub-skills": "দক্ষতা",
+    "sub-services": "সার্ভিস",
+    "sub-contact": "যোগাযোগ",
     "hero-eyebrow": "সার্ভিসের জন্য উপলব্ধ",
     "hero-title": "OBAYED<br>keeps your <span class=\"hl\">computers running.</span>",
     "hero-lede": "কম্পিউটার টেকনিশিয়ান। হার্ডওয়্যার সমস্যা, সফটওয়্যার ইন্সটলেশন, নেটওয়ার্কিং এবং যেকোনো কম্পিউটার সমস্যার সমাধান — নির্ভরযোগ্য ও দ্রুত সার্ভিস।",
@@ -636,6 +640,11 @@ const langData = {
     "nav-skills": "Skills",
     "nav-services": "Services",
     "nav-contact": "Contact",
+    "sub-home": "Home",
+    "sub-about": "About",
+    "sub-skills": "Skills",
+    "sub-services": "Services",
+    "sub-contact": "Contact",
     "hero-eyebrow": "AVAILABLE FOR SERVICE",
     "hero-title": "OBAYED<br>keeps your <span class=\"hl\">computers running.</span>",
     "hero-lede": "Computer Technician. Hardware repair, software installation, networking, and expert troubleshooting for any computer complications — reliable and fast service.",
@@ -676,7 +685,7 @@ const langData = {
   }
 };
 
-let currentLang = 'en'; // ডিফল্ট ইংলিশ রাখা হয়েছে আপনার স্ক্রিনশট অনুযায়ী
+let currentLang = 'en';
 
 function toggleLanguage() {
   const btn = document.querySelector('.lang-btn');
