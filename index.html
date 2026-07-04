@@ -49,44 +49,36 @@
     width: 100%;
   }
 
-  /* NAV & LOGO */
-  nav{
-    position: sticky; top:0; z-index: 50;
-    background: rgba(11, 15, 25, 0.95);
+  /* STICKY HEADER AREA (স্ক্রল করলেও এটি সবসময় উপরে ফিক্সড থাকবে) */
+  .main-header {
+    position: sticky; 
+    top: 0; 
+    z-index: 100;
+    background: rgba(11, 15, 25, 0.96);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
   }
-  nav .wrap{
-    display:flex; align-items:center; justify-content: space-between;
-    height: 84px;
+
+  /* TOP ROW: LOGO & BUTTON */
+  .nav-top-row {
+    border-bottom: 1px solid rgba(36, 47, 77, 0.5);
   }
-  .brand{
+  .nav-top-row .wrap {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    height: 74px;
+  }
+  .brand {
     font-family: var(--display);
     font-weight: 700;
     font-size: 32px;
-    text-decoration:none;
+    text-decoration: none;
     color: #FFF;
     letter-spacing: -0.02em;
-  }
-  .brand span{ color: var(--accent-neon); }
-  
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-  }
-  .navlinks{
-    display:flex; gap: 24px; list-style:none; margin:0; padding:0;
-    font-size: 14px;
-  }
-  .navlinks a{ 
-    text-decoration:none; 
-    color: var(--ink-soft); 
-    transition: color .15s; 
-    font-weight: 600;
     cursor: pointer;
   }
-  .navlinks a:hover, .navlinks a.active{ color: var(--accent-neon); }
+  .brand span{ color: var(--accent-neon); }
 
   .lang-btn {
     font-family: var(--mono);
@@ -105,16 +97,20 @@
     color: #fff;
   }
 
-  /* SUB-NAVIGATION BAR (লাল দাগ দেওয়া জায়গা) */
+  /* SUB-NAVIGATION BAR (লোগোর ঠিক নিচে অল-টাইম ফিক্সড মেনুবার) */
   .sub-nav {
-    background: rgba(22, 29, 48, 0.3);
-    border-bottom: 1px solid var(--line);
+    background: rgba(22, 29, 48, 0.2);
     padding: 14px 0;
-    display: none;
+  }
+  
+  /* শুধুমাত্র হোম মোড ছাড়া অন্য পেজে মেনুবারের সাধারণ স্ক্রলিং ঠিক রাখার জন্য */
+  body.mode-single .sub-nav {
+    display: none; /* অন্য ভিউতে প্রয়োজন না হলে হাইড রাখতে পারেন, অথবা সচল রাখতে পারেন */
   }
   body.mode-home .sub-nav {
     display: block;
   }
+
   .sub-nav-links {
     display: flex;
     gap: 28px;
@@ -130,7 +126,7 @@
     cursor: pointer;
     transition: color 0.2s;
   }
-  .sub-nav-links a:hover {
+  .sub-nav-links a:hover, .sub-nav-links a.active {
     color: var(--accent-neon);
   }
 
@@ -338,54 +334,47 @@
     .services-grid { grid-template-columns: 1fr; gap: 32px; }
     .about-grid{ grid-template-columns: 1fr; gap: 32px; }
     .skill-groups{ grid-template-columns: 1fr; gap: 20px; }
-    .nav-right { gap: 16px; }
-    .navlinks{ gap: 14px; font-size: 13px; }
     .contact-panel{ padding: 40px 24px; }
-    .sub-nav-links { justify-content: center; }
+    .sub-nav-links { justify-content: flex-start; gap: 20px; overflow-x: auto; padding-bottom: 4px; }
   }
 </style>
 </head>
 <body class="mode-home">
 
-<nav>
-  <div class="wrap">
-    <a onclick="navigateTo('home')" class="brand" style="cursor:pointer;">OBAYEDZONE<span>.</span></a>
-    <div class="nav-right">
-      <ul class="navlinks">
-        <li><a onclick="navigateTo('home')" id="link-home" data-i18n="nav-home" class="active">Home</a></li>
-        <li><a onclick="navigateTo('about')" id="link-about" data-i18n="nav-about">About</a></li>
-        <li><a onclick="navigateTo('skills')" id="link-skills" data-i18n="nav-skills">Skills</a></li>
-        <li><a onclick="navigateTo('services')" id="link-services" data-i18n="nav-services">Services</a></li>
-        <li><a onclick="navigateTo('contact')" id="link-contact" data-i18n="nav-contact">Contact</a></li>
-      </ul>
+<!-- সম্পূর্ণ স্টিকি হেডার এরিয়া (লোগো + মেনুবার একসাথে স্টিকি থাকবে) -->
+<div class="main-header">
+  <!-- লোগো এবং ল্যাঙ্গুয়েজ বাটন এরিয়া -->
+  <div class="nav-top-row">
+    <div class="wrap">
+      <a onclick="navigateTo('home')" class="brand">OBAYEDZONE<span>.</span></a>
       <button class="lang-btn" onclick="toggleLanguage()">Bangla</button>
     </div>
   </div>
-</nav>
 
-<!-- SUB-NAVIGATION BAR (আপডেট করা মেনু নামসমূহ) -->
-<div class="sub-nav">
-  <div class="wrap">
-    <ul class="sub-nav-links">
-      <li><a onclick="scrollToSection('page-home')" data-i18n="sub-home">Home</a></li>
-      <li><a onclick="scrollToSection('page-about')" data-i18n="sub-about">About</a></li>
-      <li><a onclick="scrollToSection('page-skills')" data-i18n="sub-skills">Skills</a></li>
-      <li><a onclick="scrollToSection('page-services')" data-i18n="sub-services">Services</a></li>
-      <li><a onclick="scrollToSection('page-contact')" data-i18n="sub-contact">Contact</a></li>
-    </ul>
+  <!-- অল-টাইম দৃশ্যমান সাব-নেভিগেশন মেনুবার -->
+  <div class="sub-nav">
+    <div class="wrap">
+      <ul class="sub-nav-links">
+        <li><a onclick="scrollToSection('page-home')" id="sub-link-home" class="active" data-i18n="sub-home">Home</a></li>
+        <li><a onclick="scrollToSection('page-about')" id="sub-link-about" data-i18n="sub-about">About</a></li>
+        <li><a onclick="scrollToSection('page-skills')" id="sub-link-skills" data-i18n="sub-skills">Skills</a></li>
+        <li><a onclick="scrollToSection('page-services')" id="sub-link-services" data-i18n="sub-services">Services</a></li>
+        <li><a onclick="scrollToSection('page-contact')" id="sub-link-contact" data-i18n="sub-contact">Contact</a></li>
+      </ul>
+    </div>
   </div>
 </div>
 
 <!-- HERO SECTION / VIEW -->
-<div id="page-home" class="page-view active-page">
+<div id="page-home" class="page-view">
   <header class="hero">
     <div class="wrap">
       <div class="eyebrow"><span class="dot"></span> <span data-i18n="hero-eyebrow">AVAILABLE FOR SERVICE</span></div>
       <h1 class="title" data-i18n="hero-title">OBAYED<br>keeps your <span class="hl">computers running.</span></h1>
       <p class="lede" data-i18n="hero-lede">Computer Technician. Hardware repair, software installation, networking, and expert troubleshooting for any computer complications — reliable and fast service.</p>
       <div class="cta-row">
-        <button onclick="navigateTo('services')" class="btn btn-primary" data-i18n="hero-btn-primary">View Services →</button>
-        <button onclick="navigateTo('contact')" class="btn btn-ghost" data-i18n="hero-btn-ghost">Contact Me</button>
+        <button onclick="scrollToSection('page-services')" class="btn btn-primary" data-i18n="hero-btn-primary">View Services →</button>
+        <button onclick="scrollToSection('page-contact')" class="btn btn-ghost" data-i18n="hero-btn-ghost">Contact Me</button>
       </div>
     </div>
   </header>
@@ -457,7 +446,7 @@
       <div class="sec-label">services</div>
       <h2 class="sec-title" data-i18n="services-title">Services</h2>
       <div class="services-grid">
-        <div onclick="navigateTo('contact')" class="service-card-new">
+        <div onclick="scrollToSection('page-contact')" class="service-card-new">
           <div class="service-img-box"><img src="https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=500&q=80" alt="Hardware Repair"></div>
           <div class="service-info">
             <div class="service-tags"><span class="tag">PC</span><span class="tag">Laptop</span></div>
@@ -466,7 +455,7 @@
             <div class="service-link-btn"><span data-i18n="service-btn-txt">Get Service</span> →</div>
           </div>
         </div>
-        <div onclick="navigateTo('contact')" class="service-card-new">
+        <div onclick="scrollToSection('page-contact')" class="service-card-new">
           <div class="service-img-box"><img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=500&q=80" alt="Software Setup"></div>
           <div class="service-info">
             <div class="service-tags"><span class="tag">Windows</span><span class="tag">Linux</span></div>
@@ -475,7 +464,7 @@
             <div class="service-link-btn"><span data-i18n="service-btn-txt">Get Service</span> →</div>
           </div>
         </div>
-        <div onclick="navigateTo('contact')" class="service-card-new">
+        <div onclick="scrollToSection('page-contact')" class="service-card-new">
           <div class="service-img-box"><img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=500&q=80" alt="CCTV & Networking"></div>
           <div class="service-info">
             <div class="service-tags"><span class="tag">CCTV</span><span class="tag">Network</span></div>
@@ -516,92 +505,66 @@
 </footer>
 
 <script>
-// SPA Routing
-function navigateTo(pageId) {
-  const body = document.body;
-  
-  document.querySelectorAll('.navlinks a').forEach(link => {
-    link.classList.remove('active');
-  });
-
-  if (pageId === 'home') {
-    body.className = "mode-home";
-    const homeLink = document.getElementById('link-home');
-    if (homeLink) homeLink.classList.add('active');
-    window.scrollTo(0, 0);
-  } else {
-    body.className = "mode-single";
-    
-    document.querySelectorAll('.page-view').forEach(view => {
-      view.classList.remove('active-page');
-    });
-    
-    const targetPage = document.getElementById('page-' + pageId);
-    if (targetPage) {
-      targetPage.classList.add('active-page');
-    }
-    
-    const activeLink = document.getElementById('link-' + pageId);
-    if (activeLink) activeLink.classList.add('active');
-    window.scrollTo(0, 0);
-  }
-
-  window.history.pushState({}, '', pageId === 'home' ? '/' : '#' + pageId);
-}
-
-// Smooth scrolling for sub-nav elements
+// Smooth Navigation and Auto-Highlight on Scroll
 function scrollToSection(id) {
   const element = document.getElementById(id);
   if (element) {
-    const navHeight = document.querySelector('nav').offsetHeight;
-    const subNavHeight = document.querySelector('.sub-nav').offsetHeight;
-    const totalOffset = navHeight + subNavHeight;
-    
+    const headerHeight = document.querySelector('.main-header').offsetHeight;
     const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+    
     window.scrollTo({
-      top: elementPosition - totalOffset,
+      top: elementPosition - headerHeight + 5,
       behavior: 'smooth'
     });
   }
 }
 
-window.addEventListener('popstate', () => {
-  const hash = window.location.hash.replace('#', '');
-  if (hash && ['about', 'skills', 'services', 'contact'].includes(hash)) {
-    navigateTo(hash);
-  } else {
-    navigateTo('home');
+// Fallback for branding click
+function navigateTo(mode) {
+  if(mode === 'home') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-});
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-  const hash = window.location.hash.replace('#', '');
-  if (hash && ['about', 'skills', 'services', 'contact'].includes(hash)) {
-    navigateTo(hash);
-  } else {
-    navigateTo('home');
-  }
+// Active link highlighting during scroll
+window.addEventListener('scroll', () => {
+  const sections = ['page-home', 'page-about', 'page-skills', 'page-services', 'page-contact'];
+  const headerHeight = document.querySelector('.main-header').offsetHeight;
+  let currentSection = 'page-home';
+
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      const top = el.getBoundingClientRect().top;
+      if (top - headerHeight <= 60) {
+        currentSection = id;
+      }
+    }
+  });
+
+  document.querySelectorAll('.sub-nav-links a').forEach(link => {
+    link.classList.remove('active');
+  });
+
+  const activeId = currentSection.replace('page-', 'sub-link-');
+  const activeLink = document.getElementById(activeId);
+  if (activeLink) activeLink.classList.add('active');
 });
 
 // Translation Database
 const langData = {
   bn: {
-    "nav-home": "হোম",
-    "nav-about": "পরিচিতি",
-    "nav-skills": "দক্ষতা",
-    "nav-services": "সার্ভিস",
-    "nav-contact": "যোগাযোগ",
-    "sub-home": "হোম",
-    "sub-about": "পরিচিতি",
-    "sub-skills": "দক্ষতা",
-    "sub-services": "সার্ভিস",
-    "sub-contact": "যোগাযোগ",
+    "sub-home": "Home",
+    "sub-about": "About",
+    "sub-skills": "Skills",
+    "sub-services": "Services",
+    "sub-contact": "Contact",
     "hero-eyebrow": "সার্ভিসের জন্য উপলব্ধ",
     "hero-title": "OBAYED<br>keeps your <span class=\"hl\">computers running.</span>",
-    "hero-lede": "কম্পিউটার টেকনিশিয়ান। হার্ডওয়্যার সমস্যা, সফটওয়্যার ইন্সটলেশন, নেটওয়ার্কিং এবং যেকোনো কম্পিউটার সমস্যার সমাধান — নির্ভরযোগ্য ও দ্রুত সার্ভিস।",
+    "hero-lede": "কম্পিউটার টেকনিশিয়ান। হার্ডওয়্যার সমস্যা, সফটওয়্যার ইন্সটলেশন, নেটওয়ার্কিং এবং যেকোনো কম্পিউটার সমস্যার সমাধান — নির্ভরযোগ্য ও দ্রুত сервис।",
     "hero-btn-primary": "সার্ভিসসমূহ দেখুন →",
     "hero-btn-ghost": "যোগাযোগ করুন",
-    "about-title": "পরিচিতি",
+    "about-title": "About Me",
     "about-text": `<p>আমি <strong>OBAYED</strong>, একজন <strong>কম্পিউটার ও সিকিউরিটি টেকনিশিয়ান</strong>। কম্পিউটার ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় ও সমাধান, অপারেটিং সিস্টেম ইন্সটলেশন, সফটওয়্যার সেটআপ, নেটওয়ার্ক কনফিগারেশন এবং প্রফেশনাল **সিসিটিভি (CCTV) সিকিউরিটি ক্যামেরা সেটআপ ও ট্রাবলশুটিংয়ের** কাজে আমার দীর্ঘ ও হাতে-কলমে অভিজ্ঞতা আছে।</p>
         <p>কোনো ডিভাইস স্লো হয়ে যাওয়া, virus সমস্যা, হার্ডওয়্যার ত্রুটি, সিসিটিভি ক্যামেরার কাভারেজ বা রেকর্ডিং ইস্যু কিংবা যেকোনো নতুন সেটআপ — নিখুঁত ও নির্ভরযোগ্য সমাধান দেওয়াই আমার লক্ষ্য।</p>
         <p>গ্রাহকের সমস্যা মনোযোগ দিয়ে বুঝে, সততার সাথে এবং যুক্তিসঙ্গত খরচে সার্ভিস দেওয়াতেই বিশ্বাস করি।</p>`,
@@ -612,7 +575,7 @@ const langData = {
     "stat-3-title": "OS",
     "stat-3-desc": "ইন্সটলেশন ও সেটআপ",
     "stat-4-desc": "সার্ভিস চালু",
-    "skills-title": "দক্ষতা",
+    "skills-title": "Skills",
     "skill-h1": "পিসি ও ল্যাপটপ মেরামত",
     "skill-h2": "কম্পোনেন্ট ডায়াগনসিস",
     "skill-h3": "অ্যাসেম্বলি ও আপগ্রেড",
@@ -622,7 +585,7 @@ const langData = {
     "skill-n1": "রাউটার / ওয়াই-ফাই সেটআপ",
     "skill-n2": "CCTV ক্যামেরা ইনস্টলেশন",
     "skill-n3": "নেটওয়ার্ক ট্রাবলশুটিং",
-    "services-title": "সার্ভিসসমূহ",
+    "services-title": "Services",
     "service-1-title": "হার্ডওয়্যার রিপেয়ার",
     "service-1-desc": "পিসি ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় করে সমাধান — যেমন মাদারবোর্ড, RAM, পাওয়ার সাপ্লাই ইত্যাদি পরিবর্তন ও মেরামত।",
     "service-2-title": "সফটওয়্যার ও OS সেটআপ",
@@ -630,16 +593,11 @@ const langData = {
     "service-3-title": "নেটওয়ার্ক ও সিসিটিভি",
     "service-3-desc": "বাসাবাড়ি বা দোকানের জন্য সিসিটিভি (CCTV) ক্যামেরা সেটআপ, উন্নত রাউটার ও Wi-Fi কনফিগারেশন এবং ল্যান (LAN) নেটওয়ার্কিং ট্রাবলশুটিং।",
     "service-btn-txt": "সার্ভিস নিন",
-    "contact-title": "সার্ভিস দরকার?",
+    "contact-title": "Need Service?",
     "contact-desc": "কম্পিউটার/ল্যাপটপ বা সিসিটিভি সংক্রান্ত যেকোনো সমস্যায় বা সার্ভিসের জন্য নিচের ইমেইল বা হোয়াটসঅ্যাপ নম্বরে সরাসরি যোগাযোগ করুন।",
     "footer-text": "© 2026 OBAYEDZONE — এইচটিএমএল ও সিএসএস দিয়ে তৈরি"
   },
   en: {
-    "nav-home": "Home",
-    "nav-about": "About",
-    "nav-skills": "Skills",
-    "nav-services": "Services",
-    "nav-contact": "Contact",
     "sub-home": "Home",
     "sub-about": "About",
     "sub-skills": "Skills",
