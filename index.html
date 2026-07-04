@@ -22,6 +22,9 @@
   }
 
   *{ box-sizing: border-box; }
+  html {
+    scroll-behavior: smooth; /* স্মুথ স্ক্রলিংয়ের জন্য */
+  }
   body{
     margin:0;
     background: var(--bg);
@@ -102,18 +105,46 @@
     color: #fff;
   }
 
+  /* NEW: SUB-NAVIGATION BAR (আপনার লাল দাগ দেওয়া অংশের জন্য) */
+  .sub-nav {
+    background: rgba(22, 29, 48, 0.4);
+    border-bottom: 1px solid var(--line);
+    padding: 12px 0;
+    display: none; /* ডিফল্টভাবে এটি বন্ধ থাকবে */
+  }
+  /* শুধুমাত্র হোম মোড একটিভ থাকলে এই নিচের বারটি দেখাবে */
+  body.mode-home .sub-nav {
+    display: block;
+  }
+  .sub-nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .sub-nav-links a {
+    font-size: 13px;
+    font-family: var(--mono);
+    color: var(--ink-soft);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .sub-nav-links a:hover {
+    color: var(--accent-neon);
+  }
+
   /* DYNAMIC PAGES / VIEW MODES SETUP */
   .page-view {
     display: none;
     animation: fadeIn 0.4s ease-in-out forwards;
   }
   
-  /* যখন হোম মোডে থাকবে, সব পেজ ভিউগুলো ব্লক হিসেবে দেখাবে */
   body.mode-home .page-view {
     display: block !important;
   }
   
-  /* যখন স্পেসিফিক পেজ মোডে থাকবে, শুধু একটি সেকশন দেখাবে */
   body.mode-single .page-view.active-page {
     display: block !important;
   }
@@ -187,7 +218,7 @@
 
   /* SECTION SHARED */
   section { padding: 96px 0; border-bottom: 1px solid var(--line); }
-  body.mode-single section { border-bottom: none; } /* সিঙ্গেল পেজ মোডে নিচের বর্ডার লাগবে না */
+  body.mode-single section { border-bottom: none; }
   
   .sec-label{
     font-family: var(--mono);
@@ -311,26 +342,40 @@
     .nav-right { gap: 16px; }
     .navlinks{ gap: 14px; font-size: 13px; }
     .contact-panel{ padding: 40px 24px; }
+    .sub-nav-links { justify-content: center; }
   }
 </style>
 </head>
-<body class="mode-home"> <!-- ডিফল্ট মোড হোম (সব একসাথে) -->
+<body class="mode-home">
 
 <nav>
   <div class="wrap">
     <a onclick="navigateTo('home')" class="brand" style="cursor:pointer;">OBAYEDZONE<span>.</span></a>
     <div class="nav-right">
       <ul class="navlinks">
-        <li><a onclick="navigateTo('home')" id="link-home" data-i18n="nav-home" class="active">হোম</a></li>
-        <li><a onclick="navigateTo('about')" id="link-about" data-i18n="nav-about">পরিচিতি</a></li>
-        <li><a onclick="navigateTo('skills')" id="link-skills" data-i18n="nav-skills">দক্ষতা</a></li>
-        <li><a onclick="navigateTo('services')" id="link-services" data-i18n="nav-services">সার্ভিস</a></li>
-        <li><a onclick="navigateTo('contact')" id="link-contact" data-i18n="nav-contact">যোগাযোগ</a></li>
+        <li><a onclick="navigateTo('home')" id="link-home" data-i18n="nav-home" class="active">Home</a></li>
+        <li><a onclick="navigateTo('about')" id="link-about" data-i18n="nav-about">About</a></li>
+        <li><a onclick="navigateTo('skills')" id="link-skills" data-i18n="nav-skills">Skills</a></li>
+        <li><a onclick="navigateTo('services')" id="link-services" data-i18n="nav-services">Services</a></li>
+        <li><a onclick="navigateTo('contact')" id="link-contact" data-i18n="nav-contact">Contact</a></li>
       </ul>
-      <button class="lang-btn" onclick="toggleLanguage()">English</button>
+      <button class="lang-btn" onclick="toggleLanguage()">Bangla</button>
     </div>
   </div>
 </nav>
+
+<!-- NEW: SUB-NAVIGATION BAR (আপনার লাল দাগ দেওয়া জায়গার জন্য) -->
+<div class="sub-nav">
+  <div class="wrap">
+    <ul class="sub-nav-links">
+      <li><a onclick="scrollToSection('page-home')">// Intro</a></li>
+      <li><a onclick="scrollToSection('page-about')">// About Sec</a></li>
+      <li><a onclick="scrollToSection('page-skills')">// Skills Sec</a></li>
+      <li><a onclick="scrollToSection('page-services')">// Services Sec</a></li>
+      <li><a onclick="scrollToSection('page-contact')">// Contact Sec</a></li>
+    </ul>
+  </div>
+</div>
 
 <!-- HERO SECTION / VIEW -->
 <div id="page-home" class="page-view active-page">
@@ -338,10 +383,10 @@
     <div class="wrap">
       <div class="eyebrow"><span class="dot"></span> <span data-i18n="hero-eyebrow">AVAILABLE FOR SERVICE</span></div>
       <h1 class="title" data-i18n="hero-title">OBAYED<br>keeps your <span class="hl">computers running.</span></h1>
-      <p class="lede" data-i18n="hero-lede">কম্পিউটার টেকনিশিয়ান। হার্ডওয়্যার সমস্যা, সফটওয়্যার ইন্সটলেশন, নেটওয়ার্কিং এবং যেকোনো কম্পিউটার সমস্যার সমাধান — নির্ভরযোগ্য ও দ্রুত সার্ভিস।</p>
+      <p class="lede" data-i18n="hero-lede">Computer Technician. Hardware repair, software installation, networking, and expert troubleshooting for any computer complications — reliable and fast service.</p>
       <div class="cta-row">
-        <button onclick="navigateTo('services')" class="btn btn-primary" data-i18n="hero-btn-primary">সার্ভিসসমূহ দেখুন →</button>
-        <button onclick="navigateTo('contact')" class="btn btn-ghost" data-i18n="hero-btn-ghost">যোগাযোগ করুন</button>
+        <button onclick="navigateTo('services')" class="btn btn-primary" data-i18n="hero-btn-primary">View Services →</button>
+        <button onclick="navigateTo('contact')" class="btn btn-ghost" data-i18n="hero-btn-ghost">Contact Me</button>
       </div>
     </div>
   </header>
@@ -352,18 +397,18 @@
   <section>
     <div class="wrap">
       <div class="sec-label">about</div>
-      <h2 class="sec-title" data-i18n="about-title">পরিচিতি</h2>
+      <h2 class="sec-title" data-i18n="about-title">About Me</h2>
       <div class="about-grid">
         <div class="about-text" data-i18n="about-text">
-          <p>আমি <strong>OBAYED</strong>, একজন <strong>কম্পিউটার ও সিকিউরিটি টেকনিশিয়ান</strong>। কম্পিউটার ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় ও সমাধান, অপারেটিং সিস্টেম ইন্সটলেশন, সফটওয়্যার সেটআপ, নেটওয়ার্ক কনফিগারেশন এবং প্রফেশনাল **সিসিটিভি (CCTV) সিকিউরিটি ক্যামেরা সেটআপ ও ট্রাবলশুটিংয়ের** কাজে আমার দীর্ঘ ও হাতে-কলমে অভিজ্ঞতা আছে।</p>
-          <p>কোনো ডিভাইস স্লো হয়ে যাওয়া, ভাইরাস সমস্যা, হার্ডওয়্যার ত্রুটি, সিসিটিভি ক্যামেরার কাভারেজ বা রেকর্ডিং ইস্যু কিংবা যেকোনো নতুন সেটআপ — নিখুঁত ও নির্ভরযোগ্য সমাধান দেওয়াই আমার লক্ষ্য।</p>
-          <p>গ্রাহকের সমস্যা মনোযোগ দিয়ে বুঝে, সততার সাথে এবং যুক্তিসঙ্গত খরচে সার্ভিস দেওয়াতেই বিশ্বাস করি।</p>
+          <p>I am <strong>OBAYED</strong>, a professional <strong>Computer & Security Technician</strong>. I have long-term, hands-on experience in diagnosing and repairing computer & laptop hardware issues, operating system installations, software setup, network configurations, and professional **CCTV security camera setup & troubleshooting**.</p>
+          <p>Whether it's a slow device, virus issues, hardware malfunctions, CCTV coverage/recording issues, or a fresh setup — my goal is to provide fast and dependable solutions.</p>
+          <p>I believe in understanding the customer's issue thoroughly, delivering services with honesty and at reasonable pricing.</p>
         </div>
         <div class="stat-list">
-          <div class="stat"><b data-i18n="stat-1-title">PC</b><span data-i18n="stat-1-desc">হার্ডওয়্যার রিপেয়ার</span></div>
-          <div class="stat"><b data-i18n="stat-2-title">CCTV</b><span data-i18n="stat-2-desc">সিকিউরিটি ক্যামেরা</span></div>
-          <div class="stat"><b data-i18n="stat-3-title">OS</b><span data-i18n="stat-3-desc">ইন্সটলেশন ও সেটআপ</span></div>
-          <div class="stat"><b>2013</b><span data-i18n="stat-4-desc">সার্ভিস চালু</span></div>
+          <div class="stat"><b data-i18n="stat-1-title">PC</b><span data-i18n="stat-1-desc">Hardware Repair</span></div>
+          <div class="stat"><b data-i18n="stat-2-title">CCTV</b><span data-i18n="stat-2-desc">Security Camera</span></div>
+          <div class="stat"><b data-i18n="stat-3-title">OS</b><span data-i18n="stat-3-desc">Install & Setup</span></div>
+          <div class="stat"><b>2013</b><span data-i18n="stat-4-desc">Service Active</span></div>
         </div>
       </div>
     </div>
@@ -375,7 +420,7 @@
   <section>
     <div class="wrap">
       <div class="sec-label">skills</div>
-      <h2 class="sec-title" data-i18n="skills-title">দক্ষতা</h2>
+      <h2 class="sec-title" data-i18n="skills-title">Skills</h2>
       <div class="skill-groups">
         <div class="skill-card">
           <h3>Hardware</h3>
@@ -411,33 +456,33 @@
   <section>
     <div class="wrap">
       <div class="sec-label">services</div>
-      <h2 class="sec-title" data-i18n="services-title">সার্ভিসসমূহ</h2>
+      <h2 class="sec-title" data-i18n="services-title">Services</h2>
       <div class="services-grid">
         <div onclick="navigateTo('contact')" class="service-card-new">
           <div class="service-img-box"><img src="https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=500&q=80" alt="Hardware Repair"></div>
           <div class="service-info">
             <div class="service-tags"><span class="tag">PC</span><span class="tag">Laptop</span></div>
-            <h3 data-i18n="service-1-title">হার্ডওয়্যার রিপেয়ার</h3>
-            <p data-i18n="service-1-desc">পিসি ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় করে সমাধান — যেমন মাদারবোর্ড, RAM, পাওয়ার সাপ্লাই ইত্যাদি পরিবর্তন ও মেরামত।</p>
-            <div class="service-link-btn"><span data-i18n="service-btn-txt">সার্ভিস নিন</span> →</div>
+            <h3 data-i18n="service-1-title">Hardware Repair</h3>
+            <p data-i18n="service-1-desc">Diagnosing and fixing PC and laptop hardware issues including Motherboards, RAM, Power Supplies, replacements and repairs.</p>
+            <div class="service-link-btn"><span data-i18n="service-btn-txt">Get Service</span> →</div>
           </div>
         </div>
         <div onclick="navigateTo('contact')" class="service-card-new">
           <div class="service-img-box"><img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=500&q=80" alt="Software Setup"></div>
           <div class="service-info">
             <div class="service-tags"><span class="tag">Windows</span><span class="tag">Linux</span></div>
-            <h3 data-i18n="service-2-title">সফটওয়্যার ও OS সেটআপ</h3>
-            <p data-i18n="service-2-desc">Windows/Linux সম্পূর্ণ নতুনভাবে ইন্সটলেশন, প্রফেশনাল প্রয়োজনীয় সফটওয়্যার কনফিগারেশন, এবং স্লো পিসি ফিক্সসহ ভাইরাস রিমুভাল।</p>
-            <div class="service-link-btn"><span data-i18n="service-btn-txt">সার্ভিস নিন</span> →</div>
+            <h3 data-i18n="service-2-title">Software & OS Setup</h3>
+            <p data-i18n="service-2-desc">Fresh Windows/Linux installations, essential software configurations, PC speed optimization, and virus removal services.</p>
+            <div class="service-link-btn"><span data-i18n="service-btn-txt">Get Service</span> →</div>
           </div>
         </div>
         <div onclick="navigateTo('contact')" class="service-card-new">
           <div class="service-img-box"><img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=500&q=80" alt="CCTV & Networking"></div>
           <div class="service-info">
             <div class="service-tags"><span class="tag">CCTV</span><span class="tag">Network</span></div>
-            <h3 data-i18n="service-3-title">নেটওয়ার্ক ও সিসিটিভি</h3>
-            <p data-i18n="service-3-desc">বাসাবাড়ি বা দোকানের জন্য সিসিটিভি (CCTV) ক্যামেরা সেটআপ, উন্নত রাউটার ও Wi-Fi কনফিগারেশন এবং ল্যান (LAN) নেটওয়ার্কিং ট্রাবলশুটিং।</p>
-            <div class="service-link-btn"><span data-i18n="service-btn-txt">সার্ভিস নিন</span> →</div>
+            <h3 data-i18n="service-3-title">Network & CCTV</h3>
+            <p data-i18n="service-3-desc">Complete CCTV security camera installation for homes or shops, advanced router & Wi-Fi setup, and local network (LAN) troubleshooting.</p>
+            <div class="service-link-btn"><span data-i18n="service-btn-txt">Get Service</span> →</div>
           </div>
         </div>
       </div>
@@ -451,8 +496,8 @@
     <div class="wrap">
       <div class="contact-panel">
         <div class="sec-label">contact</div>
-        <h2 data-i18n="contact-title">সার্ভিস দরকার?</h2>
-        <p data-i18n="contact-desc">কম্পিউটার/ল্যাপটপ বা সিসিটিভি সংক্রান্ত যেকোনো সমস্যায় বা সার্ভিসের জন্য নিচের ইমেইল বা হোয়াটসঅ্যাপ নম্বরে সরাসরি যোগাযোগ করুন।</p>
+        <h2 data-i18n="contact-title">Need Service?</h2>
+        <p data-i18n="contact-desc">For any computer/laptop or CCTV problems and service inquiries, please get in touch via email or WhatsApp below.</p>
         <a href="mailto:obayedzone@gmail.com" class="contact-email">obayedzone@gmail.com</a><br>
         <a href="https://wa.me/96893045704" target="_blank" class="contact-whatsapp">💬 WhatsApp: +968 9304 5704</a>
         <div class="contact-socials">
@@ -476,47 +521,51 @@
 function navigateTo(pageId) {
   const body = document.body;
   
-  // সব লিংকের অ্যাক্টিভ ক্লাস রিমুভ করা
   document.querySelectorAll('.navlinks a').forEach(link => {
     link.classList.remove('active');
   });
 
   if (pageId === 'home') {
-    // হোম মোড: সব সেকশন একসাথে রেন্ডার হবে
     body.className = "mode-home";
-    
-    // হোম লিংক অ্যাক্টিভ করা
     const homeLink = document.getElementById('link-home');
     if (homeLink) homeLink.classList.add('active');
-    
+    window.scrollTo(0, 0);
   } else {
-    // সিঙ্গেল মোড: শুধুমাত্র নির্দিষ্ট পেজ দেখাবে
     body.className = "mode-single";
     
-    // সব ভিউ থেকে অ্যাক্টিভ ক্লাস রিমুভ
     document.querySelectorAll('.page-view').forEach(view => {
       view.classList.remove('active-page');
     });
     
-    // নির্দিষ্ট সেকশনটি অন করা
     const targetPage = document.getElementById('page-' + pageId);
     if (targetPage) {
       targetPage.classList.add('active-page');
     }
     
-    // বর্তমান লিংক অ্যাক্টিভ করা
     const activeLink = document.getElementById('link-' + pageId);
     if (activeLink) activeLink.classList.add('active');
+    window.scrollTo(0, 0);
   }
 
-  // স্ক্রিন টপ পজিশনে নিয়ে যাওয়া
-  window.scrollTo(0, 0);
-  
-  // ব্রাউজার হিস্টোরি চেঞ্জ
   window.history.pushState({}, '', pageId === 'home' ? '/' : '#' + pageId);
 }
 
-// ব্রাউজার ব্যাক/ফরওয়ার্ড বাটন লজিক
+// নতুন ফাংশন: হোম মোডে থাকা অবস্থায় নির্দিষ্ট সেকশনে স্মুথ স্ক্রল করার জন্য
+function scrollToSection(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    const navHeight = document.querySelector('nav').offsetHeight;
+    const subNavHeight = document.querySelector('.sub-nav').offsetHeight;
+    const totalOffset = navHeight + subNavHeight;
+    
+    const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({
+      top: elementPosition - totalOffset,
+      behavior: 'smooth'
+    });
+  }
+}
+
 window.addEventListener('popstate', () => {
   const hash = window.location.hash.replace('#', '');
   if (hash && ['about', 'skills', 'services', 'contact'].includes(hash)) {
@@ -526,7 +575,6 @@ window.addEventListener('popstate', () => {
   }
 });
 
-// শুরুর সময় ইউআরএল চেক করা
 document.addEventListener("DOMContentLoaded", () => {
   const hash = window.location.hash.replace('#', '');
   if (hash && ['about', 'skills', 'services', 'contact'].includes(hash)) {
@@ -628,7 +676,7 @@ const langData = {
   }
 };
 
-let currentLang = 'bn'; 
+let currentLang = 'en'; // ডিফল্ট ইংলিশ রাখা হয়েছে আপনার স্ক্রিনশট অনুযায়ী
 
 function toggleLanguage() {
   const btn = document.querySelector('.lang-btn');
