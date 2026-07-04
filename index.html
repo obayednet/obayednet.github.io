@@ -49,7 +49,7 @@
     width: 100%;
   }
 
-  /* STICKY HEADER AREA (স্ক্রল করলেও এটি সবসময় উপরে ফিক্সড থাকবে) */
+  /* STICKY HEADER AREA (লোগো ও মেনুবার একসাথে ফিক্সড থাকবে) */
   .main-header {
     position: sticky; 
     top: 0; 
@@ -59,7 +59,7 @@
     border-bottom: 1px solid var(--line);
   }
 
-  /* TOP ROW: LOGO & BUTTON */
+  /* TOP ROW: LOGO, SLOGAN & BUTTON */
   .nav-top-row {
     border-bottom: 1px solid rgba(36, 47, 77, 0.5);
   }
@@ -69,16 +69,34 @@
     justify-content: space-between;
     height: 74px;
   }
+  
+  .brand-box {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    text-decoration: none;
+    cursor: pointer;
+  }
   .brand {
     font-family: var(--display);
     font-weight: 700;
     font-size: 32px;
-    text-decoration: none;
     color: #FFF;
     letter-spacing: -0.02em;
-    cursor: pointer;
+    margin: 0;
   }
   .brand span{ color: var(--accent-neon); }
+
+  /* স্লোগানের স্টাইল */
+  .slogan {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
 
   .lang-btn {
     font-family: var(--mono);
@@ -97,18 +115,10 @@
     color: #fff;
   }
 
-  /* SUB-NAVIGATION BAR (লোগোর ঠিক নিচে অল-টাইম ফিক্সড মেনুবার) */
+  /* SUB-NAVIGATION BAR */
   .sub-nav {
     background: rgba(22, 29, 48, 0.2);
     padding: 14px 0;
-  }
-  
-  /* শুধুমাত্র হোম মোড ছাড়া অন্য পেজে মেনুবারের সাধারণ স্ক্রলিং ঠিক রাখার জন্য */
-  body.mode-single .sub-nav {
-    display: none; /* অন্য ভিউতে প্রয়োজন না হলে হাইড রাখতে পারেন, অথবা সচল রাখতে পারেন */
-  }
-  body.mode-home .sub-nav {
-    display: block;
   }
 
   .sub-nav-links {
@@ -137,10 +147,6 @@
   }
   
   body.mode-home .page-view {
-    display: block !important;
-  }
-  
-  body.mode-single .page-view.active-page {
     display: block !important;
   }
 
@@ -213,7 +219,6 @@
 
   /* SECTION SHARED */
   section { padding: 96px 0; border-bottom: 1px solid var(--line); }
-  body.mode-single section { border-bottom: none; }
   
   .sec-label{
     font-family: var(--mono);
@@ -337,21 +342,28 @@
     .contact-panel{ padding: 40px 24px; }
     .sub-nav-links { justify-content: flex-start; gap: 20px; overflow-x: auto; padding-bottom: 4px; }
   }
+  
+  @media (max-width: 540px) {
+    .slogan { display: none; } /* খুব ছোট স্ক্রিনে স্লোগান হাইড হয়ে লোগো ঠিক রাখবে */
+  }
 </style>
 </head>
 <body class="mode-home">
 
-<!-- সম্পূর্ণ স্টিকি হেডার এরিয়া (লোগো + মেনুবার একসাথে স্টিকি থাকবে) -->
+<!-- সম্পূর্ণ স্টিকি হেডার এরিয়া -->
 <div class="main-header">
-  <!-- লোগো এবং ল্যাঙ্গুয়েজ বাটন এরিয়া -->
+  <!-- লোগো, স্লোগান এবং ল্যাঙ্গুয়েজ বাটন এরিয়া -->
   <div class="nav-top-row">
     <div class="wrap">
-      <a onclick="navigateTo('home')" class="brand">OBAYEDZONE<span>.</span></a>
+      <div onclick="navigateTo('home')" class="brand-box">
+        <h1 class="brand">OBAYEDZONE<span>.</span></h1>
+        <span class="slogan">| Tech & Security</span>
+      </div>
       <button class="lang-btn" onclick="toggleLanguage()">Bangla</button>
     </div>
   </div>
 
-  <!-- অল-টাইম দৃশ্যমান সাব-নেভিগেশন মেনুবার -->
+  <!-- সাব-নেভিগেশন মেনুবার -->
   <div class="sub-nav">
     <div class="wrap">
       <ul class="sub-nav-links">
@@ -519,7 +531,6 @@ function scrollToSection(id) {
   }
 }
 
-// Fallback for branding click
 function navigateTo(mode) {
   if(mode === 'home') {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -588,7 +599,7 @@ const langData = {
     "services-title": "Services",
     "service-1-title": "হার্ডওয়্যার রিপেয়ার",
     "service-1-desc": "পিসি ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় করে সমাধান — যেমন মাদারবোর্ড, RAM, পাওয়ার সাপ্লাই ইত্যাদি পরিবর্তন ও মেরামত।",
-    "service-2-title": "সফটওয়্যার ও OS সেটআপ",
+    "service-2-title": "সフトওয়্যার ও OS সেটআপ",
     "service-2-desc": "Windows/Linux সম্পূর্ণ নতুনভাবে ইন্সটলেশন, প্রফেশনাল প্রয়োজনীয় সফটওয়্যার কনফিগারেশন, এবং স্লো পিসি ফিক্সসহ ভাইরাস রিমুভাল।",
     "service-3-title": "নেটওয়ার্ক ও সিসিটিভি",
     "service-3-desc": "বাসাবাড়ি বা দোকানের জন্য সিসিটিভি (CCTV) ক্যামেরা সেটআপ, উন্নত রাউটার ও Wi-Fi কনফিগারেশন এবং ল্যান (LAN) নেটওয়ার্কিং ট্রাবলশুটিং।",
