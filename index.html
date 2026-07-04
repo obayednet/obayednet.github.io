@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,7 +49,7 @@
     width: 100%;
   }
 
-  /* STICKY HEADER AREA (লোগো ও মেনুবার একসাথে ফিক্সড থাকবে) */
+  /* STICKY HEADER AREA */
   .main-header {
     position: sticky; 
     top: 0; 
@@ -87,7 +87,6 @@
   }
   .brand span{ color: var(--accent-neon); }
 
-  /* স্লোগানের স্টাইল */
   .slogan {
     font-family: var(--mono);
     font-size: 12px;
@@ -344,7 +343,7 @@
   }
   
   @media (max-width: 540px) {
-    .slogan { display: none; } /* খুব ছোট স্ক্রিনে স্লোগান হাইড হয়ে লোগো ঠিক রাখবে */
+    .slogan { display: none; }
   }
 </style>
 </head>
@@ -357,7 +356,7 @@
     <div class="wrap">
       <div onclick="navigateTo('home')" class="brand-box">
         <h1 class="brand">OBAYEDZONE<span>.</span></h1>
-        <span class="slogan">| Tech & Security</span>
+        <span class="slogan" data-i18n="slogan-txt">| Tech & Security</span>
       </div>
       <button class="lang-btn" onclick="toggleLanguage()">Bangla</button>
     </div>
@@ -396,10 +395,10 @@
 <div id="page-about" class="page-view">
   <section>
     <div class="wrap">
-      <div class="sec-label">about</div>
+      <div class="sec-label" data-i18n="label-about">about</div>
       <h2 class="sec-title" data-i18n="about-title">About Me</h2>
       <div class="about-grid">
-        <div class="about-text" data-i18n="about-text">
+        <div class="about-text" id="about-text-content" data-i18n="about-text">
           <p>I am <strong>OBAYED</strong>, a professional <strong>Computer & Security Technician</strong>. I have long-term, hands-on experience in diagnosing and repairing computer & laptop hardware issues, operating system installations, software setup, network configurations, and professional **CCTV security camera setup & troubleshooting**.</p>
           <p>Whether it's a slow device, virus issues, hardware malfunctions, CCTV coverage/recording issues, or a fresh setup — my goal is to provide fast and dependable solutions.</p>
           <p>I believe in understanding the customer's issue thoroughly, delivering services with honesty and at reasonable pricing.</p>
@@ -408,7 +407,7 @@
           <div class="stat"><b data-i18n="stat-1-title">PC</b><span data-i18n="stat-1-desc">Hardware Repair</span></div>
           <div class="stat"><b data-i18n="stat-2-title">CCTV</b><span data-i18n="stat-2-desc">Security Camera</span></div>
           <div class="stat"><b data-i18n="stat-3-title">OS</b><span data-i18n="stat-3-desc">Install & Setup</span></div>
-          <div class="stat"><b>2013</b><span data-i18n="stat-4-desc">Service Active</span></div>
+          <div class="stat"><b data-i18n="stat-4-title">2013</b><span data-i18n="stat-4-desc">Service Active</span></div>
         </div>
       </div>
     </div>
@@ -419,11 +418,11 @@
 <div id="page-skills" class="page-view">
   <section>
     <div class="wrap">
-      <div class="sec-label">skills</div>
+      <div class="sec-label" data-i18n="label-skills">skills</div>
       <h2 class="sec-title" data-i18n="skills-title">Skills</h2>
       <div class="skill-groups">
         <div class="skill-card">
-          <h3>Hardware</h3>
+          <h3 data-i18n="skill-group-1">Hardware</h3>
           <ul>
             <li data-i18n="skill-h1">PC &amp; Laptop Repair</li>
             <li data-i18n="skill-h2">Component Diagnosis</li>
@@ -431,7 +430,7 @@
           </ul>
         </div>
         <div class="skill-card">
-          <h3>Software</h3>
+          <h3 data-i18n="skill-group-2">Software</h3>
           <ul>
             <li data-i18n="skill-s1">Windows / Linux Install</li>
             <li data-i18n="skill-s2">Driver &amp; Software Setup</li>
@@ -439,7 +438,7 @@
           </ul>
         </div>
         <div class="skill-card">
-          <h3>Networking & CCTV</h3>
+          <h3 data-i18n="skill-group-3">Networking & CCTV</h3>
           <ul>
             <li data-i18n="skill-n1">Router / Wi-Fi Setup</li>
             <li data-i18n="skill-n2">CCTV Camera Installation</li>
@@ -455,7 +454,7 @@
 <div id="page-services" class="page-view">
   <section>
     <div class="wrap">
-      <div class="sec-label">services</div>
+      <div class="sec-label" data-i18n="label-services">services</div>
       <h2 class="sec-title" data-i18n="services-title">Services</h2>
       <div class="services-grid">
         <div onclick="scrollToSection('page-contact')" class="service-card-new">
@@ -495,7 +494,7 @@
   <section>
     <div class="wrap">
       <div class="contact-panel">
-        <div class="sec-label">contact</div>
+        <div class="sec-label" data-i18n="label-contact">contact</div>
         <h2 data-i18n="contact-title">Need Service?</h2>
         <p data-i18n="contact-desc">For any computer/laptop or CCTV problems and service inquiries, please get in touch via email or WhatsApp below.</p>
         <a href="mailto:obayedzone@gmail.com" class="contact-email">obayedzone@gmail.com</a><br>
@@ -565,28 +564,35 @@ window.addEventListener('scroll', () => {
 // Translation Database
 const langData = {
   bn: {
-    "sub-home": "Home",
-    "sub-about": "About",
-    "sub-skills": "Skills",
-    "sub-services": "Services",
-    "sub-contact": "Contact",
+    "slogan-txt": "| টেক ও সিকিউরিটি",
+    "sub-home": "হোম",
+    "sub-about": "সম্পর্কে",
+    "sub-skills": "দক্ষতা",
+    "sub-services": "সার্ভিসসমূহ",
+    "sub-contact": "যোগাযোগ",
     "hero-eyebrow": "সার্ভিসের জন্য উপলব্ধ",
-    "hero-title": "OBAYED<br>keeps your <span class=\"hl\">computers running.</span>",
-    "hero-lede": "কম্পিউটার টেকনিশিয়ান। হার্ডওয়্যার সমস্যা, সফটওয়্যার ইন্সটলেশন, নেটওয়ার্কিং এবং যেকোনো কম্পিউটার সমস্যার সমাধান — নির্ভরযোগ্য ও দ্রুত сервис।",
+    "hero-title": "OBAYED<br>আপনার <span class=\"hl\">কম্পিউটার রাখবে সচল।</span>",
+    "hero-lede": "কম্পিউটার টেকনিশিয়ান। হার্ডওয়্যার সমস্যা, সফটওয়্যার ইন্সটলেশন, নেটওয়ার্কিং এবং যেকোনো কম্পিউটার জটিলতার বিশ্বস্ত সমাধান — দ্রুত ও নির্ভরযোগ্য সেবা।",
     "hero-btn-primary": "সার্ভিসসমূহ দেখুন →",
     "hero-btn-ghost": "যোগাযোগ করুন",
-    "about-title": "About Me",
-    "about-text": `<p>আমি <strong>OBAYED</strong>, একজন <strong>কম্পিউটার ও সিকিউরিটি টেকনিশিয়ান</strong>। কম্পিউটার ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় ও সমাধান, অপারেটিং সিস্টেম ইন্সটলেশন, সফটওয়্যার সেটআপ, নেটওয়ার্ক কনফিগারেশন এবং প্রফেশনাল **সিসিটিভি (CCTV) সিকিউরিটি ক্যামেরা সেটআপ ও ট্রাবলশুটিংয়ের** কাজে আমার দীর্ঘ ও হাতে-কলমে অভিজ্ঞতা আছে।</p>
-        <p>কোনো ডিভাইস স্লো হয়ে যাওয়া, virus সমস্যা, হার্ডওয়্যার ত্রুটি, সিসিটিভি ক্যামেরার কাভারেজ বা রেকর্ডিং ইস্যু কিংবা যেকোনো নতুন সেটআপ — নিখুঁত ও নির্ভরযোগ্য সমাধান দেওয়াই আমার লক্ষ্য।</p>
-        <p>গ্রাহকের সমস্যা মনোযোগ দিয়ে বুঝে, সততার সাথে এবং যুক্তিসঙ্গত খরচে সার্ভিস দেওয়াতেই বিশ্বাস করি।</p>`,
-    "stat-1-title": "PC",
+    "label-about": "সম্পর্কে",
+    "about-title": "আমার সম্পর্কে",
+    "about-text": `<p>আমি <strong>ওবায়েদ</strong>, একজন পেশাদার <strong>কম্পিউটার ও সিকিউরিটি টেকনিশিয়ান</strong>। কম্পিউটার এবং ল্যাপটপ হার্ডওয়্যার সমস্যা নির্ণয় ও মেরামত, অপারেটিং সিস্টেম ইনস্টলেশন, প্রয়োজনীয় সফটওয়্যার সেটআপ, নেটওয়ার্ক কনফিগারেশন এবং প্রফেশনাল <strong>সিসিটিভি (CCTV) সিকিউরিটি ক্যামেরা সেটআপ ও ট্রাবলশুটিংয়ের</strong> কাজে আমার দীর্ঘ ও বাস্তব অভিজ্ঞতা রয়েছে।</p>
+        <p>আপনার ডিভাইস স্লো হয়ে যাওয়া, ভাইরাসের আক্রমণ, হার্ডওয়্যার নষ্ট হওয়া, সিসিটিভি ক্যামেরা রেকর্ডিং বা কাভারেজ সমস্যা কিংবা যেকোনো নতুন সেটআপ — নিখুঁত সমাধান দেওয়াই আমার প্রধান লক্ষ্য।</p>
+        <p>গ্রাহকের সমস্যা আন্তরিকভাবে বুঝতে, সততা বজায় রাখতে এবং সাশ্রয়ী মূল্যে সঠিক সেবা দিতে আমি প্রতিশ্রুতিবদ্ধ।</p>`,
+    "stat-1-title": "পিসি",
     "stat-1-desc": "হার্ডওয়্যার রিপেয়ার",
     "stat-2-title": "CCTV",
     "stat-2-desc": "সিকিউরিটি ক্যামেরা",
     "stat-3-title": "OS",
     "stat-3-desc": "ইন্সটলেশন ও সেটআপ",
+    "stat-4-title": "২০১৩",
     "stat-4-desc": "সার্ভিস চালু",
-    "skills-title": "Skills",
+    "label-skills": "দক্ষতা",
+    "skills-title": "আমার কারিগরি দক্ষতা",
+    "skill-group-1": "হার্ডওয়্যার",
+    "skill-group-2": "সফটওয়্যার",
+    "skill-group-3": "নেটওয়ার্কিং ও সিসিটিভি",
     "skill-h1": "পিসি ও ল্যাপটপ মেরামত",
     "skill-h2": "কম্পোনেন্ট ডায়াগনসিস",
     "skill-h3": "অ্যাসেম্বলি ও আপগ্রেড",
@@ -596,19 +602,22 @@ const langData = {
     "skill-n1": "রাউটার / ওয়াই-ফাই সেটআপ",
     "skill-n2": "CCTV ক্যামেরা ইনস্টলেশন",
     "skill-n3": "নেটওয়ার্ক ট্রাবলশুটিং",
-    "services-title": "Services",
+    "label-services": "সার্ভিসসমূহ",
+    "services-title": "আমার সেবাসমূহ",
     "service-1-title": "হার্ডওয়্যার রিপেয়ার",
-    "service-1-desc": "পিসি ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় করে সমাধান — যেমন মাদারবোর্ড, RAM, পাওয়ার সাপ্লাই ইত্যাদি পরিবর্তন ও মেরামত।",
-    "service-2-title": "সフトওয়্যার ও OS সেটআপ",
-    "service-2-desc": "Windows/Linux সম্পূর্ণ নতুনভাবে ইন্সটলেশন, প্রফেশনাল প্রয়োজনীয় সফটওয়্যার কনফিগারেশন, এবং স্লো পিসি ফিক্সসহ ভাইরাস রিমুভাল।",
+    "service-1-desc": "পিসি ও ল্যাপটপের সব ধরনের হার্ডওয়্যার সমস্যা সমাধান — যেমন মাদারবোর্ড, র‍্যাম, পাওয়ার সাপ্লাই পরীক্ষা, মেরামত ও নতুন পার্টস প্রতিস্থাপন।",
+    "service-2-title": "সফটওয়্যার ও OS সেটআপ",
+    "service-2-desc": "নতুন Windows/Linux অপারেটিং সিস্টেম দেওয়া, দরকারি সফটওয়্যার সেটআপ করা, স্লো পিসি ফিক্স করা এবং সম্পূর্ণ ভাইরাস পরিষ্কার করা।",
     "service-3-title": "নেটওয়ার্ক ও সিসিটিভি",
-    "service-3-desc": "বাসাবাড়ি বা দোকানের জন্য সিসিটিভি (CCTV) ক্যামেরা সেটআপ, উন্নত রাউটার ও Wi-Fi কনফিগারেশন এবং ল্যান (LAN) নেটওয়ার্কিং ট্রাবলশুটিং।",
+    "service-3-desc": "বাসাবাড়ি বা ব্যবসার জন্য সিসিটিভি (CCTV) ক্যামেরা নিখুঁতভাবে ইনস্টলেশন, রাউটার ও ওয়াই-ফাই কনফিগারেশন এবং ল্যান নেটওয়ার্কিং ঠিক করা।",
     "service-btn-txt": "সার্ভিস নিন",
-    "contact-title": "Need Service?",
-    "contact-desc": "কম্পিউটার/ল্যাপটপ বা সিসিটিভি সংক্রান্ত যেকোনো সমস্যায় বা সার্ভিসের জন্য নিচের ইমেইল বা হোয়াটসঅ্যাপ নম্বরে সরাসরি যোগাযোগ করুন।",
-    "footer-text": "© 2026 OBAYEDZONE — এইচটিএমএল ও সিএসএস দিয়ে তৈরি"
+    "label-contact": "যোগাযোগ",
+    "contact-title": "সেবা প্রয়োজন?",
+    "contact-desc": "কম্পিউটার/ল্যাপটপ বা সিসিটিভি ক্যামেরা সংক্রান্ত যেকোনো সমস্যা বা জিজ্ঞাসায় সরাসরি নিচের ইমেইল অথবা হোয়াটসঅ্যাপ নম্বরে যোগাযোগ করুন।",
+    "footer-text": "© ২০২৬ OBAYEDZONE — এইচটিএমএল ও সিএসএস দিয়ে তৈরি"
   },
   en: {
+    "slogan-txt": "| Tech & Security",
     "sub-home": "Home",
     "sub-about": "About",
     "sub-skills": "Skills",
@@ -619,6 +628,7 @@ const langData = {
     "hero-lede": "Computer Technician. Hardware repair, software installation, networking, and expert troubleshooting for any computer complications — reliable and fast service.",
     "hero-btn-primary": "View Services →",
     "hero-btn-ghost": "Contact Me",
+    "label-about": "about",
     "about-title": "About Me",
     "about-text": `<p>I am <strong>OBAYED</strong>, a professional <strong>Computer & Security Technician</strong>. I have long-term, hands-on experience in diagnosing and repairing computer & laptop hardware issues, operating system installations, software setup, network configurations, and professional **CCTV security camera setup & troubleshooting**.</p>
         <p>Whether it's a slow device, virus issues, hardware malfunctions, CCTV coverage/recording issues, or a fresh setup — my goal is to provide fast and dependable solutions.</p>
@@ -629,8 +639,13 @@ const langData = {
     "stat-2-desc": "Security Camera",
     "stat-3-title": "OS",
     "stat-3-desc": "Install & Setup",
+    "stat-4-title": "2013",
     "stat-4-desc": "Service Active",
+    "label-skills": "skills",
     "skills-title": "Skills",
+    "skill-group-1": "Hardware",
+    "skill-group-2": "Software",
+    "skill-group-3": "Networking & CCTV",
     "skill-h1": "PC & Laptop Repair",
     "skill-h2": "Component Diagnosis",
     "skill-h3": "Assembly & Upgrade",
@@ -640,6 +655,7 @@ const langData = {
     "skill-n1": "Router / Wi-Fi Setup",
     "skill-n2": "CCTV Camera Installation",
     "skill-n3": "Network Troubleshooting",
+    "label-services": "services",
     "services-title": "Services",
     "service-1-title": "Hardware Repair",
     "service-1-desc": "Diagnosing and fixing PC and laptop hardware issues including Motherboards, RAM, Power Supplies, replacements and repairs.",
@@ -648,6 +664,7 @@ const langData = {
     "service-3-title": "Network & CCTV",
     "service-3-desc": "Complete CCTV security camera installation for homes or shops, advanced router & Wi-Fi setup, and local network (LAN) troubleshooting.",
     "service-btn-txt": "Get Service",
+    "label-contact": "contact",
     "contact-title": "Need Service?",
     "contact-desc": "For any computer/laptop or CCTV problems and service inquiries, please get in touch via email or WhatsApp below.",
     "footer-text": "© 2026 OBAYEDZONE — Built with HTML & CSS"
