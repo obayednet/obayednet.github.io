@@ -8,12 +8,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #0B0F19; /* ডার্ক টেক ব্যাকগ্রাউন্ড */
-    --bg-panel: #161D30; /* প্যানেল ব্যাকগ্রাউন্ড */
-    --ink: #F3F4F6; /* লাইট টেক্সট */
-    --ink-soft: #9CA3AF; /* সফট গ্রে টেক্সট */
-    --accent: #3B82F6; /* ইলেকট্রিক ব্লু */
-    --accent-neon: #10B981; /* নিয়ন গ্রিন */
+    --bg: #0B0F19; 
+    --bg-panel: #161D30; 
+    --ink: #F3F4F6; 
+    --ink-soft: #9CA3AF; 
+    --accent: #3B82F6; 
+    --accent-neon: #10B981; 
     --accent-soft: rgba(59, 130, 246, 0.15);
     --line: #242F4D;
     --mono: 'JetBrains Mono', monospace;
@@ -22,19 +22,15 @@
   }
 
   *{ box-sizing: border-box; }
-  html{ scroll-behavior: smooth; }
-
   body{
     margin:0;
     background: var(--bg);
     color: var(--ink);
     font-family: var(--body);
     line-height: 1.6;
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ animation: none !important; transition: none !important; }
-    html{ scroll-behavior: auto; }
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
 
   a{ color: inherit; }
@@ -47,23 +43,24 @@
     max-width: 960px;
     margin: 0 auto;
     padding: 0 24px;
+    width: 100%;
   }
 
-  /* NAV */
+  /* NAV & LOGO SIZE INCREASE */
   nav{
     position: sticky; top:0; z-index: 50;
-    background: rgba(11, 15, 25, 0.85);
+    background: rgba(11, 15, 25, 0.95);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
   }
   nav .wrap{
     display:flex; align-items:center; justify-content: space-between;
-    height: 76px;
+    height: 84px;
   }
   .brand{
     font-family: var(--display);
     font-weight: 700;
-    font-size: 24px;
+    font-size: 32px; /* লোগোর সাইজ বড় করা হয়েছে */
     text-decoration:none;
     color: #FFF;
     letter-spacing: -0.02em;
@@ -84,10 +81,10 @@
     color: var(--ink-soft); 
     transition: color .15s; 
     font-weight: 600;
+    cursor: pointer;
   }
-  .navlinks a:hover{ color: var(--accent-neon); }
+  .navlinks a:hover, .navlinks a.active{ color: var(--accent-neon); }
 
-  /* Language Switcher Button */
   .lang-btn {
     font-family: var(--mono);
     font-size: 12px;
@@ -105,6 +102,21 @@
     color: #fff;
   }
 
+  /* DYNAMIC PAGES SETUP */
+  .page-content {
+    display: none; /* ডিফল্টভাবে সব পেজ হাইড থাকবে */
+    flex-grow: 1;
+    animation: fadeIn 0.4s ease-in-out forwards;
+  }
+  .page-content.active-page {
+    display: block; /* শুধুমাত্র অ্যাক্টিভ পেজটি দেখাবে */
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   /* HERO WITH COMPUTER BACKGROUND IMAGE */
   header.hero{
     position: relative;
@@ -112,7 +124,6 @@
     background-image: linear-gradient(rgba(11, 15, 25, 0.88), rgba(11, 15, 25, 0.95)), url('https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=1200&q=80');
     background-size: cover;
     background-position: center;
-    border-bottom: 1px solid var(--line);
   }
   .eyebrow{
     font-family: var(--mono);
@@ -157,11 +168,9 @@
     display:inline-flex; align-items:center; gap:8px;
     transition: all .2s;
     font-weight: 600;
+    cursor: pointer;
   }
-  .btn-primary{
-    background: var(--accent);
-    color: #FFF;
-  }
+  .btn-primary{ background: var(--accent); color: #FFF; border: none; }
   .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4); }
   .btn-ghost{
     border: 1px solid var(--line);
@@ -171,7 +180,7 @@
   .btn-ghost:hover{ border-color: var(--accent-neon); color: var(--accent-neon); transform: translateY(-2px); }
 
   /* SECTION SHARED */
-  section{ padding: 96px 0; border-top: 1px solid var(--line); }
+  section { padding: 80px 0; }
   .sec-label{
     font-family: var(--mono);
     font-size: 13px;
@@ -204,15 +213,11 @@
     border-radius: 12px;
     text-align: center;
   }
-  .stat b{
-    display:block; font-family: var(--display); font-size: 32px; color: var(--accent-neon); margin-bottom: 4px;
-  }
+  .stat b{ display:block; font-family: var(--display); font-size: 32px; color: var(--accent-neon); margin-bottom: 4px; }
   .stat span{ font-size: 13px; color: var(--ink-soft); font-family: var(--mono); }
 
   /* SKILLS */
-  .skill-groups{
-    display:grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-  }
+  .skill-groups{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .skill-card{
     background: var(--bg-panel);
     border: 1px solid var(--line);
@@ -224,26 +229,17 @@
   .skill-card h3{
     font-family: var(--mono); font-size: 14px; color: var(--accent-neon);
     margin: 0 0 16px; text-transform: uppercase; letter-spacing: 0.04em;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line); padding-bottom: 8px;
   }
   .skill-card ul{ list-style: none; margin:0; padding:0; }
   .skill-card li{
     font-size: 15px; padding: 8px 0;
-    display:flex; align-items:center; gap: 10px;
-    color: #D1D5DB;
+    display:flex; align-items:center; gap: 10px; color: #D1D5DB;
   }
-  .skill-card li::before{
-    content: ""; width:6px; height:6px; border-radius:50%;
-    background: var(--accent); flex-shrink:0;
-  }
+  .skill-card li::before{ content: ""; width:6px; height:6px; border-radius:50%; background: var(--accent); flex-shrink:0; }
 
-  /* SERVICES WITH IMAGE CARDS */
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
+  /* SERVICES */
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .service-card-new {
     background: var(--bg-panel);
     border: 1px solid var(--line);
@@ -254,150 +250,51 @@
     text-decoration: none;
     color: inherit;
     transition: all 0.3s ease;
+    cursor: pointer;
   }
   .service-card-new:hover {
     transform: translateY(-6px);
     border-color: var(--accent-neon);
     box-shadow: 0 12px 30px rgba(16, 185, 129, 0.1);
   }
-  .service-img-box {
-    width: 100%;
-    height: 180px;
-    overflow: hidden;
-    position: relative;
-    border-bottom: 1px solid var(--line);
-  }
-  .service-img-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-  .service-card-new:hover .service-img-box img {
-    transform: scale(1.08);
-  }
-  .service-info {
-    padding: 24px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  .service-info h3 {
-    font-family: var(--display);
-    font-size: 20px;
-    margin: 0 0 12px;
-    color: #FFF;
-    font-weight: 600;
-  }
-  .service-info p {
-    margin: 0 0 16px;
-    color: var(--ink-soft);
-    font-size: 14px;
-    line-height: 1.6;
-    flex-grow: 1;
-  }
-  .service-tags {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 12px;
-  }
+  .service-img-box { width: 100%; height: 180px; overflow: hidden; position: relative; border-bottom: 1px solid var(--line); }
+  .service-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .service-card-new:hover .service-img-box img { transform: scale(1.08); }
+  .service-info { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
+  .service-info h3 { font-family: var(--display); font-size: 20px; margin: 0 0 12px; color: #FFF; font-weight: 600; }
+  .service-info p { margin: 0 0 16px; color: var(--ink-soft); font-size: 14px; line-height: 1.6; flex-grow: 1; }
+  .service-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
   .tag {
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 4px 10px;
-    border-radius: 6px;
-    background: rgba(255,255,255,0.05);
-    color: #9CA3AF;
-    border: 1px solid var(--line);
+    font-family: var(--mono); font-size: 11px; padding: 4px 10px; border-radius: 6px;
+    background: rgba(255,255,255,0.05); color: #9CA3AF; border: 1px solid var(--line);
   }
-  .service-card-new:hover .tag {
-    background: var(--accent-soft);
-    color: #60A5FA;
-    border-color: rgba(59,130,246,0.3);
-  }
-  .service-link-btn {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--accent-neon);
-    font-weight: 600;
-    margin-top: auto;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
+  .service-card-new:hover .tag { background: var(--accent-soft); color: #60A5FA; border-color: rgba(59,130,246,0.3); }
+  .service-link-btn { font-family: var(--mono); font-size: 13px; color: var(--accent-neon); font-weight: 600; margin-top: auto; display: flex; align-items: center; gap: 4px; }
 
   /* CONTACT */
   .contact-panel{
     background-image: linear-gradient(135deg, #111827 0%, #1F2937 100%);
-    border: 1px solid var(--line);
-    color: var(--ink);
-    border-radius: 20px;
-    padding: 64px 48px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    border: 1px solid var(--line); color: var(--ink); border-radius: 20px;
+    padding: 64px 48px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
   }
-  .contact-panel .sec-label{ color: #60A5FA; justify-content:center; }
-  .contact-panel .sec-label::before{ color: rgba(255,255,255,0.2); }
-  .contact-panel h2{
-    font-family: var(--display); font-size: clamp(30px,4vw,44px);
-    margin: 0 0 18px;
-    color: #FFF;
-    font-weight: 700;
-  }
+  .contact-panel h2{ font-family: var(--display); font-size: clamp(30px,4vw,44px); margin: 0 0 18px; color: #FFF; font-weight: 700; }
   .contact-panel p{ color: var(--ink-soft); max-width: 460px; margin: 0 auto 36px; font-size: 16px; }
-  
   .contact-email{
-    font-family: var(--mono); font-size: 22px;
-    color: #FFF; text-decoration:none;
-    border-bottom: 2px solid var(--line);
-    padding-bottom: 6px;
-    display: inline-block;
-    margin-bottom: 16px;
-    transition: all 0.2s;
+    font-family: var(--mono); font-size: 22px; color: #FFF; text-decoration:none;
+    border-bottom: 2px solid var(--line); padding-bottom: 6px; display: inline-block; margin-bottom: 16px; transition: all 0.2s;
   }
   .contact-email:hover{ border-color: var(--accent-neon); color: var(--accent-neon); }
-  
   .contact-whatsapp{
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--mono);
-    font-size: 18px;
-    color: #25D366; 
-    text-decoration: none;
-    margin-bottom: 24px;
-    font-weight: 600;
-    background: rgba(37, 211, 102, 0.1);
-    padding: 10px 20px;
-    border-radius: 30px;
-    border: 1px solid rgba(37, 211, 102, 0.2);
-    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 18px;
+    color: #25D366; text-decoration: none; margin-bottom: 24px; font-weight: 600;
+    background: rgba(37, 211, 102, 0.1); padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(37, 211, 102, 0.2); transition: all 0.2s;
   }
-  .contact-whatsapp:hover { 
-    background: #25D366;
-    color: #FFF;
-    transform: scale(1.03);
-    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
-  }
-
-  .contact-socials{
-    display:flex; gap: 24px; justify-content:center; margin-top: 24px;
-    font-family: var(--mono); font-size: 13px;
-    border-top: 1px solid var(--line);
-    padding-top: 24px;
-  }
+  .contact-whatsapp:hover { background: #25D366; color: #FFF; transform: scale(1.03); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3); }
+  .contact-socials{ display:flex; gap: 24px; justify-content:center; margin-top: 24px; font-family: var(--mono); font-size: 13px; border-top: 1px solid var(--line); padding-top: 24px; }
   .contact-socials a{ text-decoration:none; color: var(--ink-soft); transition: color 0.2s; }
   .contact-socials a:hover{ color: #FFF; }
 
-  footer{
-    padding: 40px 0 56px;
-    text-align:center;
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--ink-soft);
-    border-top: 1px solid var(--line);
-  }
+  footer{ padding: 40px 0; text-align:center; font-family: var(--mono); font-size: 12px; color: var(--ink-soft); border-top: 1px solid var(--line); margin-top: auto; }
 
   @media (max-width: 880px){
     .services-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -413,158 +310,210 @@
 
 <nav>
   <div class="wrap">
-    <a href="#" class="brand">OBAYEDZONE<span>.</span></a>
+    <a onclick="navigateTo('home')" class="brand" style="cursor:pointer;">OBAYEDZONE<span>.</span></a>
     <div class="nav-right">
       <ul class="navlinks">
-        <li><a href="#about" data-i18n="nav-about">পরিচিতি</a></li>
-        <li><a href="#skills" data-i18n="nav-skills">দক্ষতা</a></li>
-        <li><a href="#services" data-i18n="nav-services">সার্ভিস</a></li>
-        <li><a href="#contact" data-i18n="nav-contact">যোগাযোগ</a></li>
+        <li><a onclick="navigateTo('about')" id="link-about" data-i18n="nav-about">পরিচিতি</a></li>
+        <li><a onclick="navigateTo('skills')" id="link-skills" data-i18n="nav-skills">দক্ষতা</a></li>
+        <li><a onclick="navigateTo('services')" id="link-services" data-i18n="nav-services">সার্ভিস</a></li>
+        <li><a onclick="navigateTo('contact')" id="link-contact" data-i18n="nav-contact">যোগাযোগ</a></li>
       </ul>
       <button class="lang-btn" onclick="toggleLanguage()">English</button>
     </div>
   </div>
 </nav>
 
-<header class="hero">
-  <div class="wrap">
-    <div class="eyebrow"><span class="dot"></span> <span data-i18n="hero-eyebrow">AVAILABLE FOR SERVICE</span></div>
-    <h1 class="title" data-i18n="hero-title">OBAYED<br>keeps your <span class="hl">computers running.</span></h1>
-    <p class="lede" data-i18n="hero-lede">কম্পিউটার টেকনিশিয়ান। হার্ডওয়্যার সমস্যা, সফটওয়্যার ইন্সটলেশন, নেটওয়ার্কিং এবং যেকোনো কম্পিউটার সমস্যার সমাধান — নির্ভরযোগ্য ও দ্রুত সার্ভিস।</p>
-    <div class="cta-row">
-      <a href="#services" class="btn btn-primary" data-i18n="hero-btn-primary">সার্ভিসসমূহ দেখুন →</a>
-      <a href="#contact" class="btn btn-ghost" data-i18n="hero-btn-ghost">যোগাযোগ করুন</a>
-    </div>
-  </div>
-</header>
-
-<section id="about">
-  <div class="wrap">
-    <div class="sec-label">about</div>
-    <h2 class="sec-title" data-i18n="about-title">পরিচিতি</h2>
-    <div class="about-grid">
-      <div class="about-text" data-i18n="about-text">
-        <p>আমি <strong>OBAYED</strong>, একজন <strong>কম্পিউটার ও সিকিউরিটি টেকনিশিয়ান</strong>। কম্পিউটার ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় ও সমাধান, অপারেটিং সিস্টেম ইন্সটলেশন, সফটওয়্যার সেটআপ এবং নেটওয়ার্ক কনফিগারেশনের কাজে আমার হাতে-কলমে অভিজ্ঞতা আছে।</p>
-        <p>কোনো ডিভাইস স্লো হয়ে যাওয়া, ভাইরাস সমস্যা, হার্ডওয়্যার ত্রুটি বা নতুন সেটআপ — যেকোনো সমস্যায় দ্রুত ও নির্ভরযোগ্য সমাধান দেওয়াই আমার লক্ষ্য।</p>
-        <p>গ্রাহকের সমস্যা মনোযোগ দিয়ে বুঝে, সততার সাথে এবং যুক্তিসঙ্গত খরচে সার্ভিস দেওয়াতেই বিশ্বাস করি।</p>
-      </div>
-      <div class="stat-list">
-        <div class="stat"><b data-i18n="stat-1-title">PC</b><span data-i18n="stat-1-desc">হার্ডওয়্যার রিপেয়ার</span></div>
-        <div class="stat"><b data-i18n="stat-2-title">CCTV</b><span data-i18n="stat-2-desc">সিকিউরিটি ক্যামেরা</span></div>
-        <div class="stat"><b data-i18n="stat-3-title">OS</b><span data-i18n="stat-3-desc">ইন্সটলেশন ও সেটআপ</span></div>
-        <div class="stat"><b>2026</b><span data-i18n="stat-4-desc">সার্ভিস চালু</span></div>
+<!-- HOME PAGE -->
+<div id="page-home" class="page-content active-page">
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span> <span data-i18n="hero-eyebrow">AVAILABLE FOR SERVICE</span></div>
+      <h1 class="title" data-i18n="hero-title">OBAYED<br>keeps your <span class="hl">computers running.</span></h1>
+      <p class="lede" data-i18n="hero-lede">কম্পিউটার টেকনিশিয়ান। হার্ডওয়্যার সমস্যা, সফটওয়্যার ইন্সটলেশন, নেটওয়ার্কিং এবং যেকোনো কম্পিউটার সমস্যার সমাধান — নির্ভরযোগ্য ও দ্রুত সার্ভিস।</p>
+      <div class="cta-row">
+        <button onclick="navigateTo('services')" class="btn btn-primary" data-i18n="hero-btn-primary">সার্ভিসসমূহ দেখুন →</button>
+        <button onclick="navigateTo('contact')" class="btn btn-ghost" data-i18n="hero-btn-ghost">যোগাযোগ করুন</button>
       </div>
     </div>
-  </div>
-</section>
+  </header>
+</div>
 
-<section id="skills">
-  <div class="wrap">
-    <div class="sec-label">skills</div>
-    <h2 class="sec-title" data-i18n="skills-title">দক্ষতা</h2>
-    <div class="skill-groups">
-      <div class="skill-card">
-        <h3>Hardware</h3>
-        <ul>
-          <li data-i18n="skill-h1">PC &amp; Laptop Repair</li>
-          <li data-i18n="skill-h2">Component Diagnosis</li>
-          <li data-i18n="skill-h3">Assembly &amp; Upgrade</li>
-        </ul>
-      </div>
-      <div class="skill-card">
-        <h3>Software</h3>
-        <ul>
-          <li data-i18n="skill-s1">Windows / Linux Install</li>
-          <li data-i18n="skill-s2">Driver &amp; Software Setup</li>
-          <li data-i18n="skill-s3">Virus &amp; Malware Removal</li>
-        </ul>
-      </div>
-      <div class="skill-card">
-        <h3>Networking & CCTV</h3>
-        <ul>
-          <li data-i18n="skill-n1">Router / Wi-Fi Setup</li>
-          <li data-i18n="skill-n2">CCTV Camera Installation</li>
-          <li data-i18n="skill-n3">Network Troubleshooting</li>
-        </ul>
+<!-- ABOUT PAGE -->
+<div id="page-about" class="page-content">
+  <section>
+    <div class="wrap">
+      <div class="sec-label">about</div>
+      <h2 class="sec-title" data-i18n="about-title">পরিচিতি</h2>
+      <div class="about-grid">
+        <div class="about-text" data-i18n="about-text">
+          <p>আমি <strong>OBAYED</strong>, একজন <strong>কম্পিউটার ও সিকিউরিটি টেকনিশিয়ান</strong>। কম্পিউটার ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় ও সমাধান, অপারেটিং সিস্টেম ইন্সটলেশন, সফটওয়্যার সেটআপ, নেটওয়ার্ক কনফিগারেশন এবং প্রফেশনাল **সিসিটিভি (CCTV) সিকিউরিটি ক্যামেরা সেটআপ ও ট্রাবলশুটিংয়ের** কাজে আমার দীর্ঘ ও হাতে-কলমে অভিজ্ঞতা আছে।</p>
+          <p>কোনো ডিভাইস স্লো হয়ে যাওয়া, ভাইরাস সমস্যা, হার্ডওয়্যার ত্রুটি, সিসিটিভি ক্যামেরার কাভারেজ বা রেকর্ডিং ইস্যু কিংবা যেকোনো নতুন সেটআপ — নিখুঁত ও নির্ভরযোগ্য সমাধান দেওয়াই আমার লক্ষ্য।</p>
+          <p>গ্রหาร সমস্যা মনোযোগ দিয়ে বুঝে, সততার সাথে এবং যুক্তিসঙ্গত খরচে সার্ভিস দেওয়াতেই বিশ্বাস করি।</p>
+        </div>
+        <div class="stat-list">
+          <div class="stat"><b data-i18n="stat-1-title">PC</b><span data-i18n="stat-1-desc">হার্ডওয়্যার রিপেয়ার</span></div>
+          <div class="stat"><b data-i18n="stat-2-title">CCTV</b><span data-i18n="stat-2-desc">সিকিউরিটি ক্যামেরা</span></div>
+          <div class="stat"><b data-i18n="stat-3-title">OS</b><span data-i18n="stat-3-desc">ইন্সটলেশন ও সেটআপ</span></div>
+          <div class="stat"><b>2013</b><span data-i18n="stat-4-desc">সার্ভিস চালু</span></div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
-<section id="services">
-  <div class="wrap">
-    <div class="sec-label">services</div>
-    <h2 class="sec-title" data-i18n="services-title">সার্ভিসসমূহ</h2>
-
-    <div class="services-grid">
-      <!-- Service 1: Hardware -->
-      <a href="#contact" class="service-card-new">
-        <div class="service-img-box">
-          <img src="https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=500&q=80" alt="Hardware Repair">
+<!-- SKILLS PAGE -->
+<div id="page-skills" class="page-content">
+  <section>
+    <div class="wrap">
+      <div class="sec-label">skills</div>
+      <h2 class="sec-title" data-i18n="skills-title">দক্ষতা</h2>
+      <div class="skill-groups">
+        <div class="skill-card">
+          <h3>Hardware</h3>
+          <ul>
+            <li data-i18n="skill-h1">PC &amp; Laptop Repair</li>
+            <li data-i18n="skill-h2">Component Diagnosis</li>
+            <li data-i18n="skill-h3">Assembly &amp; Upgrade</li>
+          </ul>
         </div>
-        <div class="service-info">
-          <div class="service-tags"><span class="tag">PC</span><span class="tag">Laptop</span></div>
-          <h3 data-i18n="service-1-title">হার্ডওয়্যার রিপেয়ার</h3>
-          <p data-i18n="service-1-desc">পিসি ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় করে সমাধান — যেমন মাদারবোর্ড, RAM, পাওয়ার সাপ্লাই ইত্যাদি পরিবর্তন ও মেরামত।</p>
-          <div class="service-link-btn"><span data-i18n="service-btn-txt">সার্ভিস নিন</span> →</div>
+        <div class="skill-card">
+          <h3>Software</h3>
+          <ul>
+            <li data-i18n="skill-s1">Windows / Linux Install</li>
+            <li data-i18n="skill-s2">Driver &amp; Software Setup</li>
+            <li data-i18n="skill-s3">Virus &amp; Malware Removal</li>
+          </ul>
         </div>
-      </a>
-
-      <!-- Service 2: Software -->
-      <a href="#contact" class="service-card-new">
-        <div class="service-img-box">
-          <img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=500&q=80" alt="Software Setup">
+        <div class="skill-card">
+          <h3>Networking & CCTV</h3>
+          <ul>
+            <li data-i18n="skill-n1">Router / Wi-Fi Setup</li>
+            <li data-i18n="skill-n2">CCTV Camera Installation</li>
+            <li data-i18n="skill-n3">Network Troubleshooting</li>
+          </ul>
         </div>
-        <div class="service-info">
-          <div class="service-tags"><span class="tag">Windows</span><span class="tag">Linux</span></div>
-          <h3 data-i18n="service-2-title">সফটওয়্যার ও OS সেটআপ</h3>
-          <p data-i18n="service-2-desc">Windows/Linux সম্পূর্ণ নতুনভাবে ইন্সটলেশন, প্রফেশনাল প্রয়োজনীয় সফটওয়্যার কনফিগারেশন, এবং স্লো পিসি ফিক্সসহ ভাইরাস রিমুভাল।</p>
-          <div class="service-link-btn"><span data-i18n="service-btn-txt">সার্ভিস নিন</span> →</div>
-        </div>
-      </a>
-
-      <!-- Service 3: CCTV & Networking -->
-      <a href="#contact" class="service-card-new">
-        <div class="service-img-box">
-          <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=500&q=80" alt="CCTV & Networking">
-        </div>
-        <div class="service-info">
-          <div class="service-tags"><span class="tag">CCTV</span><span class="tag">Network</span></div>
-          <h3 data-i18n="service-3-title">নেটওয়ার্ক ও সিসিটিভি</h3>
-          <p data-i18n="service-3-desc">বাসাবাড়ি বা দোকানের জন্য সিসিটিভি (CCTV) ক্যামেরা সেটআপ, উন্নত রাউটার ও Wi-Fi কনফিগারেশন এবং ল্যান (LAN) নেটওয়ার্কিং ট্রাবলশুটিং।</p>
-          <div class="service-link-btn"><span data-i18n="service-btn-txt">সার্ভিস নিন</span> →</div>
-        </div>
-      </a>
-    </div>
-
-  </div>
-</section>
-
-<section id="contact">
-  <div class="wrap">
-    <div class="contact-panel">
-      <div class="sec-label">contact</div>
-      <h2 data-i18n="contact-title">সার্ভিস দরকার?</h2>
-      <p data-i18n="contact-desc">কম্পিউটার/ল্যাপটপ বা সিসিটিভি সংক্রান্ত যেকোনো সমস্যায় বা সার্ভিসের জন্য নিচের ইমেইল বা হোয়াটসঅ্যাপ নম্বরে সরাসরি যোগাযোগ করুন।</p>
-      
-      <a href="mailto:obayedzone@gmail.com" class="contact-email">obayedzone@gmail.com</a>
-      <br>
-      <a href="https://wa.me/96893045704" target="_blank" class="contact-whatsapp">💬 WhatsApp: +968 9304 5704</a>
-      
-      <div class="contact-socials">
-        <a href="#">GitHub</a>
-        <a href="#">LinkedIn</a>
-        <a href="#">Facebook</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
+
+<!-- SERVICES PAGE -->
+<div id="page-services" class="page-content">
+  <section>
+    <div class="wrap">
+      <div class="sec-label">services</div>
+      <h2 class="sec-title" data-i18n="services-title">সার্ভিসসমূহ</h2>
+      <div class="services-grid">
+        <div onclick="navigateTo('contact')" class="service-card-new">
+          <div class="service-img-box"><img src="https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=500&q=80" alt="Hardware Repair"></div>
+          <div class="service-info">
+            <div class="service-tags"><span class="tag">PC</span><span class="tag">Laptop</span></div>
+            <h3 data-i18n="service-1-title">হার্ডওয়্যার রিপেয়ার</h3>
+            <p data-i18n="service-1-desc">পিসি ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় করে সমাধান — যেমন মাদারবোর্ড, RAM, পাওয়ার সাপ্লাই ইত্যাদি পরিবর্তন ও মেরামত।</p>
+            <div class="service-link-btn"><span data-i18n="service-btn-txt">সার্ভিস নিন</span> →</div>
+          </div>
+        </div>
+        <div onclick="navigateTo('contact')" class="service-card-new">
+          <div class="service-img-box"><img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=500&q=80" alt="Software Setup"></div>
+          <div class="service-info">
+            <div class="service-tags"><span class="tag">Windows</span><span class="tag">Linux</span></div>
+            <h3 data-i18n="service-2-title">সফটওয়্যার ও OS সেটআপ</h3>
+            <p data-i18n="service-2-desc">Windows/Linux সম্পূর্ণ নতুনভাবে ইন্সটলেশন, প্রফেশনাল প্রয়োজনীয় সফটওয়্যার কনফিগারেশন, এবং স্লো পিসি ফিক্সসহ ভাইরাস রিমুভাল।</p>
+            <div class="service-link-btn"><span data-i18n="service-btn-txt">সার্ভিস নিন</span> →</div>
+          </div>
+        </div>
+        <div onclick="navigateTo('contact')" class="service-card-new">
+          <div class="service-img-box"><img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=500&q=80" alt="CCTV & Networking"></div>
+          <div class="service-info">
+            <div class="service-tags"><span class="tag">CCTV</span><span class="tag">Network</span></div>
+            <h3 data-i18n="service-3-title">নেটওয়ার্ক ও সিসিটিভি</h3>
+            <p data-i18n="service-3-desc">বাসাবাড়ি বা দোকানের জন্য সিসিটিভি (CCTV) ক্যামেরা সেটআপ, উন্নত রাউটার ও Wi-Fi কনফিগারেশন এবং ল্যান (LAN) নেটওয়ার্কিং ট্রাবলশুটিং।</p>
+            <div class="service-link-btn"><span data-i18n="service-btn-txt">সার্ভিস নিন</span> →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CONTACT PAGE -->
+<div id="page-contact" class="page-content">
+  <section>
+    <div class="wrap">
+      <div class="contact-panel">
+        <div class="sec-label">contact</div>
+        <h2 data-i18n="contact-title">সার্ভিস দরকার?</h2>
+        <p data-i18n="contact-desc">কম্পিউটার/ল্যাপটপ বা সিসিটিভি সংক্রান্ত যেকোনো সমস্যায় বা সার্ভিসের জন্য নিচের ইমেইল বা হোয়াটসঅ্যাপ নম্বরে সরাসরি যোগাযোগ করুন।</p>
+        <a href="mailto:obayedzone@gmail.com" class="contact-email">obayedzone@gmail.com</a><br>
+        <a href="https://wa.me/96893045704" target="_blank" class="contact-whatsapp">💬 WhatsApp: +968 9304 5704</a>
+        <div class="contact-socials">
+          <a href="#">GitHub</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Facebook</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 
 <footer>
-  <span data-i18n="footer-text">© 2026 OBAYEDZONE — Built with HTML &amp; CSS</span>
+  <div class="wrap">
+    <span data-i18n="footer-text">© 2026 OBAYEDZONE — Built with HTML &amp; CSS</span>
+  </div>
 </footer>
 
 <script>
+// SPA Routing Function
+function navigateTo(pageId) {
+  // সব পেজ কনটেন্ট হাইড করা
+  document.querySelectorAll('.page-content').forEach(page => {
+    page.classList.remove('active-page');
+  });
+  
+  // সব মেনু লিংকের অ্যাক্টিভ ক্লাস রিমুভ করা
+  document.querySelectorAll('.navlinks a').forEach(link => {
+    link.classList.remove('active');
+  });
+
+  // নির্দিষ্ট পেজ দেখানো
+  const targetPage = document.getElementById('page-' + pageId);
+  if (targetPage) {
+    targetPage.classList.add('active-page');
+  }
+
+  // মেনু হাইলাইট করা
+  const activeLink = document.getElementById('link-' + pageId);
+  if (activeLink) {
+    activeLink.classList.add('active');
+  }
+
+  // পেজের একদম উপরে স্ক্রোল করা
+  window.scrollTo(0, 0);
+  
+  // ব্রাউজার হিস্টোরি স্টেট চেঞ্জ (সব পেজ আলাদা দেখানোর ফিলিং)
+  window.history.pushState({}, '', pageId === 'home' ? '/' : '#' + pageId);
+}
+
+// ব্রাউজারের ব্যাক/ফরওয়ার্ড বাটন হ্যান্ডেল করা
+window.addEventListener('popstate', () => {
+  const hash = window.location.hash.replace('#', '');
+  if (hash) {
+    navigateTo(hash);
+  } else {
+    navigateTo('home');
+  }
+});
+
+// শুরুর সময় পেজ ডিটেক্ট করা
+document.addEventListener("DOMContentLoaded", () => {
+  const hash = window.location.hash.replace('#', '');
+  if (hash && ['about', 'skills', 'services', 'contact'].includes(hash)) {
+    navigateTo(hash);
+  } else {
+    navigateTo('home');
+  }
+});
+
 // বহুভাষিক ডেটাবেস
 const langData = {
   bn: {
@@ -578,8 +527,8 @@ const langData = {
     "hero-btn-primary": "সার্ভিসসমূহ দেখুন →",
     "hero-btn-ghost": "যোগাযোগ করুন",
     "about-title": "পরিচিতি",
-    "about-text": `<p>আমি <strong>OBAYED</strong>, একজন <strong>কম্পিউটার ও সিকিউরিটি টেকনিশিয়ান</strong>। কম্পিউটার ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় ও সমাধান, অপারেটিং সিস্টেম ইন্সটলেশন, সফটওয়্যার সেটআপ এবং নেটওয়ার্ক কনফিগারেশনের কাজে আমার হাতে-কলমে অভিজ্ঞতা আছে।</p>
-        <p>কোনো ডিভাইস স্লো হয়ে যাওয়া, ভাইরাস সমস্যা, হার্ডওয়্যার ত্রুটি বা নতুন সেটআপ — যেকোনো সমস্যায় দ্রুত ও নির্ভরযোগ্য সমাধান দেওয়াই আমার লক্ষ্য।</p>
+    "about-text": `<p>আমি <strong>OBAYED</strong>, একজন <strong>কম্পিউটার ও সিকিউরিটি টেকনিশিয়ান</strong>। কম্পিউটার ও ল্যাপটপের হার্ডওয়্যার সমস্যা নির্ণয় ও সমাধান, অপারেটিং সিস্টেম ইন্সটলেশন, সফটওয়্যার সেটআপ, নেটওয়ার্ক কনফিগারেশন এবং প্রফেশনাল **সিসিটিভি (CCTV) সিকিউরিটি ক্যামেরা সেটআপ ও ট্রাবলশুটিংয়ের** কাজে আমার দীর্ঘ ও হাতে-কলমে অভিজ্ঞতা আছে।</p>
+        <p>কোনো ডিভাইস স্লো হয়ে যাওয়া, ভাইরাস সমস্যা, হার্ডওয়্যার ত্রুটি, সিসিটিভি ক্যামেরার কাভারেজ বা রেকর্ডিং ইস্যু কিংবা যেকোনো নতুন সেটআপ — নিখুঁত ও নির্ভরযোগ্য সমাধান দেওয়াই আমার লক্ষ্য।</p>
         <p>গ্রাহকের সমস্যা মনোযোগ দিয়ে বুঝে, সততার সাথে এবং যুক্তিসঙ্গত খরচে সার্ভিস দেওয়াতেই বিশ্বাস করি।</p>`,
     "stat-1-title": "PC",
     "stat-1-desc": "হার্ডওয়্যার রিপেয়ার",
@@ -605,7 +554,7 @@ const langData = {
     "service-2-desc": "Windows/Linux সম্পূর্ণ নতুনভাবে ইন্সটলেশন, প্রফেশনাল প্রয়োজনীয় সফটওয়্যার কনফিগারেশন, এবং স্লো পিসি ফিক্সসহ ভাইরাস রিমুভাল।",
     "service-3-title": "নেটওয়ার্ক ও সিসিটিভি",
     "service-3-desc": "বাসাবাড়ি বা দোকানের জন্য সিসিটিভি (CCTV) ক্যামেরা সেটআপ, উন্নত রাউটার ও Wi-Fi কনফিগারেশন এবং ল্যান (LAN) নেটওয়ার্কিং ট্রাবলশুটিং।",
-    "service-btn-txt": "সার্ভিস নিন ",
+    "service-btn-txt": "সার্ভিস নিন",
     "contact-title": "সার্ভিস দরকার?",
     "contact-desc": "কম্পিউটার/ল্যাপটপ বা সিসিটিভি সংক্রান্ত যেকোনো সমস্যায় বা সার্ভিসের জন্য নিচের ইমেইল বা হোয়াটসঅ্যাপ নম্বরে সরাসরি যোগাযোগ করুন।",
     "footer-text": "© 2026 OBAYEDZONE — এইচটিএমএল ও সিএসএস দিয়ে তৈরি"
@@ -621,8 +570,8 @@ const langData = {
     "hero-btn-primary": "View Services →",
     "hero-btn-ghost": "Contact Me",
     "about-title": "About Me",
-    "about-text": `<p>I am <strong>OBAYED</strong>, a professional <strong>Computer & Security Technician</strong>. I have hands-on experience in diagnosing and repairing computer & laptop hardware issues, operating system installations, software setup, and network configurations.</p>
-        <p>Whether it's a slow device, virus issues, hardware malfunctions, or a fresh setup — my goal is to provide fast and dependable solutions.</p>
+    "about-text": `<p>I am <strong>OBAYED</strong>, a professional <strong>Computer & Security Technician</strong>. I have long-term, hands-on experience in diagnosing and repairing computer & laptop hardware issues, operating system installations, software setup, network configurations, and professional **CCTV security camera setup & troubleshooting**.</p>
+        <p>Whether it's a slow device, virus issues, hardware malfunctions, CCTV coverage/recording issues, or a fresh setup — my goal is to provide fast and dependable solutions.</p>
         <p>I believe in understanding the customer's issue thoroughly, delivering services with honesty and at reasonable pricing.</p>`,
     "stat-1-title": "PC",
     "stat-1-desc": "Hardware Repair",
@@ -680,4 +629,4 @@ function toggleLanguage() {
 </script>
 
 </body>
-</html> update
+</html>
