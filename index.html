@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OBAYED — Computer & Security Solutions</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<!-- এখানে বাংলা ফন্ট 'Noto Sans Bengali' যোগ করা হয়েছে -->
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -24,7 +23,6 @@
     --body: 'Inter', sans-serif;
   }
 
-  /* ওয়েবসাইট যখন বাংলা মোডে থাকবে তখন Noto Sans Bengali ফন্ট সেট হবে */
   html[lang="bn"], html[lang="bn"] body, html[lang="bn"] input, html[lang="bn"] button {
     font-family: 'Noto Sans Bengali', var(--body) !important;
   }
@@ -331,12 +329,13 @@
   /* SERVICES */
   .services-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .service-card{
-    display:grid; grid-template-columns: 90px 1fr 130px;
-    align-items:center; gap: 24px;
+    display: grid;
+    grid-template-columns: 50px 80px 1fr 110px;
+    align-items: center; gap: 20px;
     background: var(--bg);
     border: 3px dashed var(--ink);
     border-radius: 18px;
-    padding: 26px 28px;
+    padding: 24px;
     position: relative;
     transition: all .2s;
   }
@@ -346,18 +345,28 @@
     color: var(--paper);
     -webkit-text-stroke: 2px var(--ink);
   }
-  .service-card h3{ font-family: var(--display); font-size: 21px; margin: 0 0 8px; font-weight: 700; }
-  .service-card p{ margin:0; color: var(--ink-soft); font-size: 14.5px; font-weight: 500; }
+  .service-img-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    border: 2px solid var(--ink);
+    overflow: hidden;
+    background: var(--paper);
+  }
+  .service-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .service-card h3{ font-family: var(--display); font-size: 20px; margin: 0 0 6px; font-weight: 700; line-height: 1.3; }
+  .service-card p{ margin:0; color: var(--ink-soft); font-size: 14px; font-weight: 500; line-height: 1.5; }
   .stamp{
     font-family: var(--mono); font-size: 13px; font-weight: 700;
     border: 3px solid var(--green); color: var(--green);
-    padding: 6px 14px; border-radius: 8px;
+    padding: 6px 12px; border-radius: 8px;
     transform: rotate(-8deg);
-  }
-  @media (max-width: 700px){
-    .service-card{ grid-template-columns: 50px 1fr; }
-    .stamp{ display:none; }
-    .service-num{ font-size: 28px; }
+    text-align: center;
+    justify-self: end;
   }
 
   /* CONTACT */
@@ -415,16 +424,57 @@
   @media (max-width: 900px){
     .navlinks{ gap: 20px; }
   }
-  @media (max-width: 768px){
-    .navlinks{ display:none; }
-    .nav-bottom{ display:none; }
-    .brand-tagline{ display:none; }
+
+  /* MOBILE RESPONSIVE FIXES */
+  @media (max-width: 768px) {
+    .nav-top .wrap {
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 16px;
+    }
+    .brand-section {
+      flex-direction: column;
+      gap: 4px;
+      text-align: center;
+    }
+    .brand-tagline {
+      border-left: none;
+      padding-left: 0;
+      font-size: 11px;
+      display: block !important;
+    }
+    .nav-bottom {
+      display: flex !important;
+      background: rgba(255, 255, 255, 0.03);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .nav-bottom .wrap {
+      padding: 8px 16px;
+      overflow-x: auto;
+      justify-content: flex-start;
+      -webkit-overflow-scrolling: touch;
+    }
+    .navlinks {
+      display: flex !important;
+      gap: 20px;
+      padding-bottom: 4px;
+    }
+    .navlinks a {
+      font-size: 13px;
+      white-space: nowrap;
+    }
   }
+
   @media (max-width: 760px){
     .about-grid{ grid-template-columns: 1fr; }
     .stat-grid{ grid-template-columns: 1fr 1fr; }
     .skill-groups{ grid-template-columns: 1fr; }
     .services-grid{ grid-template-columns: 1fr; }
+    .service-card{ grid-template-columns: 40px 70px 1fr; gap: 14px; padding: 18px; }
+    .service-img-wrapper { width: 70px; height: 70px; }
+    .stamp{ display:none; }
+    .service-num{ font-size: 26px; }
     .status-badge{ position: static; display:inline-flex; margin-bottom: 24px; transform: rotate(0deg); }
     header.hero{ padding-top: 40px; }
   }
@@ -437,7 +487,7 @@
     <div class="wrap">
       <div class="brand-section">
         <a href="#" class="brand">OBAYEDZONE</a>
-        <span class="brand-tagline">| TECH & SECURITY</span>
+        <span class="brand-tagline" id="navTagline">| TECH, SECURITY & POS SOLUTIONS</span>
       </div>
       <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">Bangla</button>
     </div>
@@ -445,21 +495,21 @@
   <div class="nav-bottom">
     <div class="wrap">
       <ul class="navlinks">
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#hero" id="mHome">Home</a></li>
+        <li><a href="#about" id="mAbout">About</a></li>
+        <li><a href="#skills" id="mSkills">Skills</a></li>
+        <li><a href="#services" id="mServices">Services</a></li>
+        <li><a href="#contact" id="mContact">Contact</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-<header class="hero">
+<header class="hero" id="hero">
   <div class="status-badge"><span class="blip"></span> <span id="heroStatus">SYSTEM ONLINE</span></div>
   <div class="wrap">
     <div class="hero-tag">⚡ <span id="heroTag">Computer Technician</span></div>
-    <h1 class="title"><span id="heroTitle">Your Device,<br>Fixed & Secured,<br><span class="hl-mark">I'm Here.</span></span></h1>
+    <h1 class="title"><span id="heroTitle">Your Device,<br>Fixed & Secured,<br><span class=\"hl-mark\">I'm Here.</span></span></h1>
     <p class="lede" id="heroLede">Hardware repair, OS installation, CCTV security systems, Smart door locks & Inventory POS solutions — reliable, fast & honest service.</p>
     <div class="cta-row">
       <a href="#services" class="btn btn-primary" id="btnServices">Services →</a>
@@ -545,32 +595,48 @@
     <div class="kicker"><span class="n">03</span> SERVICES</div>
     <h2 class="sec-title" id="servicesTitle">Services</h2>
     <div class="services-grid">
+      <!-- Service 1 -->
       <div class="service-card">
         <div class="service-num">01</div>
+        <div class="service-img-wrapper">
+          <img class="service-img" src="https://images.unsplash.com/photo-1588508065123-287b28e013da?auto=format&fit=crop&w=150&q=80" alt="PC Repair">
+        </div>
         <div>
           <h3 id="service1Title">PC & Laptop Repair</h3>
           <p id="service1Desc">Hardware diagnosis & fixes, OS installations, software setup & virus removal for all devices.</p>
         </div>
         <div class="stamp">FIXED ✓</div>
       </div>
+      <!-- Service 2 -->
       <div class="service-card">
         <div class="service-num">02</div>
+        <div class="service-img-wrapper">
+          <img class="service-img" src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=150&q=80" alt="CCTV Security">
+        </div>
         <div>
           <h3 id="service2Title">CCTV & Security Systems</h3>
           <p id="service2Desc">Complete CCTV camera installation, Intercom systems, IP door locks & security alarm setup.</p>
         </div>
         <div class="stamp">SECURED ✓</div>
       </div>
+      <!-- Service 3 -->
       <div class="service-card">
         <div class="service-num">03</div>
+        <div class="service-img-wrapper">
+          <img class="service-img" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=150&q=80" alt="POS System">
+        </div>
         <div>
           <h3 id="service3Title">Inventory & POS Systems</h3>
           <p id="service3Desc">Sales & complete setup of professional Inventory POS systems for retail shops & businesses.</p>
         </div>
         <div class="stamp">SETUP ✓</div>
       </div>
+      <!-- Service 4 -->
       <div class="service-card">
         <div class="service-num">04</div>
+        <div class="service-img-wrapper">
+          <img class="service-img" src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=150&q=80" alt="Network Setup">
+        </div>
         <div>
           <h3 id="service4Title">Network & Wi-Fi Setup</h3>
           <p id="service4Desc">Router config, Wi-Fi coverage optimization, LAN cabling & network troubleshooting solutions.</p>
@@ -605,6 +671,8 @@
 <script>
 const langData = {
   en: {
+    navTagline: "| TECH, SECURITY & POS SOLUTIONS",
+    mHome: "Home", mAbout: "About", mSkills: "Skills", mServices: "Services", mContact: "Contact",
     heroStatus: "SYSTEM ONLINE",
     heroTag: "Computer Technician",
     heroTitle: "Your Device,<br>Fixed & Secured,<br><span class=\"hl-mark\">I'm Here.</span>",
@@ -648,18 +716,19 @@ const langData = {
     footerText: "© 2026 OBAYED — Computer Technician & Security Specialist"
   },
   bn: {
+    navTagline: "| টেক, সিকিউরিটি ও পস সলিউশন",
+    mHome: "হোম", mAbout: "সম্পর্কে", mSkills: "দক্ষতা", mServices: "সার্ভিসসমূহ", mContact: "যোগাযোগ",
     heroStatus: "সিস্টেম অনলাইন",
     heroTag: "কম্পিউটার টেকনিশিয়ান",
     heroTitle: "আপনার ডিভাইস,<br>ঠিক ও সুরক্ষিত,<br><span class=\"hl-mark\">আমি আছি।</span>",
-    // এখানে জাপানি অক্ষর সরিয়ে একদম নিখুঁত বাংলা করা হয়েছে
     heroLede: "কম্পিউটার হার্ডওয়্যার ও ওএস ফিক্স, স্মার্ট সিকিউরিটি সিস্টেম (সিসিটিভি, ইন্টারকম, আইপি লক) এবং ব্যবসার জন্য ইনভেন্টরি POS সেটআপের নির্ভরযোগ্য ও দ্রুত সেবা।",
     btnServices: "সার্ভিসসমূহ দেখুন →",
     btnContact: "যোগাযোগ করুন",
     langBtn: "English",
     
     aboutTitle: "আমার সম্পর্কে",
-    aboutText: `<p>আমি <strong>ওবায়েদ</strong>, একজন পেশাদার <strong>কম্পিউটার, স্মার্ট সিকিউরিটি ও পস সリューション টেকনিশিয়ান</strong>। পিসি-ল্যাপটপ হার্ডওয়্যার মেরামত, অপারেটিং সিস্টেম ইনস্টলেশনের পাশাপাশি <strong>সিসিটিভি ক্যামেরা, ইন্টারকম, আইপি ডোর লক</strong> এবং <strong>ইনভেন্টরি পস সিস্টেম</strong> সেটআপে আমার দীর্ঘ অভিজ্ঞতা রয়েছে।</p>
-    <p>ধীরগতির ডিভাইস, ভাইরাস সংক্রমণ, সিসিটিভি সমস্যা, দরজার লক সেটআপ বা পস কনফিগারেশন — সবকিছুতে দ্রুত, নির্ভরযোগ্য সমাধান সততা ও ন্যায্য মূল্যে।</p>
+    aboutText: `<p>আমি <strong>ওবায়েদ</strong>, একজন পেশাদার <strong>কম্পিউটার, স্মার্ট সিকিউরিটি ও পস সলিউশন টেকনিশিয়ান</strong>। পিসি-ল্যাপটপ হার্ডওয়্যার মেরামত, অপারেটিং সিস্টেম ইনস্টলেশনের পাশাপাশি <strong>সিসিটিভি ক্যামেরা, ইন্টারকম, আইপি ডোর লক</strong> এবং <strong>ইনভেন্টরি পস সিস্টেম</strong> সেটআপে আমার দীর্ঘ অভিজ্ঞতা রয়েছে।</p>
+    <p>ধীরগতির ডিভাইস, virus সংক্রমণ, সিসিটিভি সমস্যা, দরজার লক সেটআপ বা পস কনফিগারেশন — সবকিছুতে দ্রুত, নির্ভরযোগ্য সমাধান সততা ও ন্যায্য মূল্যে।</p>
     <p>আমার লক্ষ্য: আপনার চাহিদা বুঝে প্রতিবার সেরা সেবা প্রদান করা।</p>`,
     stat1: "হার্ডওয়্যার মেরামত",
     stat2Title: "সিসিটিভি",
@@ -670,7 +739,7 @@ const langData = {
     
     skillsTitle: "দক্ষতা",
     skillGroup1: "🔧 হার্ডওয়্যার ও ওএস",
-    skillGroup2: "📹 স্মার্ট সিকিউরিটি",
+    skillGroup2: "📹 সিকিউরিটি সিস্টেম",
     skillGroup3: "💼 বিজনেস সলিউশন",
     skillList1: ["পিসি ও ল্যাপটপ মেরামত", "কম্পোনেন্ট ডায়াগনসিস", "উইন্ডোজ / লিনাক্স ইনস্টল", "ভাইরাস রিমুভাল"],
     skillList2: ["সিসিটিভি ক্যামেরা সেটআপ", "ইন্টারকম ইনস্টলেশন", "আইপি লক কনফিগারেশন", "অ্যালার্ম সিস্টেম"],
@@ -682,7 +751,7 @@ const langData = {
     service2Title: "সিসিটিভি ও সিকিউরিটি সিস্টেম",
     service2Desc: "সম্পূর্ণ সিসিটিভি ক্যামেরা ইনস্টলেশন, ইন্টারকম, আইপি লক ও অ্যালার্ম সিস্টেম সেটআপ।",
     service3Title: "ইনভেন্টরি ও পস সিস্টেম",
-    service3Desc: "পেশাদার পস সিস্টেম বিক্রয় ও সম্পূর্ণ সেটআপ দোকান ও ব্যবসার জন্য afternoons।",
+    service3Desc: "পেশাদার পস সিস্টেম বিক্রয় ও সম্পূর্ণ সেটআপ দোকান ও ব্যবসার জন্য।",
     service4Title: "নেটওয়ার্ক ও ওয়াই-ফাই সেটআপ",
     service4Desc: "রাউটার কনফিগারেশন, ওয়াই-ফাই কভারেজ, ল্যান ক্যাবলিং ও নেটওয়ার্ক সমাধান।",
     
@@ -700,6 +769,14 @@ function toggleLanguage() {
   const data = langData[currentLang];
   
   document.getElementById('langBtn').textContent = data.langBtn;
+  document.getElementById('navTagline').textContent = data.navTagline;
+  
+  document.getElementById('mHome').textContent = data.mHome;
+  document.getElementById('mAbout').textContent = data.mAbout;
+  document.getElementById('mSkills').textContent = data.mSkills;
+  document.getElementById('mServices').textContent = data.mServices;
+  document.getElementById('mContact').textContent = data.mContact;
+  
   document.getElementById('heroStatus').textContent = data.heroStatus;
   document.getElementById('heroTag').textContent = data.heroTag;
   document.getElementById('heroTitle').innerHTML = data.heroTitle;
