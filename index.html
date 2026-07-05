@@ -3,734 +3,755 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OBAYEDZONE — Computer, Security & POS Solutions</title>
+<title>OBAYED — Computer & Security Solutions</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- এখানে বাংলা ফন্ট 'Noto Sans Bengali' যোগ করা হয়েছে -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #0B0F19; 
-    --bg-panel: #161D30; 
-    --ink: #F3F4F6; 
-    --ink-soft: #9CA3AF; 
-    --accent: #3B82F6; 
-    --accent-neon: #10B981; 
-    --accent-soft: rgba(59, 130, 246, 0.15);
-    --line: #242F4D;
+    --bg: #FFFFFF;
+    --paper: #F7F5F0;
+    --ink: #101014;
+    --ink-soft: #55555F;
+    --blue: #2F6FED;
+    --green: #00C853;
+    --orange: #FF6B35;
+    --pink: #FF3D81;
+    --yellow: #FFC700;
+    --line: #101014;
     --mono: 'JetBrains Mono', monospace;
     --display: 'Space Grotesk', sans-serif;
     --body: 'Inter', sans-serif;
   }
 
-  *{ box-sizing: border-box; }
-  html {
-    scroll-behavior: smooth;
+  /* ওয়েবসাইট যখন বাংলা মোডে থাকবে তখন Noto Sans Bengali ফন্ট সেট হবে */
+  html[lang="bn"], html[lang="bn"] body, html[lang="bn"] input, html[lang="bn"] button {
+    font-family: 'Noto Sans Bengali', var(--body) !important;
   }
+  html[lang="bn"] .brand, html[lang="bn"] h1, html[lang="bn"] h2, html[lang="bn"] h3 {
+    font-family: 'Noto Sans Bengali', var(--display) !important;
+    font-weight: 700;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
   body{
     margin:0;
     background: var(--bg);
     color: var(--ink);
     font-family: var(--body);
     line-height: 1.6;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+    html{ scroll-behavior: auto; }
   }
 
   a{ color: inherit; }
   a:focus-visible, button:focus-visible{
-    outline: 2px solid var(--accent);
+    outline: 3px solid var(--blue);
     outline-offset: 3px;
   }
 
   .wrap{
-    max-width: 960px;
+    max-width: 1080px;
     margin: 0 auto;
     padding: 0 24px;
+  }
+
+  /* STICKY HEADER */
+  nav{
+    position: sticky; top:0; z-index: 50;
+    background: #0A0E27;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+  }
+  .nav-top, .nav-bottom{
+    display:flex;
+    max-width: 100%;
+  }
+  .nav-top{
+    align-items:center; justify-content: space-between;
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-bottom{
+    align-items:center; justify-content: space-between;
+    padding: 0;
+  }
+  .nav-top .wrap, .nav-bottom .wrap{
     width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display:flex; align-items:center; justify-content: space-between;
   }
-
-  /* STICKY HEADER AREA */
-  .main-header {
-    position: sticky; 
-    top: 0; 
-    z-index: 100;
-    background: rgba(11, 15, 25, 0.96);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--line);
+  .nav-top .wrap{
+    padding: 16px 24px;
   }
-
-  /* TOP ROW: LOGO, SLOGAN & BUTTON */
-  .nav-top-row {
-    border-bottom: 1px solid rgba(36, 47, 77, 0.5);
+  .nav-bottom .wrap{
+    padding: 16px 24px;
   }
-  .nav-top-row .wrap {
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between;
-    height: 74px;
+  .brand-section{
+    display:flex; align-items:center; gap: 12px;
   }
-  
-  .brand-box {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  .brand {
+  .brand{
     font-family: var(--display);
-    font-weight: 700;
-    font-size: 32px;
-    color: #FFF;
+    font-weight: 800;
+    font-size: 28px;
+    text-decoration:none;
+    color: #FFFFFF;
     letter-spacing: -0.02em;
     margin: 0;
   }
-  .brand span{ color: var(--accent-neon); }
-
-  .slogan {
+  .brand::after{
+    content: ".";
+    color: var(--blue);
+  }
+  .brand-tagline{
     font-family: var(--mono);
     font-size: 12px;
-    color: var(--ink-soft);
+    color: rgba(255,255,255,0.5);
     font-weight: 500;
     letter-spacing: 0.05em;
-    text-transform: uppercase;
-    opacity: 0.8;
+    border-left: 1px solid rgba(255,255,255,0.2);
+    padding-left: 12px;
   }
+  .navlinks{
+    display:flex; gap: 36px; list-style:none; margin:0; padding:0;
+  }
+  .navlinks a{
+    text-decoration:none; color: rgba(255,255,255,0.6); font-family: var(--body);
+    font-size: 14px; font-weight: 500;
+    transition: color .2s;
+  }
+  .navlinks a:hover{ color: #FFFFFF; }
+  .navlinks a:first-child{ color: var(--blue); }
+  .lang-btn{
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    background: transparent; color: var(--blue);
+    border: 2px solid var(--blue); padding: 8px 18px;
+    border-radius: 100px; cursor: pointer; transition: all .2s;
+  }
+  .lang-btn:hover{ background: rgba(47,111,237,0.1); }
 
-  .lang-btn {
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 600;
-    background: var(--accent-soft);
-    color: #60A5FA;
-    border: 1px solid var(--accent);
-    padding: 6px 14px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .lang-btn:hover {
-    background: var(--accent);
-    color: #fff;
-  }
-
-  /* SUB-NAVIGATION BAR */
-  .sub-nav {
-    background: rgba(22, 29, 48, 0.2);
-    padding: 14px 0;
-  }
-
-  .sub-nav-links {
-    display: flex;
-    gap: 28px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .sub-nav-links a {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--ink-soft);
-    text-decoration: none;
-    cursor: pointer;
-    transition: color 0.2s;
-  }
-  .sub-nav-links a:hover, .sub-nav-links a.active {
-    color: var(--accent-neon);
-  }
-
-  /* DYNAMIC PAGES / VIEW MODES SETUP */
-  .page-view {
-    display: none;
-    animation: fadeIn 0.4s ease-in-out forwards;
-  }
-  
-  body.mode-home .page-view {
-    display: block !important;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+  /* HAZARD STRIPE */
+  .stripe{
+    height: 14px;
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--yellow), var(--yellow) 16px,
+      var(--ink) 16px, var(--ink) 32px
+    );
   }
 
   /* HERO */
   header.hero{
     position: relative;
-    padding: 140px 0;
-    background-image: linear-gradient(rgba(11, 15, 25, 0.88), rgba(11, 15, 25, 0.95)), url('https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=1200&q=80');
-    background-size: cover;
-    background-position: center;
+    padding: 72px 0 56px;
+    background:
+      radial-gradient(circle at 85% 15%, rgba(47,111,237,0.10), transparent 40%),
+      radial-gradient(circle at 8% 85%, rgba(255,107,53,0.12), transparent 40%);
   }
-  .eyebrow{
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--accent-neon);
-    display:flex; align-items:center; gap: 8px;
-    margin-bottom: 20px;
-    font-weight: 600;
+  .status-badge{
+    position: absolute;
+    top: 40px; right: 24px;
+    background: var(--ink); color: var(--bg);
+    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    padding: 10px 18px; border-radius: 100px;
+    display:flex; align-items:center; gap:10px;
+    transform: rotate(4deg);
+    box-shadow: 5px 5px 0 var(--green);
   }
-  .dot{
-    width:8px; height:8px; border-radius:50%;
-    background: var(--accent-neon);
-    animation: pulse 2s ease-in-out infinite;
+  .status-badge .blip{
+    width:10px; height:10px; border-radius:50%;
+    background: var(--green);
+    animation: blip 1.4s ease-in-out infinite;
   }
-  @keyframes pulse{
-    0%,100%{ opacity: 1; }
-    50%{ opacity: .35; }
+  @keyframes blip{
+    0%,100%{ opacity:1; }
+    50%{ opacity:.6; }
   }
+
+  .hero-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    padding: 6px 14px; border-radius: 100px;
+    margin-bottom: 28px;
+  }
+
   h1.title{
     font-family: var(--display);
-    font-size: clamp(38px, 6vw, 64px);
+    font-size: clamp(44px, 8vw, 88px);
     line-height: 1.1;
     margin: 0 0 24px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: #FFF;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    max-width: 900px;
   }
-  h1.title .hl{ color: var(--accent-neon); text-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
+  h1.title .hl-mark{
+    position:relative; display:inline-block;
+    background: var(--orange); color: var(--bg);
+    padding: 0 12px; transform: rotate(-1.5deg);
+  }
+
   .lede{
-    font-size: 18px;
-    color: #D1D5DB;
-    max-width: 600px;
+    font-size: 19px;
+    color: var(--ink-soft);
+    max-width: 560px;
     margin: 0 0 40px;
+    font-weight: 500;
   }
-  .cta-row{ display:flex; gap:14px; flex-wrap: wrap; }
+  .cta-row{ display:flex; gap:16px; flex-wrap: wrap; }
   .btn{
     font-family: var(--mono);
-    font-size: 14px;
-    padding: 14px 24px;
-    border-radius: 8px;
+    font-size: 15px; font-weight: 700;
+    padding: 16px 30px;
+    border-radius: 100px;
     text-decoration: none;
-    display:inline-flex; align-items:center; gap:8px;
-    transition: all .2s;
-    font-weight: 600;
+    display:inline-flex; align-items:center; gap:10px;
+    border: 3px solid var(--ink);
+    transition: transform .12s, box-shadow .12s;
     cursor: pointer;
   }
-  .btn-primary{ background: var(--accent); color: #FFF; border: none; }
-  .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4); }
+  .btn-primary{
+    background: var(--ink);
+    color: var(--bg);
+    box-shadow: 6px 6px 0 var(--blue);
+  }
+  .btn-primary:hover{ transform: translate(-3px,-3px); box-shadow: 9px 9px 0 var(--blue); }
   .btn-ghost{
-    border: 1px solid var(--line);
+    background: var(--bg);
     color: var(--ink);
-    background: rgba(255,255,255,0.03);
+    box-shadow: 6px 6px 0 var(--orange);
   }
-  .btn-ghost:hover{ border-color: var(--accent-neon); color: var(--accent-neon); transform: translateY(-2px); }
+  .btn-ghost:hover{ transform: translate(-3px,-3px); box-shadow: 9px 9px 0 var(--orange); }
 
-  /* SECTION SHARED */
-  section { padding: 96px 0; border-bottom: 1px solid var(--line); }
-  
-  .sec-label{
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--accent);
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  /* MARQUEE TICKER */
+  .ticker{
+    background: var(--ink);
+    color: var(--bg);
+    overflow: hidden;
+    white-space: nowrap;
+    border-top: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+    padding: 16px 0;
   }
-  .sec-label::before{ content: "// "; color: var(--ink-soft); }
+  .ticker-track{
+    display:inline-flex;
+    animation: scroll 22s linear infinite;
+  }
+  @keyframes scroll{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
+  .ticker-item{
+    font-family: var(--mono); font-size: 16px; font-weight: 700;
+    padding: 0 28px; display:inline-flex; align-items:center; gap:12px;
+    text-transform: uppercase; letter-spacing: 0.03em;
+  }
+  .ticker-item.c-blue{ color: #7CA6FF; }
+  .ticker-item.c-green{ color: #63EA9B; }
+  .ticker-item.c-orange{ color: #FFA27C; }
+  .ticker-item.c-pink{ color: #FF8DB8; }
+  .ticker-item .sep{ opacity: .4; }
+
+  /* SECTIONS */
+  section{ padding: 88px 0; }
+  .kicker{
+    display:inline-flex; align-items:center; gap: 10px;
+    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    color: var(--bg); background: var(--ink);
+    padding: 6px 14px; border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .kicker .n{ color: var(--yellow); }
   h2.sec-title{
     font-family: var(--display);
-    font-size: clamp(28px, 4vw, 40px);
+    font-size: clamp(34px, 5vw, 52px);
     margin: 0 0 40px;
-    font-weight: 700;
-    color: #FFF;
+    font-weight: 800;
+    letter-spacing: -0.02em;
   }
 
   /* ABOUT */
+  #about{ background: var(--paper); border-top: 3px solid var(--ink); border-bottom: 3px solid var(--ink); }
   .about-grid{
-    display:grid; grid-template-columns: 1.2fr 1fr; gap: 48px;
-    align-items: center;
+    display:grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start;
   }
-  .about-text p{ color: var(--ink-soft); margin: 0 0 20px; font-size: 16px; line-height: 1.7; }
-  .about-text strong{ color: #FFF; font-weight: 600; }
-  .stat-list{ display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .stat{
-    background: var(--bg-panel);
-    border: 1px solid var(--line);
-    padding: 24px;
-    border-radius: 12px;
-    text-align: center;
+  .about-text p{ color: var(--ink); margin: 0 0 18px; font-size: 17px; font-weight: 500; }
+  .about-text strong{ background: var(--yellow); padding: 0 6px; border-radius: 3px; }
+  .stat-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .stat-card{
+    background: var(--bg);
+    border: 3px solid var(--ink);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 6px 6px 0 var(--ink);
   }
-  .stat b{ display:block; font-family: var(--display); font-size: 32px; color: var(--accent-neon); margin-bottom: 4px; }
-  .stat span{ font-size: 13px; color: var(--ink-soft); font-family: var(--mono); }
+  .stat-card b{ display:block; font-family: var(--display); font-size: 26px; font-weight: 800; }
+  .stat-card span{ font-size: 13px; color: var(--ink-soft); font-family: var(--mono); font-weight: 500; }
+  .stat-card:nth-child(1){ border-color: var(--blue); }
+  .stat-card:nth-child(2){ border-color: var(--green); }
+  .stat-card:nth-child(3){ border-color: var(--orange); }
+  .stat-card:nth-child(4){ border-color: var(--pink); }
 
   /* SKILLS */
-  .skill-groups{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .skill-groups{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
   .skill-card{
-    background: var(--bg-panel);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 24px;
-    transition: transform 0.2s;
+    border-radius: 20px;
+    padding: 26px;
+    color: var(--bg);
+    transform: rotate(-1deg);
+    transition: transform .18s;
   }
-  .skill-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .skill-card:nth-child(2){ transform: rotate(0.8deg); }
+  .skill-card:nth-child(3){ transform: rotate(-0.6deg); }
+  .skill-card:hover{ transform: rotate(0deg) scale(1.02); }
+  .skill-card.c1{ background: var(--blue); }
+  .skill-card.c2{ background: var(--orange); }
+  .skill-card.c3{ background: var(--pink); }
   .skill-card h3{
-    font-family: var(--mono); font-size: 14px; color: var(--accent-neon);
-    margin: 0 0 16px; text-transform: uppercase; letter-spacing: 0.04em;
-    border-bottom: 1px solid var(--line); padding-bottom: 8px;
+    font-family: var(--display); font-size: 20px; font-weight: 800;
+    margin: 0 0 16px;
   }
   .skill-card ul{ list-style: none; margin:0; padding:0; }
   .skill-card li{
     font-size: 15px; padding: 8px 0;
-    display:flex; align-items:center; gap: 10px; color: #D1D5DB;
+    font-weight: 600;
+    border-bottom: 1.5px dashed rgba(255,255,255,0.4);
   }
-  .skill-card li::before{ content: ""; width:6px; height:6px; border-radius:50%; background: var(--accent); flex-shrink:0; }
+  .skill-card li:last-child{ border-bottom: none; }
 
   /* SERVICES */
-  .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-  .service-card-new {
-    background: var(--bg-panel);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.3s ease;
-    cursor: pointer;
+  .services-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .service-card{
+    display:grid; grid-template-columns: 90px 1fr 130px;
+    align-items:center; gap: 24px;
+    background: var(--bg);
+    border: 3px dashed var(--ink);
+    border-radius: 18px;
+    padding: 26px 28px;
+    position: relative;
+    transition: all .2s;
   }
-  .service-card-new:hover {
-    transform: translateY(-6px);
-    border-color: var(--accent-neon);
-    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.1);
+  .service-card:hover{ box-shadow: 8px 8px 0 rgba(0,0,0,0.05); }
+  .service-num{
+    font-family: var(--display); font-size: 40px; font-weight: 800;
+    color: var(--paper);
+    -webkit-text-stroke: 2px var(--ink);
   }
-  .service-img-box { width: 100%; height: 200px; overflow: hidden; position: relative; border-bottom: 1px solid var(--line); }
-  .service-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-  .service-card-new:hover .service-img-box img { transform: scale(1.08); }
-  .service-info { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
-  .service-info h3 { font-family: var(--display); font-size: 20px; margin: 0 0 12px; color: #FFF; font-weight: 600; }
-  .service-info p { margin: 0 0 16px; color: var(--ink-soft); font-size: 14px; line-height: 1.6; flex-grow: 1; }
-  .service-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-  .tag {
-    font-family: var(--mono); font-size: 11px; padding: 4px 10px; border-radius: 6px;
-    background: rgba(255,255,255,0.05); color: #9CA3AF; border: 1px solid var(--line);
+  .service-card h3{ font-family: var(--display); font-size: 21px; margin: 0 0 8px; font-weight: 700; }
+  .service-card p{ margin:0; color: var(--ink-soft); font-size: 14.5px; font-weight: 500; }
+  .stamp{
+    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    border: 3px solid var(--green); color: var(--green);
+    padding: 6px 14px; border-radius: 8px;
+    transform: rotate(-8deg);
   }
-  .service-card-new:hover .tag { background: var(--accent-soft); color: #60A5FA; border-color: rgba(59,130,246,0.3); }
-  .service-link-btn { font-family: var(--mono); font-size: 13px; color: var(--accent-neon); font-weight: 600; margin-top: auto; display: flex; align-items: center; gap: 4px; }
+  @media (max-width: 700px){
+    .service-card{ grid-template-columns: 50px 1fr; }
+    .stamp{ display:none; }
+    .service-num{ font-size: 28px; }
+  }
 
   /* CONTACT */
-  .contact-panel{
-    background-image: linear-gradient(135deg, #111827 0%, #1F2937 100%);
-    border: 1px solid var(--line); color: var(--ink); border-radius: 20px;
-    padding: 64px 48px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  #contact{
+    background: var(--ink);
+    color: var(--bg);
+    border-top: 3px solid var(--ink);
   }
-  .contact-panel h2{ font-family: var(--display); font-size: clamp(30px,4vw,44px); margin: 0 0 18px; color: #FFF; font-weight: 700; }
-  .contact-panel p{ color: var(--ink-soft); max-width: 460px; margin: 0 auto 36px; font-size: 16px; }
+  .contact-inner{ text-align:center; }
+  #contact .kicker{ background: var(--yellow); color: var(--ink); }
+  #contact h2{
+    font-family: var(--display); font-size: clamp(36px,6vw,60px);
+    margin: 0 0 20px; font-weight: 800; letter-spacing: -0.02em;
+  }
+  #contact .lede2{ color: rgba(255,255,255,0.65); max-width: 480px; margin: 0 auto 40px; font-size: 17px; }
   .contact-email{
-    font-family: var(--mono); font-size: 22px; color: #FFF; text-decoration:none;
-    border-bottom: 2px solid var(--line); padding-bottom: 6px; display: inline-block; margin-bottom: 16px; transition: all 0.2s;
+    font-family: var(--display); font-size: clamp(22px,4vw,34px); font-weight: 800;
+    color: var(--bg); text-decoration:none;
+    display:inline-block;
+    padding: 16px 32px;
+    border: 3px solid var(--bg);
+    border-radius: 100px;
+    transition: background .15s, color .15s, transform .15s;
   }
-  .contact-email:hover{ border-color: var(--accent-neon); color: var(--accent-neon); }
+  .contact-email:hover{ background: var(--green); color: var(--ink); border-color: var(--green); transform: scale(1.04); }
   .contact-whatsapp{
-    display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 18px;
-    color: #25D366; text-decoration: none; margin-bottom: 24px; font-weight: 600;
-    background: rgba(37, 211, 102, 0.1); padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(37, 211, 102, 0.2); transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono);
+    font-size: 16px; color: #25D366; text-decoration: none; margin: 16px 0;
+    font-weight: 700; transition: all .2s;
   }
-  .contact-whatsapp:hover { background: #25D366; color: #FFF; transform: scale(1.03); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3); }
-  .contact-socials{ display:flex; gap: 24px; justify-content:center; margin-top: 24px; font-family: var(--mono); font-size: 13px; border-top: 1px solid var(--line); padding-top: 24px; }
-  .contact-socials a{ text-decoration:none; color: var(--ink-soft); transition: color 0.2s; }
-  .contact-socials a:hover{ color: #FFF; }
-
-  footer{ padding: 40px 0; text-align:center; font-family: var(--mono); font-size: 12px; color: var(--ink-soft); border-top: 1px solid var(--line); margin-top: auto; }
-
-  @media (max-width: 880px){
-    .services-grid { grid-template-columns: 1fr; gap: 32px; }
-    .about-grid{ grid-template-columns: 1fr; gap: 32px; }
-    .skill-groups{ grid-template-columns: 1fr; gap: 20px; }
-    .contact-panel{ padding: 40px 24px; }
-    .sub-nav-links { justify-content: flex-start; gap: 20px; overflow-x: auto; padding-bottom: 4px; }
+  .contact-whatsapp:hover{ transform: scale(1.05); }
+  .contact-socials{
+    display:flex; gap: 14px; justify-content:center; margin-top: 36px;
+    flex-wrap: wrap;
   }
-  
-  /* MOBILE OPTIMIZATION FOR BRAND & SLOGAN */
-  @media (max-width: 540px) {
-    .slogan { 
-      font-size: 10px;
-      letter-spacing: 0.02em;
-    }
-    .brand {
-      font-size: 26px;
-    }
-    .brand-box {
-      gap: 6px;
-    }
+  .contact-socials a{
+    text-decoration:none; color: var(--bg);
+    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    border: 2px solid rgba(255,255,255,0.3);
+    padding: 8px 18px; border-radius: 100px;
+    transition: border-color .15s, background .15s;
+  }
+  .contact-socials a:hover{ border-color: var(--bg); background: rgba(255,255,255,0.08); }
+
+  footer{
+    padding: 28px 0;
+    text-align:center;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--bg);
+    background: var(--ink);
+  }
+
+  @media (max-width: 900px){
+    .navlinks{ gap: 20px; }
+  }
+  @media (max-width: 768px){
+    .navlinks{ display:none; }
+    .nav-bottom{ display:none; }
+    .brand-tagline{ display:none; }
+  }
+  @media (max-width: 760px){
+    .about-grid{ grid-template-columns: 1fr; }
+    .stat-grid{ grid-template-columns: 1fr 1fr; }
+    .skill-groups{ grid-template-columns: 1fr; }
+    .services-grid{ grid-template-columns: 1fr; }
+    .status-badge{ position: static; display:inline-flex; margin-bottom: 24px; transform: rotate(0deg); }
+    header.hero{ padding-top: 40px; }
   }
 </style>
 </head>
-<body class="mode-home">
+<body>
 
-<!-- সম্পূর্ণ স্টিকি হেডার এরিয়া -->
-<div class="main-header">
-  <div class="nav-top-row">
+<nav>
+  <div class="nav-top">
     <div class="wrap">
-      <div onclick="navigateTo('home')" class="brand-box">
-        <h1 class="brand">OBAYEDZONE<span>.</span></h1>
-        <span class="slogan" data-i18n="slogan-txt">| Tech & Security</span>
+      <div class="brand-section">
+        <a href="#" class="brand">OBAYEDZONE</a>
+        <span class="brand-tagline">| TECH & SECURITY</span>
       </div>
-      <button class="lang-btn" onclick="toggleLanguage()">Bangla</button>
+      <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">Bangla</button>
     </div>
   </div>
-
-  <!-- সাব-নেভিগেশন মেনুবার -->
-  <div class="sub-nav">
+  <div class="nav-bottom">
     <div class="wrap">
-      <ul class="sub-nav-links">
-        <li><a onclick="scrollToSection('page-home')" id="sub-link-home" class="active" data-i18n="sub-home">Home</a></li>
-        <li><a onclick="scrollToSection('page-about')" id="sub-link-about" data-i18n="sub-about">About</a></li>
-        <li><a onclick="scrollToSection('page-skills')" id="sub-link-skills" data-i18n="sub-skills">Skills</a></li>
-        <li><a onclick="scrollToSection('page-services')" id="sub-link-services" data-i18n="sub-services">Services</a></li>
-        <li><a onclick="scrollToSection('page-contact')" id="sub-link-contact" data-i18n="sub-contact">Contact</a></li>
+      <ul class="navlinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
   </div>
-</div>
+</nav>
 
-<!-- HERO SECTION -->
-<div id="page-home" class="page-view">
-  <header class="hero">
-    <div class="wrap">
-      <div class="eyebrow"><span class="dot"></span> <span data-i18n="hero-eyebrow">AVAILABLE FOR SERVICE</span></div>
-      <h1 class="title" data-i18n="hero-title">OBAYED<br>powering your computers, <span class="hl">securing your space.</span></h1>
-      <p class="lede" data-i18n="hero-lede">Your trusted technician for advanced computer repairs, smart security setups (CCTV, Intercom, IP Lock), and inventory POS systems — reliable, fast, and secure.</p>
-      <div class="cta-row">
-        <button onclick="scrollToSection('page-services')" class="btn btn-primary" data-i18n="hero-btn-primary">View Services →</button>
-        <button onclick="scrollToSection('page-contact')" class="btn btn-ghost" data-i18n="hero-btn-ghost">Contact Me</button>
+<header class="hero">
+  <div class="status-badge"><span class="blip"></span> <span id="heroStatus">SYSTEM ONLINE</span></div>
+  <div class="wrap">
+    <div class="hero-tag">⚡ <span id="heroTag">Computer Technician</span></div>
+    <h1 class="title"><span id="heroTitle">Your Device,<br>Fixed & Secured,<br><span class="hl-mark">I'm Here.</span></span></h1>
+    <p class="lede" id="heroLede">Hardware repair, OS installation, CCTV security systems, Smart door locks & Inventory POS solutions — reliable, fast & honest service.</p>
+    <div class="cta-row">
+      <a href="#services" class="btn btn-primary" id="btnServices">Services →</a>
+      <a href="#contact" class="btn btn-ghost" id="btnContact">Contact</a>
+    </div>
+  </div>
+</header>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item c-blue">🔧 PC REPAIR <span class="sep">//</span></span>
+    <span class="ticker-item c-green">📹 CCTV SETUP <span class="sep">//</span></span>
+    <span class="ticker-item c-orange">🛡️ IP LOCK INSTALL <span class="sep">//</span></span>
+    <span class="ticker-item c-pink">💾 OS & POS <span class="sep">//</span></span>
+    <span class="ticker-item c-blue">🔧 PC REPAIR <span class="sep">//</span></span>
+    <span class="ticker-item c-green">📹 CCTV SETUP <span class="sep">//</span></span>
+    <span class="ticker-item c-orange">🛡️ IP LOCK INSTALL <span class="sep">//</span></span>
+    <span class="ticker-item c-pink">💾 OS & POS <span class="sep">//</span></span>
+  </div>
+</div>
+<div class="stripe"></div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="kicker"><span class="n">01</span> ABOUT</div>
+    <h2 class="sec-title" id="aboutTitle">About Me</h2>
+    <div class="about-grid">
+      <div class="about-text" id="aboutText">
+        <p>I am <strong>OBAYED</strong>, a professional <strong>Computer, Security & POS Solutions Technician</strong>. I have hands-on expertise in PC/laptop hardware repair, OS installations, and advanced <strong>CCTV security systems, Intercom setups, IP smart door locks</strong>, plus <strong>professional Inventory POS systems</strong> for retail shops.</p>
+        <p>Slow device, virus infected, CCTV issues, door lock setup, or POS configuration — fast, dependable solutions with honesty and fair pricing.</p>
+        <p>My goal: understand your exact needs and deliver high-quality service every time.</p>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card"><b>PC</b><span id="stat1">Hardware Repair</span></div>
+        <div class="stat-card"><b id="stat2Title">CCTV</b><span id="stat2">Security Cameras</span></div>
+        <div class="stat-card"><b>POS</b><span id="stat3">Inventory Systems</span></div>
+        <div class="stat-card"><b id="stat4Title">2013</b><span id="stat4">Service Active</span></div>
       </div>
     </div>
-  </header>
-</div>
+  </div>
+</section>
 
-<!-- ABOUT SECTION -->
-<div id="page-about" class="page-view">
-  <section>
-    <div class="wrap">
-      <div class="sec-label" data-i18n="label-about">about</div>
-      <h2 class="sec-title" data-i18n="about-title">About Me</h2>
-      <div class="about-grid">
-        <div class="about-text" id="about-text-content" data-i18n="about-text">
-          <p>I am <strong>OBAYED</strong>, a professional <strong>Computer & Security Technician</strong>. I have long-term, hands-on experience in diagnosing and repairing computer & laptop hardware issues, operating system installations, software setup, network configurations, and professional **CCTV security camera setup & troubleshooting**.</p>
-          <p>Whether it's a slow device, virus issues, hardware malfunctions, CCTV coverage/recording issues, or a fresh setup — my goal is to provide fast and dependable solutions.</p>
-          <p>I believe in understanding the customer's issue thoroughly, delivering services with honesty and at reasonable pricing.</p>
-        </div>
-        <div class="stat-list">
-          <div class="stat"><b data-i18n="stat-1-title">PC</b><span data-i18n="stat-1-desc">Hardware Repair</span></div>
-          <div class="stat"><b data-i18n="stat-2-title">CCTV</b><span data-i18n="stat-2-desc">Security Camera</span></div>
-          <div class="stat"><b data-i18n="stat-3-title">OS</b><span data-i18n="stat-3-desc">Install & Setup</span></div>
-          <div class="stat"><b data-i18n="stat-4-title">2013</b><span data-i18n="stat-4-desc">Service Active</span></div>
-        </div>
+<section id="skills">
+  <div class="wrap">
+    <div class="kicker"><span class="n">02</span> SKILLS</div>
+    <h2 class="sec-title" id="skillsTitle">Skills</h2>
+    <div class="skill-groups">
+      <div class="skill-card c1">
+        <h3 id="skillGroup1">🔧 Hardware & OS</h3>
+        <ul id="skillList1">
+          <li>PC & Laptop Repair</li>
+          <li>Component Diagnosis</li>
+          <li>Windows / Linux Install</li>
+          <li>Virus & Malware Removal</li>
+        </ul>
+      </div>
+      <div class="skill-card c2">
+        <h3 id="skillGroup2">📹 Smart Security</h3>
+        <ul id="skillList2">
+          <li>CCTV Camera Setup</li>
+          <li>Intercom Installation</li>
+          <li>IP Door Lock Config</li>
+          <li>Alarm Systems Setup</li>
+        </ul>
+      </div>
+      <div class="skill-card c3">
+        <h3 id="skillGroup3">💼 Business Solutions</h3>
+        <ul id="skillList3">
+          <li>Inventory POS Sales</li>
+          <li>POS Software Setup</li>
+          <li>Router / Wi-Fi Setup</li>
+          <li>Network Troubleshooting</li>
+        </ul>
       </div>
     </div>
-  </section>
-</div>
+  </div>
+</section>
 
-<!-- SKILLS SECTION -->
-<div id="page-skills" class="page-view">
-  <section>
-    <div class="wrap">
-      <div class="sec-label" data-i18n="label-skills">skills</div>
-      <h2 class="sec-title" data-i18n="skills-title">Skills</h2>
-      <div class="skill-groups">
-        <div class="skill-card">
-          <h3 data-i18n="skill-group-1">Hardware & OS</h3>
-          <ul>
-            <li data-i18n="skill-h1">PC &amp; Laptop Repair</li>
-            <li data-i18n="skill-h2">Component Diagnosis</li>
-            <li data-i18n="skill-h3">Windows / Linux Install</li>
-            <li data-i18n="skill-h4">Virus &amp; Malware Removal</li>
-          </ul>
+<div class="stripe"></div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="kicker"><span class="n">03</span> SERVICES</div>
+    <h2 class="sec-title" id="servicesTitle">Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div>
+          <h3 id="service1Title">PC & Laptop Repair</h3>
+          <p id="service1Desc">Hardware diagnosis & fixes, OS installations, software setup & virus removal for all devices.</p>
         </div>
-        <div class="skill-card">
-          <h3 data-i18n="skill-group-2">Smart Security</h3>
-          <ul>
-            <li data-i18n="skill-s1">CCTV Camera Setup</li>
-            <li data-i18n="skill-s2">Intercom Installation</li>
-            <li data-i18n="skill-s3">IP Door Lock Config</li>
-            <li data-i18n="skill-s4">Alarm Systems Setup</li>
-          </ul>
+        <div class="stamp">FIXED ✓</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div>
+          <h3 id="service2Title">CCTV & Security Systems</h3>
+          <p id="service2Desc">Complete CCTV camera installation, Intercom systems, IP door locks & security alarm setup.</p>
         </div>
-        <div class="skill-card">
-          <h3 data-i18n="skill-group-3">Business Solutions</h3>
-          <ul>
-            <li data-i18n="skill-n1">Inventory POS Sales</li>
-            <li data-i18n="skill-n2">POS Software Setup</li>
-            <li data-i18n="skill-n3">Router / Wi-Fi Setup</li>
-            <li data-i18n="skill-n4">Network Troubleshooting</li>
-          </ul>
+        <div class="stamp">SECURED ✓</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div>
+          <h3 id="service3Title">Inventory & POS Systems</h3>
+          <p id="service3Desc">Sales & complete setup of professional Inventory POS systems for retail shops & businesses.</p>
         </div>
+        <div class="stamp">SETUP ✓</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <div>
+          <h3 id="service4Title">Network & Wi-Fi Setup</h3>
+          <p id="service4Desc">Router config, Wi-Fi coverage optimization, LAN cabling & network troubleshooting solutions.</p>
+        </div>
+        <div class="stamp">ONLINE ✓</div>
       </div>
     </div>
-  </section>
-</div>
+  </div>
+</section>
 
-<!-- SERVICES SECTION -->
-<div id="page-services" class="page-view">
-  <section>
-    <div class="wrap">
-      <div class="sec-label" data-i18n="label-services">services</div>
-      <h2 class="sec-title" data-i18n="services-title">Services</h2>
-      <div class="services-grid">
-        <!-- Service 1 (Hardware & Software Fix) -->
-        <div onclick="scrollToSection('page-contact')" class="service-card-new">
-          <div class="service-img-box">
-            <img src="https://images.unsplash.com/photo-1624705002806-5d72df19c3ad?auto=format&fit=crop&w=500&q=80" alt="Hardware Repair">
-          </div>
-          <div class="service-info">
-            <div class="service-tags"><span class="tag">PC</span><span class="tag">Laptop</span><span class="tag">OS</span></div>
-            <h3 data-i18n="service-1-title">Hardware & Software Fix</h3>
-            <p data-i18n="service-1-desc">Diagnosing and fixing PC/laptop hardware issues (Motherboards, RAM, Power Supplies) along with fresh Windows/Linux installations and virus removal.</p>
-            <div class="service-link-btn"><span data-i18n="service-btn-txt">Get Service</span> →</div>
-          </div>
-        </div>
-        <!-- Service 2 (Advanced Security Systems) -->
-        <div onclick="scrollToSection('page-contact')" class="service-card-new">
-          <div class="service-img-box">
-            <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=500&q=80" alt="CCTV & Advanced Security">
-          </div>
-          <div class="service-info">
-            <div class="service-tags"><span class="tag">CCTV</span><span class="tag">Intercom</span><span class="tag">IP Lock</span></div>
-            <h3 data-i18n="service-2-title">Advanced Security Systems</h3>
-            <p data-i18n="service-2-desc">Complete home and shop security solutions including CCTV installation, Intercom systems, IP smart door locks, and advanced security alarm systems setup.</p>
-            <div class="service-link-btn"><span data-i18n="service-btn-txt">Get Service</span> →</div>
-          </div>
-        </div>
-        <!-- Service 3 -->
-        <div onclick="scrollToSection('page-contact')" class="service-card-new">
-          <div class="service-img-box"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=500&q=80" alt="Inventory POS Systems"></div>
-          <div class="service-info">
-            <div class="service-tags"><span class="tag">POS</span><span class="tag">Retail</span><span class="tag">Inventory</span></div>
-            <h3 data-i18n="service-3-title">Inventory & POS Systems</h3>
-            <p data-i18n="service-3-desc">Sales and complete configurations of professional Inventory POS systems for retail shops and businesses. Track sales and stocks seamlessly.</p>
-            <div class="service-link-btn"><span data-i18n="service-btn-txt">Get Service</span> →</div>
-          </div>
-        </div>
-        <!-- Service 4 -->
-        <div onclick="scrollToSection('page-contact')" class="service-card-new">
-          <div class="service-img-box"><img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=500&q=80" alt="Network Infrastructure"></div>
-          <div class="service-info">
-            <div class="service-tags"><span class="tag">Network</span><span class="tag">Wi-Fi</span><span class="tag">Router</span></div>
-            <h3 data-i18n="service-4-title">Network & Wi-Fi Setup</h3>
-            <p data-i18n="service-4-desc">Advanced router, access point and Wi-Fi configurations, local area network (LAN) cabling, and expert network troubleshooting for flawless connectivity.</p>
-            <div class="service-link-btn"><span data-i18n="service-btn-txt">Get Service</span> →</div>
-          </div>
-        </div>
-      </div>
+<section id="contact">
+  <div class="wrap contact-inner">
+    <div class="kicker"><span class="n">04</span> CONTACT</div>
+    <h2 id="contactTitle">Need Service?</h2>
+    <p class="lede2" id="contactDesc">For any computer, CCTV, POS or networking issues — contact via email or WhatsApp below.</p>
+    <a href="mailto:obayedzone@gmail.com" class="contact-email">obayedzone@gmail.com</a><br>
+    <a href="https://wa.me/96893045704" target="_blank" class="contact-whatsapp">💬 WhatsApp: +968 9304 5704</a>
+    <div class="contact-socials">
+      <a href="#">GitHub</a>
+      <a href="#">Facebook</a>
+      <a href="#">LinkedIn</a>
     </div>
-  </section>
-</div>
-
-<!-- CONTACT SECTION -->
-<div id="page-contact" class="page-view">
-  <section>
-    <div class="wrap">
-      <div class="contact-panel">
-        <div class="sec-label" data-i18n="label-contact">contact</div>
-        <h2 data-i18n="contact-title">Need Service?</h2>
-        <p data-i18n="contact-desc">For any computer/laptop or CCTV problems and service inquiries, please get in touch via email or WhatsApp below.</p>
-        <a href="mailto:obayedzone@gmail.com" class="contact-email">obayedzone@gmail.com</a><br>
-        <a href="https://wa.me/96893045704" target="_blank" class="contact-whatsapp">💬 WhatsApp: +968 9304 5704</a>
-        <div class="contact-socials">
-          <a href="#">GitHub</a>
-          <a href="#">LinkedIn</a>
-          <a href="#">Facebook</a>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+  </div>
+</section>
 
 <footer>
   <div class="wrap">
-    <span data-i18n="footer-text">© 2026 OBAYEDZONE — Built with HTML &amp; CSS</span>
+    <span id="footerText">© 2026 OBAYED — Computer Technician & Security Specialist</span>
   </div>
 </footer>
 
 <script>
-// Smooth Navigation and Auto-Highlight on Scroll
-function scrollToSection(id) {
-  const element = document.getElementById(id);
-  if (element) {
-    const headerHeight = document.querySelector('.main-header').offsetHeight;
-    const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-    
-    window.scrollTo({
-      top: elementPosition - headerHeight + 5,
-      behavior: 'smooth'
-    });
-  }
-}
-
-function navigateTo(mode) {
-  if(mode === 'home') {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-}
-
-// Active link highlighting during scroll
-window.addEventListener('scroll', () => {
-  const sections = ['page-home', 'page-about', 'page-skills', 'page-services', 'page-contact'];
-  const headerHeight = document.querySelector('.main-header').offsetHeight;
-  let currentSection = 'page-home';
-
-  sections.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      const top = el.getBoundingClientRect().top;
-      if (top - headerHeight <= 60) {
-        currentSection = id;
-      }
-    }
-  });
-
-  document.querySelectorAll('.sub-nav-links a').forEach(link => {
-    link.classList.remove('active');
-  });
-
-  const activeId = currentSection.replace('page-', 'sub-link-');
-  const activeLink = document.getElementById(activeId);
-  if (activeLink) activeLink.classList.add('active');
-});
-
-// Translation Database
 const langData = {
-  bn: {
-    "slogan-txt": "| টেক, সিকিউরিটি ও পস সリューション",
-    "sub-home": "হোম",
-    "sub-about": "সম্পর্কে",
-    "sub-skills": "দক্ষতা",
-    "sub-services": "সার্ভিসসমূহ",
-    "sub-contact": "যোগাযোগ",
-    "hero-eyebrow": "সার্ভিসের জন্য উপলব্ধ",
-    "hero-title": "OBAYED<br>আপনার কম্পিউটার রাখবে সচল, <span class=\"hl\">সুরক্ষায় অবিচল।</span>",
-    "hero-lede": "কম্পিউটার হার্ডওয়্যার ও ওএস ফিক্স, スマート সিকিউরিটি সিস্টেম (সিসিটিভি, ইন্টারকম, আইপি লক) এবং ব্যবসার জন্য ইনভেন্টরি POS সেটআপের নির্ভরযোগ্য ও দ্রুত সেবা।",
-    "hero-btn-primary": "সার্ভিসসমূহ দেখুন →",
-    "hero-btn-ghost": "যোগাযোগ করুন",
-    "label-about": "সম্পর্কে",
-    "about-title": "আমার সম্পর্কে",
-    "about-text": `<p>আমি <strong>ওবায়েদ</strong>, একজন পেশাদার <strong>কম্পিউটার, স্মার্ট সিকিউরিটি এবং পস (POS) সリューション টেকনিশিয়ান</strong>। কম্পিউটার এবং ল্যাপটপ হার্ডওয়্যার মেরামত, অপারেটিং সিস্টেম ও প্রয়োজনীয় সফটওয়্যার সেটআপের পাশাপাশি আধুনিক সিকিউরিটি সিস্টেম যেমন— <strong>সিসিটিভি ক্যামেরা, ইন্টারকম (Intercom), আইপি ডোর লক (IP Door Lock) এবং সিকিউরিটি অ্যালার্ম সিস্টেম</strong> নিখুঁতভাবে ইনস্টলেশন ও ট্রাবলশুটিংয়ের কাজে আমার দীর্ঘ অভিজ্ঞতা রয়েছে।</p>
-        <p>এছাড়াও ব্যবসা প্রতিষ্ঠান ও রিটেল শপের হিসাব-নিকাশ ও স্টক ম্যানেজমেন্ট সহজ করতে আমি প্রফেশনাল <strong>ইনভেন্টরি পস (Inventory POS) সিস্টেম বিক্রি এবং সম্পূর্ণ সেটআপ</strong> সেবা প্রদান করি।</p>
-        <p>গ্রাহকের প্রয়োজন আন্তরিকভাবে বুঝে সততা ও সাশ্রয়ী মূল্যে সঠিক সময়ে উন্নত মানের সেবা নিশ্চিত করাই আমার মূল লক্ষ্য।</p>`,
-    "stat-1-title": "পিসি",
-    "stat-1-desc": "হার্ডওয়্যার রিপেয়ার",
-    "stat-2-title": "সিকিউরিটি",
-    "stat-2-desc": "CCTV, লক ও অ্যালার্ম",
-    "stat-3-title": "POS",
-    "stat-3-desc": "ইনভেন্টরি সিস্টেম সেলস",
-    "stat-4-title": "২০১৩",
-    "stat-4-desc": "সার্ভিস চালু",
-    "label-skills": "দক্ষতা",
-    "skills-title": "আমার কারিগরি দক্ষতা",
-    "skill-group-1": "হার্ডওয়্যার ও ওএস",
-    "skill-group-2": "স্মার্ট সিকিউরিটি",
-    "skill-group-3": "বিজনেস সলিউশন",
-    "skill-h1": "পিসি ও ল্যাপটপ মেরামত",
-    "skill-h2": "কম্পোনেন্ট ডায়াগনসিস",
-    "skill-h3": "উইন্ডোজ / লিনাক্স ইনস্টল",
-    "skill-h4": "ভাইরাস ও ম্যালওয়্যার রিমুভাল",
-    "skill-s1": "CCTV ক্যামেরা সেটআপ",
-    "skill-s2": "ইন্টারকম (Intercom) ইনস্টলেশন",
-    "skill-s3": "IP ডোর লক কনফিগারেশন",
-    "skill-s4": "অ্যালার্ম সিস্টেম সেটআপ",
-    "skill-n1": "ইনভেন্টরি POS সিস্টেম বিক্রি",
-    "skill-n2": "POS সফটওয়্যার কনফিগারেশন",
-    "skill-n3": "রাউটার / ওয়াই-ফাই সেটআপ",
-    "skill-n4": "নেটওয়ার্ক ট্রাবলশুটিং",
-    "label-services": "সার্ভিসসমূহ",
-    "services-title": "আমার সেবাসমূহ",
-    "service-1-title": "হার্ডওয়্যার ও সফটওয়্যার ফিক্স",
-    "service-1-desc": "পিসি ও ল্যাপটপের সব ধরনের হার্ডওয়্যার সমস্যা সমাধান (মাদারবোর্ড, র‍্যাম, পাওয়ার সাপ্লাই) এবং নতুন Windows/Linux ও ভাইরাস পরিষ্কার করার সেবা।",
-    "service-2-title": "অ্যাডভান্সড সিকিউরিটি সিস্টেম",
-    "service-2-desc": "বাসাবাড়ি বা দোকানের সম্পূর্ণ নিরাপত্তা নিশ্চিত করতে সিসিটিভি ক্যামেরা, ইন্টারকম সিস্টেম, আইপি স্মার্ট ডোর লক এবং অটোমেটেড অ্যালার্ম সিস্টেম ইনস্টলেশন।",
-    "service-3-title": "ইনভেন্টরি ও POS সিস্টেমস",
-    "service-3-desc": "দোকান ও ব্যবসা প্রতিষ্ঠানের জন্য উন্নত মানের ইনভেন্টরি POS (Point of Sale) হার্ডওয়্যার ও সফটওয়্যার বিক্রয়, ইন্সটলেশন এবং সম্পূর্ণ লাইভ কনফিগারেশন সেবা।",
-    "service-4-title": "নেটওয়ার্ক ও ওয়াই-ফাই সেটআপ",
-    "service-4-desc": "অ্যাডভান্সড রাউটার ও ওয়াই-ফাই কাভারেজ কনফিগারেশন, লোকাল ল্যান (LAN) ক্যাবলিং এবং নিরবচ্ছিন্ন ইন্টারনেটের জন্য নেটওয়ার্ক সমস্যার স্থায়ী সমাধান।",
-    "service-btn-txt": "সার্ভিস নিন",
-    "label-contact": "যোগাযোগ",
-    "contact-title": "সেবা প্রয়োজন?",
-    "contact-desc": "যেকোনো কম্পিউটার, সিকিউরিটি লক, সিসিটিভি ক্যামেরা বা পস (POS) সিস্টেম সংক্রান্ত সেবার জন্য নিচের ইমেইল অথবা হোয়াটসঅ্যাপ নম্বরে সরাসরি যোগাযোগ করুন।",
-    "footer-text": "© ২০২৬ OBAYEDZONE — এইচটিএমএল ও সিএসএস দিয়ে তৈরি"
-  },
   en: {
-    "slogan-txt": "| Tech & Security",
-    "sub-home": "Home",
-    "sub-about": "About",
-    "sub-skills": "Skills",
-    "sub-services": "Services",
-    "sub-contact": "Contact",
-    "hero-eyebrow": "AVAILABLE FOR SERVICE",
-    "hero-title": "OBAYED<br>powering your computers, <span class=\"hl\">securing your space.</span>",
-    "hero-lede": "Your trusted technician for advanced computer repairs, smart security setups (CCTV, Intercom, IP Lock), and inventory POS systems — reliable, fast, and secure.",
-    "hero-btn-primary": "View Services →",
-    "hero-btn-ghost": "Contact Me",
-    "label-about": "about",
-    "about-title": "About Me",
-    "about-text": `<p>I am <strong>OBAYED</strong>, a professional <strong>Computer, Smart Security & POS Solutions Technician</strong>. Along with diagnosis and repair of PC/laptop hardware and software, I have extensive experience in advanced home security solutions like <strong>CCTV cameras, Intercom systems, IP Door Locks, and Security Alarm systems</strong>.</p>
-        <p>Additionally, I sell and fully configure <strong>Inventory POS (Point of Sale) systems</strong> for retail shops and businesses to manage their daily sales and stocks efficiently.</p>
-        <p>My goal is to understand the customer's exact needs and deliver high-quality services with maximum honesty, speed, and affordable pricing.</p>`,
-    "stat-1-title": "PC Fix",
-    "stat-1-desc": "Hardware & OS",
-    "stat-2-title": "Security",
-    "stat-2-desc": "CCTV, Locks & Alarms",
-    "stat-3-title": "POS",
-    "stat-3-desc": "Inventory Systems Sale",
-    "stat-4-title": "2013",
-    "stat-4-desc": "Service Active",
-    "label-skills": "skills",
-    "skills-title": "Skills",
-    "skill-group-1": "Hardware & OS",
-    "skill-group-2": "Smart Security",
-    "skill-group-3": "Business Solutions",
-    "skill-h1": "PC & Laptop Repair",
-    "skill-h2": "Component Diagnosis",
-    "skill-h3": "Windows / Linux Install",
-    "skill-h4": "Virus & Malware Removal",
-    "skill-s1": "CCTV Camera Setup",
-    "skill-s2": "Intercom Installation",
-    "skill-s3": "IP Door Lock Config",
-    "skill-s4": "Alarm Systems Setup",
-    "skill-n1": "Inventory POS Sales",
-    "skill-n2": "POS Software Setup",
-    "skill-n3": "Router / Wi-Fi Setup",
-    "skill-n4": "Network Troubleshooting",
-    "label-services": "services",
-    "services-title": "Services",
-    "service-1-title": "Hardware & Software Fix",
-    "service-1-desc": "Diagnosing and fixing PC/laptop hardware issues (Motherboards, RAM, Power Supplies) along with fresh Windows/Linux installations and virus removal.",
-    "service-2-title": "Advanced Security Systems",
-    "service-2-desc": "Complete home and shop security solutions including CCTV installation, Intercom systems, IP smart door locks, and advanced security alarm systems setup.",
-    "service-3-title": "Inventory & POS Systems",
-    "service-3-desc": "Sales and complete configurations of professional Inventory POS systems for retail shops and businesses. Track sales and stocks seamlessly.",
-    "service-4-title": "Network & Wi-Fi Setup",
-    "service-4-desc": "Advanced router, access point and Wi-Fi configurations, local area network (LAN) cabling, and expert network troubleshooting for flawless connectivity.",
-    "service-btn-txt": "Get Service",
-    "label-contact": "contact",
-    "contact-title": "Need Service?",
-    "contact-desc": "For any computer/laptop or CCTV problems and service inquiries, please get in touch via email or WhatsApp below.",
-    "footer-text": "© 2026 OBAYEDZONE — Built with HTML & CSS"
+    heroStatus: "SYSTEM ONLINE",
+    heroTag: "Computer Technician",
+    heroTitle: "Your Device,<br>Fixed & Secured,<br><span class=\"hl-mark\">I'm Here.</span>",
+    heroLede: "Hardware repair, OS installation, CCTV security systems, Smart door locks & Inventory POS solutions — reliable, fast & honest service.",
+    btnServices: "Services →",
+    btnContact: "Contact",
+    langBtn: "Bangla",
+    
+    aboutTitle: "About Me",
+    aboutText: `<p>I am <strong>OBAYED</strong>, a professional <strong>Computer, Security & POS Solutions Technician</strong>. I have hands-on expertise in PC/laptop hardware repair, OS installations, and advanced <strong>CCTV security systems, Intercom setups, IP smart door locks</strong>, plus <strong>professional Inventory POS systems</strong> for retail shops.</p>
+    <p>Slow device, virus infected, CCTV issues, door lock setup, or POS configuration — fast, dependable solutions with honesty and fair pricing.</p>
+    <p>My goal: understand your exact needs and deliver high-quality service every time.</p>`,
+    stat1: "Hardware Repair",
+    stat2Title: "CCTV",
+    stat2: "Security Cameras",
+    stat3: "Inventory Systems",
+    stat4Title: "2013",
+    stat4: "Service Active",
+    
+    skillsTitle: "Skills",
+    skillGroup1: "🔧 Hardware & OS",
+    skillGroup2: "📹 Smart Security",
+    skillGroup3: "💼 Business Solutions",
+    skillList1: ["PC & Laptop Repair", "Component Diagnosis", "Windows / Linux Install", "Virus & Malware Removal"],
+    skillList2: ["CCTV Camera Setup", "Intercom Installation", "IP Door Lock Config", "Alarm Systems Setup"],
+    skillList3: ["Inventory POS Sales", "POS Software Setup", "Router / Wi-Fi Setup", "Network Troubleshooting"],
+    
+    servicesTitle: "Services",
+    service1Title: "PC & Laptop Repair",
+    service1Desc: "Hardware diagnosis & fixes, OS installations, software setup & virus removal for all devices.",
+    service2Title: "CCTV & Security Systems",
+    service2Desc: "Complete CCTV camera installation, Intercom systems, IP door locks & security alarm setup.",
+    service3Title: "Inventory & POS Systems",
+    service3Desc: "Sales & complete setup of professional Inventory POS systems for retail shops & businesses.",
+    service4Title: "Network & Wi-Fi Setup",
+    service4Desc: "Router config, Wi-Fi coverage optimization, LAN cabling & network troubleshooting solutions.",
+    
+    contactTitle: "Need Service?",
+    contactDesc: "For any computer, CCTV, POS or networking issues — contact via email or WhatsApp below.",
+    
+    footerText: "© 2026 OBAYED — Computer Technician & Security Specialist"
+  },
+  bn: {
+    heroStatus: "সিস্টেম অনলাইন",
+    heroTag: "কম্পিউটার টেকনিশিয়ান",
+    heroTitle: "আপনার ডিভাইস,<br>ঠিক ও সুরক্ষিত,<br><span class=\"hl-mark\">আমি আছি।</span>",
+    // এখানে জাপানি অক্ষর সরিয়ে একদম নিখুঁত বাংলা করা হয়েছে
+    heroLede: "কম্পিউটার হার্ডওয়্যার ও ওএস ফিক্স, স্মার্ট সিকিউরিটি সিস্টেম (সিসিটিভি, ইন্টারকম, আইপি লক) এবং ব্যবসার জন্য ইনভেন্টরি POS সেটআপের নির্ভরযোগ্য ও দ্রুত সেবা।",
+    btnServices: "সার্ভিসসমূহ দেখুন →",
+    btnContact: "যোগাযোগ করুন",
+    langBtn: "English",
+    
+    aboutTitle: "আমার সম্পর্কে",
+    aboutText: `<p>আমি <strong>ওবায়েদ</strong>, একজন পেশাদার <strong>কম্পিউটার, স্মার্ট সিকিউরিটি ও পস সリューション টেকনিশিয়ান</strong>। পিসি-ল্যাপটপ হার্ডওয়্যার মেরামত, অপারেটিং সিস্টেম ইনস্টলেশনের পাশাপাশি <strong>সিসিটিভি ক্যামেরা, ইন্টারকম, আইপি ডোর লক</strong> এবং <strong>ইনভেন্টরি পস সিস্টেম</strong> সেটআপে আমার দীর্ঘ অভিজ্ঞতা রয়েছে।</p>
+    <p>ধীরগতির ডিভাইস, ভাইরাস সংক্রমণ, সিসিটিভি সমস্যা, দরজার লক সেটআপ বা পস কনফিগারেশন — সবকিছুতে দ্রুত, নির্ভরযোগ্য সমাধান সততা ও ন্যায্য মূল্যে।</p>
+    <p>আমার লক্ষ্য: আপনার চাহিদা বুঝে প্রতিবার সেরা সেবা প্রদান করা।</p>`,
+    stat1: "হার্ডওয়্যার মেরামত",
+    stat2Title: "সিসিটিভি",
+    stat2: "নিরাপত্তা ক্যামেরা",
+    stat3: "ইনভেন্টরি সিস্টেম",
+    stat4Title: "২০১৩",
+    stat4: "সেবা চালু",
+    
+    skillsTitle: "দক্ষতা",
+    skillGroup1: "🔧 হার্ডওয়্যার ও ওএস",
+    skillGroup2: "📹 স্মার্ট সিকিউরিটি",
+    skillGroup3: "💼 বিজনেস সলিউশন",
+    skillList1: ["পিসি ও ল্যাপটপ মেরামত", "কম্পোনেন্ট ডায়াগনসিস", "উইন্ডোজ / লিনাক্স ইনস্টল", "ভাইরাস রিমুভাল"],
+    skillList2: ["সিসিটিভি ক্যামেরা সেটআপ", "ইন্টারকম ইনস্টলেশন", "আইপি লক কনফিগারেশন", "অ্যালার্ম সিস্টেম"],
+    skillList3: ["পস সিস্টেম বিক্রি", "পস সফটওয়্যার সেটআপ", "রাউটার ওয়াই-ফাই সেটআপ", "নেটওয়ার্ক সমাধান"],
+    
+    servicesTitle: "সেবাসমূহ",
+    service1Title: "পিসি ও ল্যাপটপ মেরামত",
+    service1Desc: "হার্ডওয়্যার নির্ণয় ও সমাধান, ওএস ইনস্টলেশন, সফটওয়্যার সেটআপ ও ভাইরাস অপসারণ।",
+    service2Title: "সিসিটিভি ও সিকিউরিটি সিস্টেম",
+    service2Desc: "সম্পূর্ণ সিসিটিভি ক্যামেরা ইনস্টলেশন, ইন্টারকম, আইপি লক ও অ্যালার্ম সিস্টেম সেটআপ।",
+    service3Title: "ইনভেন্টরি ও পস সিস্টেম",
+    service3Desc: "পেশাদার পস সিস্টেম বিক্রয় ও সম্পূর্ণ সেটআপ দোকান ও ব্যবসার জন্য afternoons।",
+    service4Title: "নেটওয়ার্ক ও ওয়াই-ফাই সেটআপ",
+    service4Desc: "রাউটার কনফিগারেশন, ওয়াই-ফাই কভারেজ, ল্যান ক্যাবলিং ও নেটওয়ার্ক সমাধান।",
+    
+    contactTitle: "সেবা দরকার?",
+    contactDesc: "যেকোনো কম্পিউটার, সিসিটিভি, পস বা নেটওয়ার্ক সমস্যায় ইমেইল বা হোয়াটসঅ্যাপে যোগাযোগ করুন।",
+    
+    footerText: "© ২০২৬ ওবায়েদ — কম্পিউটার টেকনিশিয়ান ও সিকিউরিটি বিশেষজ্ঞ"
   }
 };
 
 let currentLang = 'en';
 
 function toggleLanguage() {
-  const btn = document.querySelector('.lang-btn');
+  currentLang = currentLang === 'en' ? 'bn' : 'en';
+  const data = langData[currentLang];
   
-  if (currentLang === 'bn') {
-    currentLang = 'en';
-    btn.textContent = 'Bangla';
-    document.documentElement.lang = 'en';
-  } else {
-    currentLang = 'bn';
-    btn.textContent = 'English';
-    document.documentElement.lang = 'bn';
-  }
+  document.getElementById('langBtn').textContent = data.langBtn;
+  document.getElementById('heroStatus').textContent = data.heroStatus;
+  document.getElementById('heroTag').textContent = data.heroTag;
+  document.getElementById('heroTitle').innerHTML = data.heroTitle;
+  document.getElementById('heroLede').textContent = data.heroLede;
+  document.getElementById('btnServices').textContent = data.btnServices;
+  document.getElementById('btnContact').textContent = data.btnContact;
   
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (langData[currentLang][key]) {
-      el.innerHTML = langData[currentLang][key];
+  document.getElementById('aboutTitle').textContent = data.aboutTitle;
+  document.getElementById('aboutText').innerHTML = data.aboutText;
+  document.getElementById('stat1').textContent = data.stat1;
+  document.getElementById('stat2Title').textContent = data.stat2Title;
+  document.getElementById('stat2').textContent = data.stat2;
+  document.getElementById('stat3').textContent = data.stat3;
+  document.getElementById('stat4Title').textContent = data.stat4Title;
+  document.getElementById('stat4').textContent = data.stat4;
+  
+  document.getElementById('skillsTitle').textContent = data.skillsTitle;
+  document.getElementById('skillGroup1').textContent = data.skillGroup1;
+  document.getElementById('skillGroup2').textContent = data.skillGroup2;
+  document.getElementById('skillGroup3').textContent = data.skillGroup3;
+  
+  data.skillList1.forEach((skill, i) => {
+    if (document.querySelectorAll('#skillList1 li')[i]) {
+      document.querySelectorAll('#skillList1 li')[i].textContent = skill;
     }
   });
+  data.skillList2.forEach((skill, i) => {
+    if (document.querySelectorAll('#skillList2 li')[i]) {
+      document.querySelectorAll('#skillList2 li')[i].textContent = skill;
+    }
+  });
+  data.skillList3.forEach((skill, i) => {
+    if (document.querySelectorAll('#skillList3 li')[i]) {
+      document.querySelectorAll('#skillList3 li')[i].textContent = skill;
+    }
+  });
+  
+  document.getElementById('servicesTitle').textContent = data.servicesTitle;
+  document.getElementById('service1Title').textContent = data.service1Title;
+  document.getElementById('service1Desc').textContent = data.service1Desc;
+  document.getElementById('service2Title').textContent = data.service2Title;
+  document.getElementById('service2Desc').textContent = data.service2Desc;
+  document.getElementById('service3Title').textContent = data.service3Title;
+  document.getElementById('service3Desc').textContent = data.service3Desc;
+  document.getElementById('service4Title').textContent = data.service4Title;
+  document.getElementById('service4Desc').textContent = data.service4Desc;
+  
+  document.getElementById('contactTitle').textContent = data.contactTitle;
+  document.getElementById('contactDesc').textContent = data.contactDesc;
+  document.getElementById('footerText').textContent = data.footerText;
+  
+  document.documentElement.lang = currentLang;
 }
 </script>
 
