@@ -94,7 +94,7 @@
     padding: 14px 24px;
   }
   .brand-section{
-    display:flex; align-items:center; gap: 12px;
+    display:flex; flex-direction: column; align-items: flex-start; gap: 2px;
   }
   .brand{
     font-family: var(--display);
@@ -104,6 +104,7 @@
     color: #FFFFFF;
     letter-spacing: -0.02em;
     margin: 0;
+    line-height: 1.1;
   }
   .brand::after{
     content: ".";
@@ -111,12 +112,11 @@
   }
   .brand-tagline{
     font-family: var(--mono);
-    font-size: 11px;
-    color: rgba(255,255,255,0.5);
+    font-size: 10px;
+    color: rgba(255,255,255,0.4); /* কালার আরও লাইট করা হয়েছে */
     font-weight: 500;
     letter-spacing: 0.02em;
-    border-left: 1px solid rgba(255,255,255,0.2);
-    padding-left: 12px;
+    padding-left: 60px; /* OBAYED এর শেষ অংশ থেকে শুরু করার জন্য */
   }
   .navlinks{
     display:flex; gap: 36px; list-style:none; margin:0; padding:0;
@@ -134,6 +134,7 @@
     background: transparent; color: var(--blue);
     border: 1.5px solid var(--blue); padding: 5px 12px;
     border-radius: 100px; cursor: pointer; transition: all .2s;
+    flex-shrink: 0;
   }
   .lang-btn:hover{ background: rgba(47,111,237,0.1); }
 
@@ -426,38 +427,39 @@
     .navlinks{ gap: 20px; }
   }
 
-  /* MOBILE RESPONSIVE FIXES (মোবাইল ও পিসির জন্য আপডেট করা লেআউট) */
+  /* MOBILE RESPONSIVE FIXES */
   @media (max-width: 768px) {
     .nav-top .wrap {
-      flex-direction: row; /* বাম-ডান অ্যালাইনমেন্ট ঠিক রাখার জন্য */
+      flex-direction: row;
       justify-content: space-between;
       align-items: center;
       padding: 12px 16px;
-      gap: 8px;
+      gap: 12px;
     }
     .brand-section {
-      flex-direction: row;
-      align-items: center;
-      gap: 8px;
-      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1px;
     }
     .brand {
-      font-size: 19px; /* লোগোর সাইজ ছোট করা হলো */
+      font-size: 20px;
     }
     .brand-tagline {
-      border-left: 1px solid rgba(255,255,255,0.2);
-      padding-left: 8px;
-      font-size: 9px; /* স্লোগান সাইজ ছোট করা হলো */
-      display: inline-block !important;
+      padding-left: 55px; /* মোবাইলের জন্য OBAYED এর পর থেকে শুরু হওয়ার পারফেক্ট মার্জিন */
+      font-size: 8.5px;
+      color: rgba(255, 255, 255, 0.35); /* স্লোগান আরও লাইট করা হয়েছে */
       white-space: nowrap;
     }
     .lang-btn {
-      font-size: 11px; /* বাটন আরও ছোট করা হলো */
+      font-size: 11px;
       padding: 4px 10px;
+      margin-right: 0;
+      flex-shrink: 0; /* বাটন যেন ছোট হয়ে বা কেটে বের না হয়ে যায় */
     }
     .nav-bottom {
       display: flex !important;
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.02);
       border-top: 1px solid rgba(255,255,255,0.05);
     }
     .nav-bottom .wrap {
@@ -498,7 +500,7 @@
     <div class="wrap">
       <div class="brand-section">
         <a href="#" class="brand">OBAYEDZONE</a>
-        <span class="brand-tagline" id="navTagline">| TECH, SECURITY & POS SOLUTIONS</span>
+        <span class="brand-tagline" id="navTagline">TECH, SECURITY & POS SOLUTIONS</span>
       </div>
       <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">Bangla</button>
     </div>
@@ -606,7 +608,6 @@
     <div class="kicker"><span class="n">03</span> SERVICES</div>
     <h2 class="sec-title" id="servicesTitle">Services</h2>
     <div class="services-grid">
-      <!-- Service 1 -->
       <div class="service-card">
         <div class="service-num">01</div>
         <div class="service-img-wrapper">
@@ -618,7 +619,6 @@
         </div>
         <div class="stamp">FIXED ✓</div>
       </div>
-      <!-- Service 2 -->
       <div class="service-card">
         <div class="service-num">02</div>
         <div class="service-img-wrapper">
@@ -630,7 +630,6 @@
         </div>
         <div class="stamp">SECURED ✓</div>
       </div>
-      <!-- Service 3 -->
       <div class="service-card">
         <div class="service-num">03</div>
         <div class="service-img-wrapper">
@@ -642,7 +641,6 @@
         </div>
         <div class="stamp">SETUP ✓</div>
       </div>
-      <!-- Service 4 -->
       <div class="service-card">
         <div class="service-num">04</div>
         <div class="service-img-wrapper">
@@ -682,7 +680,7 @@
 <script>
 const langData = {
   en: {
-    navTagline: "| TECH, SECURITY & POS SOLUTIONS",
+    navTagline: "TECH, SECURITY & POS SOLUTIONS",
     mHome: "Home", mAbout: "About", mSkills: "Skills", mServices: "Services", mContact: "Contact",
     heroStatus: "SYSTEM ONLINE",
     heroTag: "Computer Technician",
@@ -727,7 +725,7 @@ const langData = {
     footerText: "© 2026 OBAYED — Computer Technician & Security Specialist"
   },
   bn: {
-    navTagline: "| টেক, সিকিউরিটি ও পস সলিউশন",
+    navTagline: "টেক, সিকিউরিটি ও পস সলিউশন",
     mHome: "হোম", mAbout: "সম্পর্কে", mSkills: "দক্ষতা", mServices: "সার্ভিসসমূহ", mContact: "যোগাযোগ",
     heroStatus: "সিস্টেম অনলাইন",
     heroTag: "কম্পিউটার টেকনিশিয়ান",
