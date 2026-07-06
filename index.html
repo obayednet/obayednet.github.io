@@ -521,18 +521,21 @@
     }
     .nav-bottom .wrap {
       padding: 10px 16px;
-      overflow-x: auto;
-      justify-content: flex-start;
-      -webkit-overflow-scrolling: touch;
+      overflow-x: visible;
+      flex-wrap: wrap;
+      justify-content: center;
     }
     .navlinks {
       display: flex !important;
-      gap: 10px;
-      padding-bottom: 4px;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      row-gap: 8px;
+      padding-bottom: 0;
     }
     .navlinks a {
-      font-size: 13px;
-      padding: 7px 14px;
+      font-size: 12px;
+      padding: 6px 12px;
       box-shadow: 2px 2px 0 var(--ink);
       white-space: nowrap;
     }
@@ -929,4 +932,4 @@ function setActive(element) {
 </script>
 
 </body>
-</html> 
+</html>
