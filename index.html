@@ -113,10 +113,10 @@
   .brand-tagline{
     font-family: var(--mono);
     font-size: 10px;
-    color: rgba(255,255,255,0.4); /* কালার আরও লাইট করা হয়েছে */
+    color: rgba(255,255,255,0.4);
     font-weight: 500;
     letter-spacing: 0.02em;
-    padding-left: 60px; /* OBAYED এর শেষ অংশ থেকে শুরু করার জন্য */
+    padding-left: 60px;
   }
   .navlinks{
     display:flex; gap: 36px; list-style:none; margin:0; padding:0;
@@ -328,47 +328,90 @@
   }
   .skill-card li:last-child{ border-bottom: none; }
 
-  /* SERVICES */
-  .services-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  /* SERVICES WITH 3D GLOWING DESIGN */
+  .services-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  
   .service-card{
     display: grid;
-    grid-template-columns: 50px 80px 1fr 110px;
-    align-items: center; gap: 20px;
-    background: var(--bg);
-    border: 3px dashed var(--ink);
-    border-radius: 18px;
+    grid-template-columns: 120px 1fr auto;
+    align-items: center; gap: 24px;
+    background: #FFFFFF;
+    border-radius: 20px;
     padding: 24px;
     position: relative;
-    transition: all .2s;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background-clip: padding-box;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
   }
-  .service-card:hover{ box-shadow: 8px 8px 0 rgba(0,0,0,0.05); }
-  .service-num{
-    font-family: var(--display); font-size: 40px; font-weight: 800;
-    color: var(--paper);
-    -webkit-text-stroke: 2px var(--ink);
+
+  /* 3D চকচকে ও কালারফুল বর্ডার থিমসমূহ */
+  .service-card.card-blue {
+    box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px var(--blue), 0 12px 20px rgba(47, 111, 237, 0.15);
   }
+  .service-card.card-blue:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 0 0 4px #FFFFFF, 0 0 0 8px var(--blue), 0 20px 30px rgba(47, 111, 237, 0.3);
+  }
+
+  .service-card.card-orange {
+    box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px var(--orange), 0 12px 20px rgba(255, 107, 53, 0.15);
+  }
+  .service-card.card-orange:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 0 0 4px #FFFFFF, 0 0 0 8px var(--orange), 0 20px 30px rgba(255, 107, 53, 0.3);
+  }
+
+  .service-card.card-pink {
+    box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px var(--pink), 0 12px 20px rgba(255, 61, 129, 0.15);
+  }
+  .service-card.card-pink:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 0 0 4px #FFFFFF, 0 0 0 8px var(--pink), 0 20px 30px rgba(255, 61, 129, 0.3);
+  }
+
+  .service-card.card-green {
+    box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px var(--green), 0 12px 20px rgba(0, 200, 83, 0.15);
+  }
+  .service-card.card-green:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 0 0 4px #FFFFFF, 0 0 0 8px var(--green), 0 20px 30px rgba(0, 200, 83, 0.3);
+  }
+
+  /* ছবি বড় করার স্টাইল */
   .service-img-wrapper {
-    width: 80px;
-    height: 80px;
-    border-radius: 12px;
-    border: 2px solid var(--ink);
+    width: 120px;
+    height: 120px;
+    border-radius: 16px;
+    border: 3px solid var(--ink);
     overflow: hidden;
     background: var(--paper);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 3px 3px 0 var(--ink);
+    flex-shrink: 0;
   }
   .service-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
   }
-  .service-card h3{ font-family: var(--display); font-size: 20px; margin: 0 0 6px; font-weight: 700; line-height: 1.3; }
-  .service-card p{ margin:0; color: var(--ink-soft); font-size: 14px; font-weight: 500; line-height: 1.5; }
+  .service-card:hover .service-img {
+    transform: scale(1.08);
+  }
+
+  .service-card h3{ font-family: var(--display); font-size: 21px; margin: 0 0 8px; font-weight: 800; line-height: 1.3; color: var(--ink); }
+  .service-card p{ margin:0; color: var(--ink-soft); font-size: 14.5px; font-weight: 500; line-height: 1.5; }
+  
   .stamp{
-    font-family: var(--mono); font-size: 13px; font-weight: 700;
-    border: 3px solid var(--green); color: var(--green);
-    padding: 6px 12px; border-radius: 8px;
-    transform: rotate(-8deg);
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
+    border: 2.5px solid var(--green); color: var(--green);
+    padding: 6px 10px; border-radius: 8px;
+    transform: rotate(-6deg);
     text-align: center;
-    justify-self: end;
+    align-self: center;
+    background: #FFFFFF;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.05);
+    flex-shrink: 0;
   }
 
   /* CONTACT */
@@ -446,16 +489,16 @@
       font-size: 20px;
     }
     .brand-tagline {
-      padding-left: 55px; /* মোবাইলের জন্য OBAYED এর পর থেকে শুরু হওয়ার পারফেক্ট মার্জিন */
+      padding-left: 55px;
       font-size: 8.5px;
-      color: rgba(255, 255, 255, 0.35); /* স্লোগান আরও লাইট করা হয়েছে */
+      color: rgba(255, 255, 255, 0.35);
       white-space: nowrap;
     }
     .lang-btn {
       font-size: 11px;
       padding: 4px 10px;
       margin-right: 0;
-      flex-shrink: 0; /* বাটন যেন ছোট হয়ে বা কেটে বের না হয়ে যায় */
+      flex-shrink: 0;
     }
     .nav-bottom {
       display: flex !important;
@@ -477,17 +520,29 @@
       font-size: 13px;
       white-space: nowrap;
     }
+    .services-grid { gap: 24px; }
+    .service-card {
+      grid-template-columns: 90px 1fr;
+      gap: 16px;
+      padding: 16px;
+    }
+    .service-img-wrapper {
+      width: 90px;
+      height: 90px;
+    }
+    .stamp {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 10px;
+      padding: 3px 6px;
+    }
   }
 
   @media (max-width: 760px){
     .about-grid{ grid-template-columns: 1fr; }
     .stat-grid{ grid-template-columns: 1fr 1fr; }
     .skill-groups{ grid-template-columns: 1fr; }
-    .services-grid{ grid-template-columns: 1fr; }
-    .service-card{ grid-template-columns: 40px 70px 1fr; gap: 14px; padding: 18px; }
-    .service-img-wrapper { width: 70px; height: 70px; }
-    .stamp{ display:none; }
-    .service-num{ font-size: 26px; }
     .status-badge{ position: static; display:inline-flex; margin-bottom: 24px; transform: rotate(0deg); }
     header.hero{ padding-top: 40px; }
   }
@@ -608,8 +663,8 @@
     <div class="kicker"><span class="n">03</span> SERVICES</div>
     <h2 class="sec-title" id="servicesTitle">Services</h2>
     <div class="services-grid">
-      <div class="service-card">
-        <div class="service-num">01</div>
+      <!-- Card 1 (Blue Theme) -->
+      <div class="service-card card-blue">
         <div class="service-img-wrapper">
           <img class="service-img" src="https://images.unsplash.com/photo-1588508065123-287b28e013da?auto=format&fit=crop&w=150&q=80" alt="PC Repair">
         </div>
@@ -619,8 +674,9 @@
         </div>
         <div class="stamp">FIXED ✓</div>
       </div>
-      <div class="service-card">
-        <div class="service-num">02</div>
+      
+      <!-- Card 2 (Orange Theme) -->
+      <div class="service-card card-orange">
         <div class="service-img-wrapper">
           <img class="service-img" src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=150&q=80" alt="CCTV Security">
         </div>
@@ -630,8 +686,9 @@
         </div>
         <div class="stamp">SECURED ✓</div>
       </div>
-      <div class="service-card">
-        <div class="service-num">03</div>
+      
+      <!-- Card 3 (Pink Theme) -->
+      <div class="service-card card-pink">
         <div class="service-img-wrapper">
           <img class="service-img" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=150&q=80" alt="POS System">
         </div>
@@ -641,8 +698,9 @@
         </div>
         <div class="stamp">SETUP ✓</div>
       </div>
-      <div class="service-card">
-        <div class="service-num">04</div>
+      
+      <!-- Card 4 (Green Theme) -->
+      <div class="service-card card-green">
         <div class="service-img-wrapper">
           <img class="service-img" src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=150&q=80" alt="Network Setup">
         </div>
@@ -737,7 +795,7 @@ const langData = {
     
     aboutTitle: "আমার সম্পর্কে",
     aboutText: `<p>আমি <strong>ওবায়েদ</strong>, একজন পেশাদার <strong>কম্পিউটার, স্মার্ট সিকিউরিটি ও পস সলিউশন টেকনিশিয়ান</strong>। পিসি-ল্যাপটপ হার্ডওয়্যার মেরামত, অপারেটিং সিস্টেম ইনস্টলেশনের পাশাপাশি <strong>সিসিটিভি ক্যামেরা, ইন্টারকম, আইপি ডোর লক</strong> এবং <strong>ইনভেন্টরি পস সিস্টেম</strong> সেটআপে আমার দীর্ঘ অভিজ্ঞতা রয়েছে।</p>
-    <p>ধীরগতির ডিভাইস, virus সংক্রমণ, সিসিটিভি সমস্যা, দরজার লক সেটআপ বা পস কনফিগারেশন — সবকিছুতে দ্রুত, নির্ভরযোগ্য সমাধান সততা ও ন্যায্য মূল্যে।</p>
+    <p>ধীরগতির ডিভাইস, virus সমস্যা, সিসিটিভি সমস্যা, দরজার লক সেটআপ বা পস কনফিগারেশন — সবকিছুতে দ্রুত, নির্ভরযোগ্য সমাধান সততা ও ন্যায্য মূল্যে।</p>
     <p>আমার লক্ষ্য: আপনার চাহিদা বুঝে প্রতিবার সেরা সেবা প্রদান করা।</p>`,
     stat1: "হার্ডওয়্যার মেরামত",
     stat2Title: "সিসিটিভি",
