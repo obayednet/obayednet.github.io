@@ -114,16 +114,35 @@
     letter-spacing: 0.02em;
     padding-left: 60px;
   }
+  .nav-bottom {
+    background: var(--paper);
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
   .navlinks {
-    display: flex; gap: 36px; list-style: none; margin: 0; padding: 0;
+    display: flex; gap: 16px; list-style: none; margin: 0; padding: 0;
   }
   .navlinks a {
-    color: rgba(255,255,255,0.6); font-family: var(--body);
-    font-size: 14px; font-weight: 500;
-    transition: color .2s;
+    color: var(--ink); font-family: var(--body);
+    font-size: 16px; font-weight: 700;
+    padding: 9px 20px;
+    border-radius: 100px;
+    background: #FFFFFF;
+    border: 2px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
+    display: inline-block;
+    transition: transform .15s, box-shadow .15s, background .15s, color .15s;
   }
-  .navlinks a:hover { color: #FFFFFF; }
-  .navlinks li.active a { color: var(--blue); }
+  .navlinks a:hover {
+    color: #FFFFFF;
+    background: var(--blue);
+    transform: translate(-2px,-2px);
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+  .navlinks li.active a {
+    color: #FFFFFF;
+    background: var(--blue);
+    box-shadow: 3px 3px 0 var(--orange);
+  }
   
   .lang-btn {
     font-family: var(--mono); font-size: 12px; font-weight: 600;
@@ -492,23 +511,28 @@
     }
     .nav-bottom {
       display: flex !important;
-      background: rgba(255, 255, 255, 0.02);
-      border-top: 1px solid rgba(255,255,255,0.05);
+      background: var(--paper);
+      border-top: 1px solid rgba(0,0,0,0.06);
     }
     .nav-bottom .wrap {
-      padding: 8px 16px;
+      padding: 10px 16px;
       overflow-x: auto;
       justify-content: flex-start;
       -webkit-overflow-scrolling: touch;
     }
     .navlinks {
       display: flex !important;
-      gap: 20px;
+      gap: 10px;
       padding-bottom: 4px;
     }
     .navlinks a {
       font-size: 13px;
+      padding: 7px 14px;
+      box-shadow: 2px 2px 0 var(--ink);
       white-space: nowrap;
+    }
+    .navlinks a:hover, .navlinks li.active a {
+      box-shadow: 2px 2px 0 var(--orange);
     }
 
     .services-grid { 
