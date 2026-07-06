@@ -518,16 +518,16 @@
       white-space: nowrap;
     }
 
-    /* মোবাইলের জন্য কাট-অফ ফিক্স */
+    /* মোবাইলের জন্য কাট-অফ ও ওভারল্যাপ ফিক্স */
     .services-grid { 
-      grid-template-columns: 1fr !important; /* মোবাইলে পাশাপাশি ২ কলামের বদলে ১ কলাম হবে */
+      grid-template-columns: 1fr !important;
       gap: 24px; 
     }
     .service-card {
       grid-template-columns: 90px 1fr;
       gap: 16px;
       padding: 16px;
-      box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--blue), 0 8px 15px rgba(0,0,0,0.1);
+      position: relative;
     }
     .service-card.card-blue { box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--blue), 0 8px 15px rgba(47, 111, 237, 0.15); }
     .service-card.card-orange { box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--orange), 0 8px 15px rgba(255, 107, 53, 0.15); }
@@ -538,17 +538,26 @@
       transform: translateY(-3px);
     }
     
+    /* হেডিং লেখার ডানপাশে প্যাডিং দেওয়া হলো যাতে ব্যাজের সাথে ধাক্কা না লাগে */
+    .service-card h3 {
+      padding-right: 75px; 
+      font-size: 18px;
+    }
+
     .service-img-wrapper {
       width: 90px;
       height: 90px;
     }
+    
+    /* ব্যাজটিকে ডানদিকের কোনায় ফিক্সড পজিশনে রাখা হলো */
     .stamp {
       position: absolute;
-      top: 12px;
-      right: 12px;
-      font-size: 10px;
-      padding: 3px 6px;
-      transform: rotate(0deg); /* ওভারল্যাপ এড়াতে মোবাইলে সোজা রাখা হলো */
+      top: 16px;
+      right: 16px;
+      font-size: 9px;
+      padding: 4px 8px;
+      transform: rotate(0deg);
+      margin: 0;
     }
   }
 
