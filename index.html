@@ -345,7 +345,7 @@
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
   }
 
-  /* 3D চকচকে ও কালারফুল বর্ডার থিমসমূহ */
+  /* 3D বর্ডার থিমসমূহ */
   .service-card.card-blue {
     box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px var(--blue), 0 12px 20px rgba(47, 111, 237, 0.15);
   }
@@ -378,7 +378,6 @@
     box-shadow: 0 0 0 4px #FFFFFF, 0 0 0 8px var(--green), 0 20px 30px rgba(0, 200, 83, 0.3);
   }
 
-  /* ছবি বড় করার স্টাইল */
   .service-img-wrapper {
     width: 120px;
     height: 120px;
@@ -470,7 +469,7 @@
     .navlinks{ gap: 20px; }
   }
 
-  /* MOBILE RESPONSIVE FIXES */
+  /* MOBILE RESPONSIVE UPDATES & FIXES */
   @media (max-width: 768px) {
     .nav-top .wrap {
       flex-direction: row;
@@ -485,9 +484,7 @@
       align-items: flex-start;
       gap: 1px;
     }
-    .brand {
-      font-size: 20px;
-    }
+    .brand { font-size: 20px; }
     .brand-tagline {
       padding-left: 55px;
       font-size: 8.5px;
@@ -520,12 +517,27 @@
       font-size: 13px;
       white-space: nowrap;
     }
-    .services-grid { gap: 24px; }
+
+    /* মোবাইলের জন্য কাট-অফ ফিক্স */
+    .services-grid { 
+      grid-template-columns: 1fr !important; /* মোবাইলে পাশাপাশি ২ কলামের বদলে ১ কলাম হবে */
+      gap: 24px; 
+    }
     .service-card {
       grid-template-columns: 90px 1fr;
       gap: 16px;
       padding: 16px;
+      box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--blue), 0 8px 15px rgba(0,0,0,0.1);
     }
+    .service-card.card-blue { box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--blue), 0 8px 15px rgba(47, 111, 237, 0.15); }
+    .service-card.card-orange { box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--orange), 0 8px 15px rgba(255, 107, 53, 0.15); }
+    .service-card.card-pink { box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--pink), 0 8px 15px rgba(255, 61, 129, 0.15); }
+    .service-card.card-green { box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--green), 0 8px 15px rgba(0, 200, 83, 0.15); }
+    
+    .service-card:hover {
+      transform: translateY(-3px);
+    }
+    
     .service-img-wrapper {
       width: 90px;
       height: 90px;
@@ -536,6 +548,7 @@
       right: 12px;
       font-size: 10px;
       padding: 3px 6px;
+      transform: rotate(0deg); /* ওভারল্যাপ এড়াতে মোবাইলে সোজা রাখা হলো */
     }
   }
 
