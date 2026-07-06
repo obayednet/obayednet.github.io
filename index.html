@@ -287,7 +287,7 @@
   .about-text p{ color: var(--ink); margin: 0 0 18px; font-size: 17px; font-weight: 500; }
   .about-text strong{ background: var(--yellow); padding: 0 6px; border-radius: 3px; }
   .stat-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .stat-card{
+  .stat-grid .stat-card{
     background: var(--bg);
     border: 3px solid var(--ink);
     border-radius: 16px;
@@ -296,10 +296,10 @@
   }
   .stat-card b{ display:block; font-family: var(--display); font-size: 26px; font-weight: 800; }
   .stat-card span{ font-size: 13px; color: var(--ink-soft); font-family: var(--mono); font-weight: 500; }
-  .stat-card:nth-child(1){ border-color: var(--blue); }
-  .stat-card:nth-child(2){ border-color: var(--green); }
-  .stat-card:nth-child(3){ border-color: var(--orange); }
-  .stat-card:nth-child(4){ border-color: var(--pink); }
+  .stat-grid .stat-card:nth-child(1){ border-color: var(--blue); }
+  .stat-grid .stat-card:nth-child(2){ border-color: var(--green); }
+  .stat-grid .stat-card:nth-child(3){ border-color: var(--orange); }
+  .stat-grid .stat-card:nth-child(4){ border-color: var(--pink); }
 
   /* SKILLS */
   .skill-groups{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
@@ -310,8 +310,8 @@
     transform: rotate(-1deg);
     transition: transform .18s;
   }
-  .skill-card:nth-child(2){ transform: rotate(0.8deg); }
-  .skill-card:nth-child(3){ transform: rotate(-0.6deg); }
+  .skill-groups .skill-card:nth-child(2){ transform: rotate(0.8deg); }
+  .skill-groups .skill-card:nth-child(3){ transform: rotate(-0.6deg); }
   .skill-card:hover{ transform: rotate(0deg) scale(1.02); }
   .skill-card.c1{ background: var(--blue); }
   .skill-card.c2{ background: var(--orange); }
@@ -345,7 +345,6 @@
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
   }
 
-  /* 3D বর্ডার থিমসমূহ */
   .service-card.card-blue {
     box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px var(--blue), 0 12px 20px rgba(47, 111, 237, 0.15);
   }
@@ -518,7 +517,6 @@
       white-space: nowrap;
     }
 
-    /* মোবাইলের জন্য কাট-অফ ও ওভারল্যাপ ফিক্স */
     .services-grid { 
       grid-template-columns: 1fr !important;
       gap: 24px; 
@@ -538,7 +536,6 @@
       transform: translateY(-3px);
     }
     
-    /* হেডিং লেখার ডানপাশে প্যাডিং দেওয়া হলো যাতে ব্যাজের সাথে ধাক্কা না লাগে */
     .service-card h3 {
       padding-right: 75px; 
       font-size: 18px;
@@ -549,7 +546,6 @@
       height: 90px;
     }
     
-    /* ব্যাজটিকে ডানদিকের কোনায় ফিক্সড পজিশনে রাখা হলো */
     .stamp {
       position: absolute;
       top: 16px;
@@ -685,7 +681,6 @@
     <div class="kicker"><span class="n">03</span> SERVICES</div>
     <h2 class="sec-title" id="servicesTitle">Services</h2>
     <div class="services-grid">
-      <!-- Card 1 (Blue Theme) -->
       <div class="service-card card-blue">
         <div class="service-img-wrapper">
           <img class="service-img" src="https://images.unsplash.com/photo-1588508065123-287b28e013da?auto=format&fit=crop&w=150&q=80" alt="PC Repair">
@@ -697,7 +692,6 @@
         <div class="stamp">FIXED ✓</div>
       </div>
       
-      <!-- Card 2 (Orange Theme) -->
       <div class="service-card card-orange">
         <div class="service-img-wrapper">
           <img class="service-img" src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=150&q=80" alt="CCTV Security">
@@ -709,7 +703,6 @@
         <div class="stamp">SECURED ✓</div>
       </div>
       
-      <!-- Card 3 (Pink Theme) -->
       <div class="service-card card-pink">
         <div class="service-img-wrapper">
           <img class="service-img" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=150&q=80" alt="POS System">
@@ -721,7 +714,6 @@
         <div class="stamp">SETUP ✓</div>
       </div>
       
-      <!-- Card 4 (Green Theme) -->
       <div class="service-card card-green">
         <div class="service-img-wrapper">
           <img class="service-img" src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=150&q=80" alt="Network Setup">
@@ -769,18 +761,14 @@ const langData = {
     btnServices: "Services →",
     btnContact: "Contact",
     langBtn: "Bangla",
-    
     aboutTitle: "About Me",
-    aboutText: `<p>I am <strong>OBAYED</strong>, a professional <strong>Computer, Security & POS Solutions Technician</strong>. I have hands-on expertise in PC/laptop hardware repair, OS installations, and advanced <strong>CCTV security systems, Intercom setups, IP smart door locks</strong>, plus <strong>professional Inventory POS systems</strong> for retail shops.</p>
-    <p>Slow device, virus infected, CCTV issues, door lock setup, or POS configuration — fast, dependable solutions with honesty and fair pricing.</p>
-    <p>My goal: understand your exact needs and deliver high-quality service every time.</p>`,
+    aboutText: '<p>I am <strong>OBAYED</strong>, a professional <strong>Computer, Security & POS Solutions Technician</strong>. I have hands-on expertise in PC/laptop hardware repair, OS installations, and advanced <strong>CCTV security systems, Intercom setups, IP smart door locks</strong>, plus <strong>professional Inventory POS systems</strong> for retail shops.</p><p>Slow device, virus infected, CCTV issues, door lock setup, or POS configuration — fast, dependable solutions with honesty and fair pricing.</p><p>My goal: understand your exact needs and deliver high-quality service every time.</p>',
     stat1: "Hardware Repair",
     stat2Title: "CCTV",
     stat2: "Security Cameras",
     stat3: "Inventory Systems",
     stat4Title: "2013",
     stat4: "Service Active",
-    
     skillsTitle: "Skills",
     skillGroup1: "🔧 Hardware & OS",
     skillGroup2: "📹 Smart Security",
@@ -788,7 +776,6 @@ const langData = {
     skillList1: ["PC & Laptop Repair", "Component Diagnosis", "Windows / Linux Install", "Virus & Malware Removal"],
     skillList2: ["CCTV Camera Setup", "Intercom Installation", "IP Door Lock Config", "Alarm Systems Setup"],
     skillList3: ["Inventory POS Sales", "POS Software Setup", "Router / Wi-Fi Setup", "Network Troubleshooting"],
-    
     servicesTitle: "Services",
     service1Title: "PC & Laptop Repair",
     service1Desc: "Hardware diagnosis & fixes, OS installations, software setup & virus removal for all devices.",
@@ -798,10 +785,8 @@ const langData = {
     service3Desc: "Sales & complete setup of professional Inventory POS systems for retail shops & businesses.",
     service4Title: "Network & Wi-Fi Setup",
     service4Desc: "Router config, Wi-Fi coverage optimization, LAN cabling & network troubleshooting solutions.",
-    
     contactTitle: "Need Service?",
     contactDesc: "For any computer, CCTV, POS or networking issues — contact via email or WhatsApp below.",
-    
     footerText: "© 2026 OBAYED — Computer Technician & Security Specialist"
   },
   bn: {
@@ -814,18 +799,14 @@ const langData = {
     btnServices: "সার্ভিসসমূহ দেখুন →",
     btnContact: "যোগাযোগ করুন",
     langBtn: "English",
-    
     aboutTitle: "আমার সম্পর্কে",
-    aboutText: `<p>আমি <strong>ওবায়েদ</strong>, একজন পেশাদার <strong>কম্পিউটার, স্মার্ট সিকিউরিটি ও পস সলিউশন টেকনিশিয়ান</strong>। পিসি-ল্যাপটপ হার্ডওয়্যার মেরামত, অপারেটিং সিস্টেম ইনস্টলেশনের পাশাপাশি <strong>সিসিটিভি ক্যামেরা, ইন্টারকম, আইপি ডোর লক</strong> এবং <strong>ইনভেন্টরি পস সিস্টেম</strong> সেটআপে আমার দীর্ঘ অভিজ্ঞতা রয়েছে।</p>
-    <p>ধীরগতির ডিভাইস, virus সমস্যা, সিসিটিভি সমস্যা, দরজার লক সেটআপ বা পস কনফিগারেশন — সবকিছুতে দ্রুত, নির্ভরযোগ্য সমাধান সততা ও ন্যায্য মূল্যে।</p>
-    <p>আমার লক্ষ্য: আপনার চাহিদা বুঝে প্রতিবার সেরা সেবা প্রদান করা।</p>`,
+    aboutText: '<p>আমি <strong>ওবায়েদ</strong>, একজন পেশাদার <strong>কম্পিউটার, স্মার্ট সিকিউরিটি ও পস সলিউশন টেকনিশিয়ান</strong>। পিসি-ল্যাপটপ হার্ডওয়্যার মেরামত, অপারেটিং সিস্টেম ইনস্টলেশনের পাশাপাশি <strong>সিসিটিভি ক্যামেরা, ইন্টারকম, আইপি ডোর লক</strong> এবং <strong>ইনভেন্টরি পস সিস্টেম</strong> সেটআপে আমার দীর্ঘ অভিজ্ঞতা রয়েছে।</p><p>ধীরগতির ডিভাইস, virus সমস্যা, সিসিটিভি সমস্যা, দরজার লক সেটআপ বা পস কনফিগারেশন — সবকিছুতে দ্রুত, নির্ভরযোগ্য সমাধান সততা ও ন্যায্য মূল্যে।</p><p>আমার লক্ষ্য: আপনার চাহিদা বুঝে প্রতিবার সেরা সেবা প্রদান করা।</p>',
     stat1: "হার্ডওয়্যার মেরামত",
     stat2Title: "সিসিটিভি",
     stat2: "নিরাপত্তা ক্যামেরা",
     stat3: "ইনভেন্টরি সিস্টেম",
     stat4Title: "২০১৩",
     stat4: "সেবা চালু",
-    
     skillsTitle: "দক্ষতা",
     skillGroup1: "🔧 হার্ডওয়্যার ও ওএস",
     skillGroup2: "📹 সিকিউরিটি সিস্টেম",
@@ -833,7 +814,6 @@ const langData = {
     skillList1: ["পিসি ও ল্যাপটপ মেরামত", "কম্পোনেন্ট ডায়াগনসিস", "উইন্ডোজ / লিনাক্স ইনস্টল", "ভাইরাস রিমুভাল"],
     skillList2: ["সিসিটিভি ক্যামেরা সেটআপ", "ইন্টারকম ইনস্টলেশন", "আইপি লক কনফিগারেশন", "অ্যালার্ম সিস্টেম"],
     skillList3: ["পস সিস্টেম বিক্রি", "পস সফটওয়্যার সেটআপ", "রাউটার ওয়াই-ফাই সেটআপ", "নেটওয়ার্ক সমাধান"],
-    
     servicesTitle: "সেবাসমূহ",
     service1Title: "পিসি ও ল্যাপটপ মেরামত",
     service1Desc: "হার্ডওয়্যার নির্ণয় ও সমাধান, ওএস ইনস্টলেশন, সফটওয়্যার সেটআপ ও ভাইরাস অপসারণ।",
@@ -843,10 +823,8 @@ const langData = {
     service3Desc: "পেশাদার পস সিস্টেম বিক্রয় ও সম্পূর্ণ সেটআপ দোকান ও ব্যবসার জন্য।",
     service4Title: "নেটওয়ার্ক ও ওয়াই-ফাই সেটআপ",
     service4Desc: "রাউটার কনফিগারেশন, ওয়াই-ফাই কভারেজ, ল্যান ক্যাবলিং ও নেটওয়ার্ক সমাধান।",
-    
     contactTitle: "সেবা দরকার?",
     contactDesc: "যেকোনো কম্পিউটার, সিসিটিভি, পস বা নেটওয়ার্ক সমস্যায় ইমেইল বা হোয়াটসঅ্যাপে যোগাযোগ করুন।",
-    
     footerText: "© ২০২৬ ওবায়েদ — কম্পিউটার টেকনিশিয়ান ও সিকিউরিটি বিশেষজ্ঞ"
   }
 };
@@ -903,7 +881,7 @@ function toggleLanguage() {
     }
   });
   
-  document.getElementById('servicesTitle').textContent = data.servicesTitle; 
+  document.getElementById('servicesTitle').textContent = data.servicesTitle;
   document.getElementById('service1Title').textContent = data.service1Title;
   document.getElementById('service1Desc').textContent = data.service1Desc;
   document.getElementById('service2Title').textContent = data.service2Title;
