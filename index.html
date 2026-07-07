@@ -68,7 +68,7 @@
     background:
       linear-gradient(180deg, rgba(16, 20, 38, 0.75), rgba(16, 20, 38, 0.85)),
       url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: none; /* মেনুর নিচের সাদা চিকন বর্ডারটি পুরোপুরি রিমুভ করা হয়েছে */
     backdrop-filter: blur(4px);
   }
   .nav-top, .nav-bottom {
@@ -110,14 +110,18 @@
     content: ".";
     color: var(--blue);
   }
+  
+  /* বাংলা ও ইংরেজি ট্যাগলাইন স্পষ্ট করার জন্য ফিক্স */
   .brand-tagline {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: rgba(255,255,255,0.5);
-    font-weight: 500;
-    letter-spacing: 0.02em;
+    font-family: 'Noto Sans Bengali', var(--mono);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.85); /* ব্রাইটনেস এবং ভিজিবিলিটি বাড়ানো হয়েছে */
+    font-weight: 600;
+    letter-spacing: 0.03em;
     padding-left: 60px;
+    line-height: 1.4;
   }
+  
   .nav-bottom {
     background: var(--paper);
     border-top: 1px solid rgba(255,255,255,0.05);
@@ -503,8 +507,15 @@
     }
     .brand-section { align-items: flex-start; }
     .brand { font-size: 26px; line-height: 1; }
-    /* Tagline positioned perfectly under the middle of OBAYEDZONE */
-    .brand-tagline { padding-left: 48px; font-size: 8px; margin-top: 3px; } 
+    
+    /* মোবাইলেও বাংলা ট্যাগলাইন সুন্দর ও বড় দেখানোর জন্য ফিক্স */
+    .brand-tagline { 
+      padding-left: 4px; 
+      font-size: 11px; 
+      margin-top: 5px; 
+      color: rgba(255, 255, 255, 0.95);
+      font-weight: 600;
+    } 
     .lang-btn { margin-top: 2px; padding: 5px 12px; font-size: 11px; }
 
     /* Mobile Menu Centering & Spacing */
@@ -651,6 +662,7 @@
 
 <div class="stripe"></div>
 
+<!-- SERVICES SECTION -->
 <section id="services">
   <div class="wrap">
     <div class="kicker"><span class="n">03</span> SERVICES</div>
@@ -697,6 +709,7 @@
   </div>
 </section>
 
+<!-- DYNAMIC DETAILS SERVICE PAGE (MODAL) -->
 <div id="serviceModal" class="service-modal" onclick="closeServicePage(event)">
   <div class="modal-content">
     <button class="modal-close" onclick="closeServicePage(event, true)">×</button>
@@ -769,13 +782,13 @@ const servicePagesData = {
     {
       title: "সিসিটিভি ও সিকিউরিটি সিস্টেম",
       img: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=700&q=80",
-      desc: "আপনার বাড়ি, দোকান বা অফিসের জন্য আধুনিক সিকিউরিটি সリューション, যার মাধ্যমে যেকোনো জায়গা থেকে স্মার্টলি সবকিছু তদারকি করতে পারবেন।",
+      desc: "আপনার বাড়ি, দোকান বা অফিসের জন্য আদেশ সিকিউরিটি সリューション, যার মাধ্যমে যেকোনো জায়গা থেকে স্মার্টলি সবকিছু তদারকি করতে পারবেন।",
       features: ["এইচডি এবং আইপি সিসিটিভি ক্যামেরা ইনস্টলেশন", "মাল্টি-ফ্ল্যাট ইন্টারকম সিস্টেম ওয়্যারিং ও সেটআপ", "স্মার্ট ওয়াই-ফাই/আইপি ডিজিটাল ডোর লক কনফিগারেশন", "স্মার্টফোন অ্যাপের মাধ্যমে রিমোট ভিডিও মনিটরিং"]
     },
     {
       title: "ইনভেন্টরি ও পস সিস্টেম",
       img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=700&q=80",
-      desc: "খুচরা দোকান, সুপারমার্কেট বা রেস্তোরাঁকে অটোমেট করতে প্রিমিয়াম হার্ডওয়্যার এবং ত্রুটিহীন পয়েন্ট-অব-সেল ম্যানেজমেন্ট সফটওয়্যার টুলস সেটআপ।",
+      desc: "খুচরা দোকান, সুপারমার্কেট বা রেস্তোরাঁকে অটোমেট করতে প্রিমিয়াম হার্ডওয়্যার এবং ত্রুটিহীন পয়েন্ট-অব-সেল ম্যানেজমেন্টソフトওয়্যার টুলস সেটআপ।",
       features: ["পস সফটওয়্যার সেটআপ এবং ইনভেন্টরি ম্যানেজমেন্ট", "বারকোড স্ক্যানার ও থার্মাল রিসিট প্রিন্টার সংযোগ", "ক্যাশ ড্রয়ার এবং টাচস্ক্রিন টার্মিনাল কনফিগারেশন", "বিক্রয় রিপোর্ট ট্র্যাকিং ও মাল্টি-ইউজার সিকিউরিটি"]
     },
     {
@@ -838,7 +851,7 @@ const langData = {
     btnContact: "যোগাযোগ করুন",
     langBtn: "English",
     aboutTitle: "আমার সম্পর্কে",
-    aboutText: '<p>আমি <strong>ওবায়েদ</strong>, একজন পেশাদার <strong>কম্পিউটার, স্মার্ট সিকিউরিটি ও পস সリューション টেকনিশিয়ান</strong>। পিসি-ল্যাপটপ হার্ডওয়্যার মেরামত, অপারেটিং সিস্টেম ইনস্টলেশনের পাশাপাশি <strong>সিসিটিভি ক্যামেরা, ইন্টারকম, আইপি ডোর লক</strong> এবং <strong>ইনভেন্টরি পস সিস্টেম</strong> সেটআপে আমার দীর্ঘ অভিজ্ঞতা রয়েছে।</p><p>ধীরগতির ডিভাইস, virus সমস্যা, সিসিটিভি সমস্যা, দরজার লক সেটআপ বা পস কনফিগারেশন — সবকিছুতে দ্রুত, নির্ভরযোগ্য সমাধান সততা ও ন্যায্য মূল্যে।</p><p>আমার লক্ষ্য: আপনার চাহিদা বুঝে প্রতিবার সেরা সেবা প্রদান করা।</p>',
+    aboutText: '<p>আমি <strong>ওবায়েদ</strong>, একজন পেশাদার <strong>কম্পিউটার, স্মার্ট সিকিউরিটি ও পস সリューション টেকনিশিয়ান</strong>। পিসি-ল্যাপটপ হার্ডওয়্যার মেরামত, ওএস ইনস্টলেশনের পাশাপাশি <strong>সিসিটিভি ক্যামেরা, ইন্টারকম, আইপি ডোর লক</strong> এবং <strong>ইনভেন্টরি পস সিস্টেম</strong> সেটআপে আমার দীর্ঘ অভিজ্ঞতা রয়েছে।</p><p>ধীরগতির ডিভাইস, ভাইরাস সমস্যা, সিসিটিভি সমস্যা, দরজার লক সেটআপ বা পস কনফিগারেশন — সবকিছুতে দ্রুত, নির্ভরযোগ্য সমাধান সততা ও ন্যায্য মূল্যে।</p><p>আমার লক্ষ্য: আপনার চাহিদা বুঝে প্রতিবার সেরা সেবা প্রদান করা।</p>',
     stat1: "হার্ডওয়্যার মেরামত",
     stat2Title: "সিসিটিভি",
     stat2: "নিরাপত্তা ক্যামেরা",
