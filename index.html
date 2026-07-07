@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OBAYEDZONE — Computer & Security Solutions</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #FFFFFF;
@@ -23,13 +23,16 @@
     --mono: 'JetBrains Mono', monospace;
     --display: 'Space Grotesk', sans-serif;
     --body: 'Inter', sans-serif;
+    /* বাংলা ফন্ট ফ্যামিলি ফিক্স */
+    --bengali-font: 'Noto Sans Bengali', 'Hind Siliguri', sans-serif;
   }
 
-  html[lang="bn"], html[lang="bn"] body, html[lang="bn"] input, html[lang="bn"] button {
-    font-family: 'Noto Sans Bengali', var(--body) !important;
+  /* গ্লোবাল বাংলা ফন্ট রুলস যেন জাপানি টাইপ না দেখায় */
+  html[lang="bn"], html[lang="bn"] body, html[lang="bn"] input, html[lang="bn"] button, html[lang="bn"] span, html[lang="bn"] a {
+    font-family: var(--bengali-font) !important;
   }
   html[lang="bn"] .brand, html[lang="bn"] h1, html[lang="bn"] h2, html[lang="bn"] h3 {
-    font-family: 'Noto Sans Bengali', var(--display) !important;
+    font-family: var(--bengali-font) !important;
     font-weight: 700;
   }
 
@@ -62,14 +65,13 @@
     padding: 0 24px;
   }
 
-  /* STICKY HEADER WITH NEW CLEAR TECH BACKGROUND */
+  /* STICKY HEADER WITH TECH BACKGROUND */
   nav {
     position: sticky; top: 0; z-index: 50;
     background:
-      linear-gradient(180deg, rgba(16, 20, 38, 0.75), rgba(16, 20, 38, 0.85)),
+      linear-gradient(180deg, rgba(16, 20, 38, 0.8), rgba(16, 20, 38, 0.9)),
       url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-    border-bottom: none; /* মেনুর নিচের সাদা চিকন বর্ডারটি পুরোপুরি রিমুভ করা হয়েছে */
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(6px);
   }
   .nav-top, .nav-bottom {
     display: flex;
@@ -80,10 +82,24 @@
     padding: 0;
     border-bottom: 1px solid rgba(255,255,255,0.08);
   }
+  
+  /* কালারফুল ও ক্লিয়ার মেনু বার (গ্রেডিয়েন্ট বর্ডার ও গ্লো ইফেক্ট) */
   .nav-bottom {
     align-items: center; justify-content: center;
     padding: 0;
+    background: rgba(20, 24, 46, 0.95);
+    position: relative;
   }
+  .nav-bottom::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--orange), var(--yellow), var(--blue), var(--pink));
+    box-shadow: 0 2px 10px rgba(255, 107, 53, 0.4);
+    z-index: 2;
+  }
+  
   .nav-top .wrap, .nav-bottom .wrap {
     width: 100%;
     max-width: 1080px;
@@ -92,7 +108,7 @@
     display: flex; align-items: center; justify-content: space-between;
   }
   .nav-top .wrap { padding: 16px 24px; }
-  .nav-bottom .wrap { padding: 12px 24px; justify-content: center; }
+  .nav-bottom .wrap { padding: 14px 24px; justify-content: center; }
   
   .brand-section {
     display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
@@ -111,32 +127,27 @@
     color: var(--blue);
   }
   
-  /* বাংলা ও ইংরেজি ট্যাগলাইন স্পষ্ট করার জন্য ফিক্স */
   .brand-tagline {
-    font-family: 'Noto Sans Bengali', var(--mono);
+    font-family: var(--bengali-font);
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.85); /* ব্রাইটনেস এবং ভিজিবিলিটি বাড়ানো হয়েছে */
+    color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
     letter-spacing: 0.03em;
     padding-left: 60px;
     line-height: 1.4;
   }
   
-  .nav-bottom {
-    background: var(--paper);
-    border-top: 1px solid rgba(255,255,255,0.05);
-  }
   .navlinks {
-    display: flex; gap: 12px; list-style: none; margin: 0; padding: 0;
+    display: flex; gap: 14px; list-style: none; margin: 0; padding: 0;
   }
   .navlinks a {
-    color: var(--ink); font-family: var(--body);
-    font-size: 13px; font-weight: 700;
-    padding: 6px 15px;
+    color: var(--ink); font-family: var(--bengali-font), var(--body);
+    font-size: 14px; font-weight: 700;
+    padding: 7px 18px;
     border-radius: 100px;
     background: #FFFFFF;
     border: 1.5px solid var(--ink);
-    box-shadow: 2px 2px 0 var(--ink);
+    box-shadow: 2.5px 2.5px 0 var(--ink);
     display: inline-block;
     transition: transform .15s, box-shadow .15s, background .15s, color .15s;
   }
@@ -183,7 +194,7 @@
     position: absolute;
     top: 40px; right: 24px;
     background: var(--ink); color: var(--bg);
-    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    font-family: var(--bengali-font), var(--mono); font-size: 13px; font-weight: 700;
     padding: 10px 18px; border-radius: 100px;
     display: flex; align-items: center; gap: 10px;
     transform: rotate(4deg);
@@ -201,7 +212,7 @@
 
   .hero-tag {
     display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    font-family: var(--bengali-font), var(--mono); font-size: 13px; font-weight: 700;
     background: var(--yellow);
     color: var(--ink);
     border: 2px solid var(--ink);
@@ -210,7 +221,7 @@
   }
 
   h1.title {
-    font-family: var(--display);
+    font-family: var(--bengali-font), var(--display);
     font-size: clamp(44px, 8vw, 88px);
     line-height: 1.1;
     margin: 0 0 24px;
@@ -225,6 +236,7 @@
   }
 
   .lede {
+    font-family: var(--bengali-font), var(--body);
     font-size: 19px;
     color: var(--ink-soft);
     max-width: 560px;
@@ -233,7 +245,7 @@
   }
   .cta-row { display: flex; gap: 16px; flex-wrap: wrap; }
   .btn {
-    font-family: var(--mono);
+    font-family: var(--bengali-font), var(--mono);
     font-size: 15px; font-weight: 700;
     padding: 16px 30px;
     border-radius: 100px;
@@ -295,7 +307,7 @@
   }
   .kicker .n { color: var(--blue); font-weight: 800; }
   h2.sec-title {
-    font-family: var(--display);
+    font-family: var(--bengali-font), var(--display);
     font-size: clamp(34px, 5vw, 52px);
     margin: 0 0 40px;
     font-weight: 800;
@@ -307,7 +319,7 @@
   .about-grid {
     display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start;
   }
-  .about-text p { color: var(--text-light); margin: 0 0 18px; font-size: 17px; font-weight: 500; }
+  .about-text p { font-family: var(--bengali-font), var(--body); color: var(--text-light); margin: 0 0 18px; font-size: 17px; font-weight: 500; }
   .about-text strong { background: var(--yellow); color: var(--ink); padding: 0 6px; border-radius: 3px; }
   .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .stat-grid .stat-card {
@@ -317,8 +329,8 @@
     padding: 22px;
     box-shadow: 6px 6px 0 var(--ink);
   }
-  .stat-card b { display: block; font-family: var(--display); font-size: 26px; font-weight: 800; color: var(--ink); }
-  .stat-card span { font-size: 13px; color: #44444F; font-family: var(--mono); font-weight: 600; }
+  .stat-card b { display: block; font-family: var(--bengali-font), var(--display); font-size: 26px; font-weight: 800; color: var(--ink); }
+  .stat-card span { font-size: 13px; color: #44444F; font-family: var(--bengali-font), var(--mono); font-weight: 600; }
   .stat-grid .stat-card:nth-child(1) { border-color: var(--blue); }
   .stat-grid .stat-card:nth-child(2) { border-color: var(--green); }
   .stat-grid .stat-card:nth-child(3) { border-color: var(--orange); }
@@ -340,11 +352,12 @@
   .skill-card.c2 { background: var(--orange); }
   .skill-card.c3 { background: var(--pink); }
   .skill-card h3 {
-    font-family: var(--display); font-size: 20px; font-weight: 800;
+    font-family: var(--bengali-font), var(--display); font-size: 20px; font-weight: 800;
     margin: 0 0 16px;
   }
   .skill-card ul { list-style: none; margin: 0; padding: 0; }
   .skill-card li {
+    font-family: var(--bengali-font);
     font-size: 15px; padding: 8px 0;
     font-weight: 600;
     border-bottom: 1.5px dashed rgba(255,255,255,0.4);
@@ -375,17 +388,17 @@
     border: 3px solid var(--ink); border-radius: 16px;
     flex-shrink: 0;
   }
-  .service-card h3 { font-family: var(--display); font-size: 21px; margin: 0 0 8px; font-weight: 800; line-height: 1.3; }
-  .service-card p { margin: 0; color: #55555F; font-size: 14.5px; font-weight: 500; }
+  .service-card h3 { font-family: var(--bengali-font), var(--display); font-size: 21px; margin: 0 0 8px; font-weight: 800; line-height: 1.3; }
+  .service-card p { font-family: var(--bengali-font); margin: 0; color: #55555F; font-size: 14.5px; font-weight: 500; }
   .stamp {
-    font-family: var(--mono); font-size: 12px; font-weight: 700;
+    font-family: var(--bengali-font), var(--mono); font-size: 12px; font-weight: 700;
     border: 2.5px solid var(--green); color: var(--green);
     padding: 6px 10px; border-radius: 8px;
     transform: rotate(-6deg); margin-left: auto;
     white-space: nowrap;
   }
 
-  /* MODAL PAGE STYLE (NEO-BRUTALISM) */
+  /* MODAL PAGE STYLE */
   .service-modal {
     display: none;
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -421,7 +434,6 @@
     transition: all 0.1s;
   }
   .modal-close:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
-  .modal-close:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--ink); }
   
   .modal-hero-img {
     width: 100%; height: 240px; object-fit: cover;
@@ -429,11 +441,12 @@
     margin-bottom: 24px;
     box-shadow: 6px 6px 0 var(--ink);
   }
-  .modal-title { font-family: var(--display); font-size: 32px; font-weight: 800; margin: 0 0 16px; color: #FFFFFF; }
-  .modal-desc { font-size: 16px; color: var(--ink-soft); margin-bottom: 24px; line-height: 1.7; }
+  .modal-title { font-family: var(--bengali-font), var(--display); font-size: 32px; font-weight: 800; margin: 0 0 16px; color: #FFFFFF; }
+  .modal-desc { font-family: var(--bengali-font); font-size: 16px; color: var(--ink-soft); margin-bottom: 24px; line-height: 1.7; }
   
   .features-list { list-style: none; padding: 0; margin: 0 0 32px 0; }
   .features-list li {
+    font-family: var(--bengali-font);
     display: flex; align-items: center; gap: 12px;
     font-size: 15px; font-weight: 600; padding: 10px 0;
     border-bottom: 1px dashed rgba(255,255,255,0.1);
@@ -451,10 +464,10 @@
   .contact-inner { text-align: center; }
   #contact .kicker { background: var(--yellow); color: var(--ink); }
   #contact h2 {
-    font-family: var(--display); font-size: clamp(36px,6vw,60px);
+    font-family: var(--bengali-font), var(--display); font-size: clamp(36px,6vw,60px);
     margin: 0 0 20px; font-weight: 800; letter-spacing: -0.02em;
   }
-  #contact .lede2 { color: rgba(255,255,255,0.65); max-width: 480px; margin: 0 auto 40px; font-size: 17px; }
+  #contact .lede2 { font-family: var(--bengali-font); color: rgba(255,255,255,0.65); max-width: 480px; margin: 0 auto 40px; font-size: 17px; }
   .contact-email {
     font-family: var(--display); font-size: clamp(22px,4vw,34px); font-weight: 800;
     color: var(--bg); display: inline-block;
@@ -486,57 +499,60 @@
   footer {
     padding: 28px 0;
     text-align: center;
-    font-family: var(--mono);
+    font-family: var(--bengali-font), var(--mono);
     font-size: 12px;
     font-weight: 500;
     color: var(--bg);
     background: var(--ink);
   }
 
-  /* MEDIA QUERIES (UPDATED FOR MOBILE FIXES) */
-  @media (max-width: 900px) {
-    .navlinks { gap: 10px; }
-  }
+  /* MEDIA QUERIES (UPDATED FOR PERFECT MOBILE VIEW) */
   @media (max-width: 760px) {
     /* Mobile Header Alignment */
     .nav-top .wrap { 
       flex-direction: row; 
       justify-content: space-between; 
       align-items: flex-start;
-      padding: 16px 16px; 
+      padding: 12px 14px; 
     }
     .brand-section { align-items: flex-start; }
-    .brand { font-size: 26px; line-height: 1; }
+    .brand { font-size: 24px; line-height: 1; }
     
-    /* মোবাইলেও বাংলা ট্যাগলাইন সুন্দর ও বড় দেখানোর জন্য ফিক্স */
     .brand-tagline { 
-      padding-left: 4px; 
-      font-size: 11px; 
-      margin-top: 5px; 
+      padding-left: 2px; 
+      font-size: 10.5px; 
+      margin-top: 4px; 
       color: rgba(255, 255, 255, 0.95);
-      font-weight: 600;
     } 
-    .lang-btn { margin-top: 2px; padding: 5px 12px; font-size: 11px; }
+    .lang-btn { margin-top: 0px; padding: 4px 10px; font-size: 11px; }
 
-    /* Mobile Menu Centering & Spacing */
-    .nav-bottom .wrap { padding: 12px 10px; }
+    /* মোবােইলে মেনু বাটন ভাঙা রোধ করে এক লাইনে রাখার জন্য ফিক্স */
+    .nav-bottom .wrap { padding: 10px 8px; justify-content: center; width: 100%; }
     .navlinks { 
       width: 100%; 
-      justify-content: center; 
+      justify-content: space-between; 
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap; /* এক লাইনে লক করার জন্য */
       gap: 5px; 
-      flex-wrap: nowrap;
-      overflow-x: auto; 
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 2px;
+      padding: 0;
     }
-    .navlinks::-webkit-scrollbar { display: none; } 
+    .navlinks li {
+      flex: 1;
+      text-align: center;
+    }
     .navlinks a { 
+      display: block;
+      width: 100%;
       font-size: 11px; 
-      padding: 6px 10px; 
-      border-width: 1px;
+      padding: 6px 2px; /* বাটন ছোট করে এক লাইনে ফিট করা হয়েছে */
+      text-align: center;
+      border-width: 1.5px;
+      border-radius: 50px;
       box-shadow: 1.5px 1.5px 0 var(--ink);
+      white-space: nowrap;
     }
-    .navlinks a:hover { transform: translate(-1px,-1px); box-shadow: 2.5px 2.5px 0 var(--ink); }
+    .navlinks a:hover { transform: translate(-1px,-1px); box-shadow: 2px 2px 0 var(--ink); }
     .navlinks li.active a { box-shadow: 1.5px 1.5px 0 var(--orange); }
 
     .services-grid { grid-template-columns: 1fr; }
@@ -782,13 +798,13 @@ const servicePagesData = {
     {
       title: "সিসিটিভি ও সিকিউরিটি সিস্টেম",
       img: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=700&q=80",
-      desc: "আপনার বাড়ি, দোকান বা অফিসের জন্য আদেশ সিকিউরিটি সリューション, যার মাধ্যমে যেকোনো জায়গা থেকে স্মার্টলি সবকিছু তদারকি করতে পারবেন।",
+      desc: "আপনার বাড়ি, দোকান বা অফিসের জন্য আদর্শ সিকিউরিটি সリューション, যার মাধ্যমে যেকোনো জায়গা থেকে স্মার্টলি সবকিছু তদারকি করতে পারবেন।",
       features: ["এইচডি এবং আইপি সিসিটিভি ক্যামেরা ইনস্টলেশন", "মাল্টি-ফ্ল্যাট ইন্টারকম সিস্টেম ওয়্যারিং ও সেটআপ", "স্মার্ট ওয়াই-ফাই/আইপি ডিজিটাল ডোর লক কনফিগারেশন", "স্মার্টফোন অ্যাপের মাধ্যমে রিমোট ভিডিও মনিটরিং"]
     },
     {
       title: "ইনভেন্টরি ও পস সিস্টেম",
       img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=700&q=80",
-      desc: "খুচরা দোকান, সুপারমার্কেট বা রেস্তোরাঁকে অটোমেট করতে প্রিমিয়াম হার্ডওয়্যার এবং ত্রুটিহীন পয়েন্ট-অব-সেল ম্যানেজমেন্টソフトওয়্যার টুলস সেটআপ।",
+      desc: "খুচরা দোকান, সুপারমার্কেট বা রেস্তোরাঁকে অটোমেট করতে প্রিমিয়াম হার্ডওয়্যার এবং ত্রুটিহীন পয়েন্ট-অব-সেল ম্যানেজমেন্ট সফটওয়্যার টুলস সেটআপ।",
       features: ["পস সফটওয়্যার সেটআপ এবং ইনভেন্টরি ম্যানেজমেন্ট", "বারকোড স্ক্যানার ও থার্মাল রিসিট প্রিন্টার সংযোগ", "ক্যাশ ড্রয়ার এবং টাচস্ক্রিন টার্মিনাল কনফিগারেশন", "বিক্রয় রিপোর্ট ট্র্যাকিং ও মাল্টি-ইউজার সিকিউরিটি"]
     },
     {
@@ -867,7 +883,7 @@ const langData = {
     skillList3: ["পস সিস্টেম বিক্রি", "পস সফটওয়্যার সেটআপ", "রাউটার ওয়াই-ফাই সেটআপ", "নেটওয়ার্ক সমাধান"],
     servicesTitle: "সেবাসমূহ",
     service1Title: "পিসি ও ল্যাপটপ মেরামত",
-    service1Desc: "হার্ডওয়্যার নির্ণয় ও সমাধান, ওএস ইনস্টলেশন, সফটওয়্যার সেটআপ ও ভাইরাস অপসারণ।",
+    service1Desc: "হার্ডওয়্যার নির্ণয় ও সমাধান, ওএস ইনস্টলেশন,ソフトওয়্যার সেটআপ ও ভাইরাস অপসারণ।",
     service2Title: "সিসিটিভি ও সিকিউরিটি সিস্টেম",
     service2Desc: "সম্পূর্ণ সিসিটিভি ক্যামেরা ইনস্টলেশন, ইন্টারকম, আইপি লক ও অ্যালার্ম সিস্টেম সেটআপ।",
     service3Title: "ইনভেন্টরি ও পস সিস্টেম",
