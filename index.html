@@ -62,14 +62,14 @@
     padding: 0 24px;
   }
 
-  /* STICKY HEADER */
+  /* STICKY HEADER WITH NEW CLEAR TECH BACKGROUND */
   nav {
     position: sticky; top: 0; z-index: 50;
     background:
-      linear-gradient(180deg, rgba(10,14,39,0.88), rgba(10,14,39,0.93)),
-      url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=60') center/cover no-repeat;
+      linear-gradient(180deg, rgba(16, 20, 38, 0.75), rgba(16, 20, 38, 0.85)),
+      url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
     border-bottom: 1px solid rgba(255,255,255,0.08);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(4px);
   }
   .nav-top, .nav-bottom {
     display: flex;
@@ -113,7 +113,7 @@
   .brand-tagline {
     font-family: var(--mono);
     font-size: 10px;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.5);
     font-weight: 500;
     letter-spacing: 0.02em;
     padding-left: 60px;
@@ -494,7 +494,7 @@
     .navlinks { gap: 10px; }
   }
   @media (max-width: 760px) {
-    /* Updated Mobile Header Alignment */
+    /* Mobile Header Alignment */
     .nav-top .wrap { 
       flex-direction: row; 
       justify-content: space-between; 
@@ -507,20 +507,20 @@
     .brand-tagline { padding-left: 48px; font-size: 8px; margin-top: 3px; } 
     .lang-btn { margin-top: 2px; padding: 5px 12px; font-size: 11px; }
 
-    /* Updated Mobile Menu Centering & Spacing */
+    /* Mobile Menu Centering & Spacing */
     .nav-bottom .wrap { padding: 12px 10px; }
     .navlinks { 
       width: 100%; 
       justify-content: center; 
-      gap: 5px; /* Reduced gap */
+      gap: 5px; 
       flex-wrap: nowrap;
       overflow-x: auto; 
       -webkit-overflow-scrolling: touch;
       padding-bottom: 2px;
     }
-    .navlinks::-webkit-scrollbar { display: none; } /* Hide scrollbar */
+    .navlinks::-webkit-scrollbar { display: none; } 
     .navlinks a { 
-      font-size: 11px; /* Smaller font to fit in one line */
+      font-size: 11px; 
       padding: 6px 10px; 
       border-width: 1px;
       box-shadow: 1.5px 1.5px 0 var(--ink);
@@ -651,7 +651,6 @@
 
 <div class="stripe"></div>
 
-<!-- SERVICES SECTION -->
 <section id="services">
   <div class="wrap">
     <div class="kicker"><span class="n">03</span> SERVICES</div>
@@ -698,7 +697,6 @@
   </div>
 </section>
 
-<!-- DYNAMIC DETAILS SERVICE PAGE (MODAL) -->
 <div id="serviceModal" class="service-modal" onclick="closeServicePage(event)">
   <div class="modal-content">
     <button class="modal-close" onclick="closeServicePage(event, true)">×</button>
@@ -734,7 +732,6 @@
 </footer>
 
 <script>
-// DETAIL PAGES DATA FOR BOTH LANGUAGES
 const servicePagesData = {
   en: [
     {
@@ -772,7 +769,7 @@ const servicePagesData = {
     {
       title: "সিসিটিভি ও সিকিউরিটি সিস্টেম",
       img: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=700&q=80",
-      desc: "আপনার বাড়ি, দোকান বা অফিসের জন্য আধুনিক সিকিউরিটি সলিউশন, যার মাধ্যমে যেকোনো জায়গা থেকে স্মার্টলি সবকিছু তদারকি করতে পারবেন।",
+      desc: "আপনার বাড়ি, দোকান বা অফিসের জন্য আধুনিক সিকিউরিটি সリューション, যার মাধ্যমে যেকোনো জায়গা থেকে স্মার্টলি সবকিছু তদারকি করতে পারবেন।",
       features: ["এইচডি এবং আইপি সিসিটিভি ক্যামেরা ইনস্টলেশন", "মাল্টি-ফ্ল্যাট ইন্টারকম সিস্টেম ওয়্যারিং ও সেটআপ", "স্মার্ট ওয়াই-ফাই/আইপি ডিজিটাল ডোর লক কনফিগারেশন", "স্মার্টফোন অ্যাপের মাধ্যমে রিমোট ভিডিও মনিটরিং"]
     },
     {
@@ -831,7 +828,7 @@ const langData = {
     modalCtaBtn: "Get This Service"
   },
   bn: {
-    navTagline: "টেক, সিকিউরিটি ও পস সলিউশন",
+    navTagline: "টেক, সিকিউরিটি ও পস সリューション",
     mHome: "হোম", mAbout: "সম্পর্কে", mSkills: "দক্ষতা", mServices: "সার্ভিসসমূহ", mContact: "যোগাযোগ",
     heroStatus: "সিস্টেম অনলাইন",
     heroTag: "কম্পিউটার টেকনিশিয়ান",
@@ -841,7 +838,7 @@ const langData = {
     btnContact: "যোগাযোগ করুন",
     langBtn: "English",
     aboutTitle: "আমার সম্পর্কে",
-    aboutText: '<p>আমি <strong>ওবায়েদ</strong>, একজন পেশাদার <strong>কম্পিউটার, স্মার্ট সিকিউরিটি ও পস সলিউশন টেকনিশিয়ান</strong>। পিসি-ল্যাপটপ হার্ডওয়্যার মেরামত, অপারেটিং সিস্টেম ইনস্টলেশনের পাশাপাশি <strong>সিসিটিভি ক্যামেরা, ইন্টারকম, আইপি ডোর লক</strong> এবং <strong>ইনভেন্টরি পস সিস্টেম</strong> সেটআপে আমার দীর্ঘ অভিজ্ঞতা রয়েছে।</p><p>ধীরগতির ডিভাইস, virus সমস্যা, সিসিটিভি সমস্যা, দরজার লক সেটআপ বা পস কনফিগারেশন — সবকিছুতে দ্রুত, নির্ভরযোগ্য সমাধান সততা ও ন্যায্য মূল্যে।</p><p>আমার লক্ষ্য: আপনার চাহিদা বুঝে প্রতিবার সেরা সেবা প্রদান করা।</p>',
+    aboutText: '<p>আমি <strong>ওবায়েদ</strong>, একজন পেশাদার <strong>কম্পিউটার, স্মার্ট সিকিউরিটি ও পস সリューション টেকনিশিয়ান</strong>। পিসি-ল্যাপটপ হার্ডওয়্যার মেরামত, অপারেটিং সিস্টেম ইনস্টলেশনের পাশাপাশি <strong>সিসিটিভি ক্যামেরা, ইন্টারকম, আইপি ডোর লক</strong> এবং <strong>ইনভেন্টরি পস সিস্টেম</strong> সেটআপে আমার দীর্ঘ অভিজ্ঞতা রয়েছে।</p><p>ধীরগতির ডিভাইস, virus সমস্যা, সিসিটিভি সমস্যা, দরজার লক সেটআপ বা পস কনফিগারেশন — সবকিছুতে দ্রুত, নির্ভরযোগ্য সমাধান সততা ও ন্যায্য মূল্যে।</p><p>আমার লক্ষ্য: আপনার চাহিদা বুঝে প্রতিবার সেরা সেবা প্রদান করা।</p>',
     stat1: "হার্ডওয়্যার মেরামত",
     stat2Title: "সিসিটিভি",
     stat2: "নিরাপত্তা ক্যামেরা",
@@ -873,7 +870,6 @@ const langData = {
 
 let currentLang = 'en';
 
-// OPEN DETAILS MODAL PAGE
 function openServicePage(index) {
   const pageData = servicePagesData[currentLang][index];
   document.getElementById('modalImg').src = pageData.img;
@@ -890,14 +886,13 @@ function openServicePage(index) {
   
   document.getElementById('modalCtaBtn').textContent = langData[currentLang].modalCtaBtn;
   document.getElementById('serviceModal').style.display = 'flex';
-  document.body.style.overflow = 'hidden'; // Stop background scrolling
+  document.body.style.overflow = 'hidden'; 
 }
 
-// CLOSE DETAILS MODAL PAGE
 function closeServicePage(event, forced = false) {
   if (forced || event.target.id === 'serviceModal') {
     document.getElementById('serviceModal').style.display = 'none';
-    document.body.style.overflow = 'auto'; // Enable scrolling back
+    document.body.style.overflow = 'auto'; 
   }
 }
 
